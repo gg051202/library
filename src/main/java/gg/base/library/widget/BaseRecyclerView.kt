@@ -124,7 +124,7 @@ class BaseRecyclerView : SmartRefreshLayout {
 
         data?.let {
             if (mRefreshingStatus == RefreshingStatus.STATUS_REFRESHING || mPageIndex == 1) {
-                mAdapter.setList(data as List<Nothing>)
+                mAdapter.setNewData(data as List<Nothing>)
             } else {
                 mAdapter.addData(data as List<Nothing>)
             }
