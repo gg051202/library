@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/default_err_layout_style1">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:src="@mipmap/frame_img_quesun" />
+
+    <TextView
+        android:id="@+id/loadingErrMsgTextView"
+        style="@style/default_err_layout_style2"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/loadingErrRetryTextView"
+        style="@style/default_err_layout_style3"
+        android:layout_marginBottom="100dp"
+        android:text="点击重试" />
+
+</LinearLayout>

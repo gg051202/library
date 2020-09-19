@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryNight">#F54F4C</color>
+    <color name="colorPrimary">#F54F4C</color>
+    <color name="colorPrimaryDark">#F54F4C</color>
+    <color name="colorSecondary">#FCE322</color>
+    <color name="colorSecondaryVariant">#FCE322</color>
+    <color name="colorOnSecondary">#ffffff</color>
+    <color name="colorOnPrimary">#FFFFFFFF</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="default_black">#333333</color>
+    <color name="default_grey">#999999</color>
+    <color name="default_grey_666666">#666666</color>
+    <color name="block">#F5F5F5</color>
+    <color name="press_color">#F8F8F8</color>
+    <color name="divider_color">#F0F0F0</color>
+    <color name="alpha_black">#44000000</color>
+    <color name="dialogColorAccent">#ac5bb5</color>
+
+</resources>

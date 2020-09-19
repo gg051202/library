@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="desc"
+            type="CharSequence" />
+
+        <variable
+            name="submitText"
+            type="String" />
+
+        <variable
+            name="cancleText"
+            type="String" />
+
+        <variable
+            name="showCancleButton"
+            type="boolean" />
+
+        <import type="jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType" />
+
+        <import type="android.text.TextUtils" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout"
+                background_cornerType="@{CornerType.TOP}"
+                background_pressedColor="@{true}"
+                background_radius_dp="@{18}"
+                background_solidColor0x="@{0xffffffff}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingTop="19dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="38dp">
+
+                <gg.base.library.widget.FakeBoldTextView
+                    android:id="@+id/titleTextView"
+                    gone="@{!TextUtils.isEmpty(title)}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginRight="11dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="4dp"
+                    android:text="@{title}"
+                    android:textColor="@color/default_black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/descTextView"
+                    gone="@{!TextUtils.isEmpty(desc)}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="23dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="5dp"
+                    android:text="@{desc}"
+                    android:textColor="#555555"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                app:layout_constraintTop_toBottomOf="@+id/layout">
+
+                <gg.base.library.widget.FakeBoldTextView
+                    android:id="@+id/cancelTextView"
+                    background_cornerType="@{CornerType.BOTTOM_LEFT}"
+                    background_pressedColor="@{true}"
+                    background_radius_dp="@{18}"
+                    background_solidColor0x="@{0xffF6F6F6}"
+                    gone="@{showCancleButton}"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{cancleText}"
+                    android:textColor="@color/default_black"
+                    android:textSize="15sp" />
+
+                <gg.base.library.widget.FakeBoldTextView
+                    android:id="@+id/submitTextView"
+                    background_cornerType="@{showCancleButton?CornerType.BOTTOM_RIGHT:CornerType.BOTTOM}"
+                    background_pressedColor="@{true}"
+                    background_radius_dp="@{18}"
+                    background_solidColor0x="@{0xffF54F4C}"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{submitText}"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>

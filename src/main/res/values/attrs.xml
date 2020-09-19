@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FakeBoldTextView">
+        <attr name="fbt_bold_size" format="float" />
+    </declare-styleable>
+    <declare-styleable name="RedPointTextView">
+        <attr name="rpt_color" format="color" />
+        <attr name="rpt_number" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="MaxHeightNestScrollView">
+        <attr name="mhnsv_maxHeight" format="dimension" />
+    </declare-styleable>
+
+</resources>

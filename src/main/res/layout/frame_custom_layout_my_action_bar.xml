@@ -1,0 +1,26 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/baseTitlebarLayout"
+    style="@style/frame_base_tool_bar_style1">
+
+    <ImageView
+        android:id="@+id/baseBackBackImageView"
+        android:src="@mipmap/frame_base_back_hei"
+        style="@style/frame_base_tool_bar_style2" />
+
+    <TextView
+        android:id="@+id/baseTitleTextView"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/baseBackBackImageView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/baseBackBackImageView"
+        style="@style/frame_base_tool_bar_style3" />
+
+
+    <LinearLayout
+        android:id="@+id/baseMenuImageViewLayout"
+        app:layout_constraintRight_toRightOf="parent"
+        style="@style/frame_base_tool_bar_style4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

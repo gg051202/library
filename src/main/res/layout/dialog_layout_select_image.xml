@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <LinearLayout
+            background_radius_dp="@{7}"
+            background_solidColor0x="@{0xffffffff}"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/photoLayout"
+                style="@style/select_dialog_style1">
+
+                <ImageView
+                    style="@style/select_dialog_style2"
+                    android:src="@mipmap/frame_icon_photo" />
+
+                <TextView
+                    style="@style/select_dialog_style3"
+                    android:text="拍照" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/albumLayout"
+                style="@style/select_dialog_style1">
+
+                <ImageView
+                    style="@style/select_dialog_style2"
+                    android:src="@mipmap/frame_icon_album" />
+
+                <TextView
+                    style="@style/select_dialog_style3"
+                    android:text="相册" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

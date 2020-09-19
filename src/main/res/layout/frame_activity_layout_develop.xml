@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="gg.base.library.vm.DevelopActivityViewModel" />
+
+        <variable
+            name="onClickProxy"
+            type="gg.base.library.activity.DevelopActivity.OnClickProxy" />
+        <variable
+            name="uid"
+            type="String" />
+
+    </data>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#001010"
+        tools:context=".activity.DevelopActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/frame_tes" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:lineSpacingExtra="4dp"
+                android:text="@string/develop_desc"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <RadioButton
+                    android:id="@+id/productedRadioButton"
+                    style="@style/develop_button_style1"
+                    android:checked='@{!vm.testUrl}'
+                    android:text="正式环境" />
+
+                <RadioButton
+                    style="@style/develop_button_style1"
+                    android:checked='@={vm.testUrl}'
+                    android:text="测试环境" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <RadioButton
+                    style="@style/develop_button_style1"
+                    android:checked='@{vm.autoRank}'
+                    android:text="自动匹配" />
+
+                <RadioButton
+                    style="@style/develop_button_style1"
+                    android:checked='@={!vm.autoRank}'
+                    android:text="不自动匹配(重启失效)" />
+
+            </RadioGroup>
+
+
+            <!--        <RadioGroup-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:orientation="horizontal"-->
+            <!--            android:padding="20dp">-->
+
+            <!--            <RadioButton-->
+            <!--                android:id="@+id/notPrintLogRadioButton"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:checked='@{!data.showLog}'-->
+            <!--                android:text="不打印日志" />-->
+
+            <!--            <RadioButton-->
+            <!--                android:id="@+id/printLogRadioButton"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:checked='@{data.showLog}'-->
+            <!--                android:text="打印日志" />-->
+
+
+            <!--        </RadioGroup>-->
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <RadioButton
+                    style="@style/develop_button_style1"
+                    android:checked="@{!vm.showLogButton}"
+                    android:text="关闭日志按钮" />
+
+                <RadioButton
+                    android:id="@+id/showLogButtonRadioButton"
+                    style="@style/develop_button_style1"
+                    android:checked="@={vm.showLogButton}"
+                    android:text="显示日志按钮" />
+
+
+            </RadioGroup>
+
+            <com.google.android.material.internal.FlowLayout
+                android:id="@+id/tagFlowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                app:itemSpacing="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv3"
+                app:lineSpacing="15dp">
+
+                <TextView
+                    android:id="@+id/button"
+                    style="@style/develop_style_2"
+                    background_pressedColor="@{true}"
+                    background_radius_dp="@{4}"
+                    background_solidColor0x="@{0xffFFD707}"
+                    android:onClick="@{()->onClickProxy.restart()}"
+                    android:text="重启生效" />
+
+                <TextView
+                    android:id="@+id/copyPushButton"
+                    style="@style/develop_style_2"
+                    background_pressedColor="@{true}"
+                    background_radius_dp="@{4}"
+                    background_solidColor0x="@{0xffFFD707}"
+                    android:onClick="@{()->onClickProxy.copy()}"
+                    android:text="复制推送ID" />
+
+
+            </com.google.android.material.internal.FlowLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{uid}"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

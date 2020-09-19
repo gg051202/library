@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:src="@mipmap/frame_img_quesun" />
+
+    <TextView
+        android:id="@+id/tv"
+        style="@style/default_err_layout_style2"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/refresh"
+        style="@style/default_err_layout_style3"
+        android:layout_marginBottom="100dp"
+        android:text="点击重试" />
+
+</LinearLayout>
