@@ -173,12 +173,7 @@ public class CheckUpdateManager {
 
 
         Observable
-                .create(new Observable.OnSubscribe<Integer>() {
-                    @Override
-                    public void call(Subscriber<? super Integer> subscriber) {
-                        startDownload(subscriber, downloadUrl);
-                    }
-                })
+                .create((Observable.OnSubscribe<Integer>) subscriber -> startDownload(subscriber, downloadUrl))
                 .sample(1, TimeUnit.SECONDS)//过滤 1秒只能更新一次
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidScheduler.mainThread())

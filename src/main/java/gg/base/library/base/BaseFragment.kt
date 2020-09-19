@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.dongjin.mylibrary.BR
 import androidx.lifecycle.ViewModelProvider
-import com.chad.library.BR
 import gg.base.library.base.others.*
 import gg.base.library.base.others.RunOperationImpl
 import gg.base.library.base.others.setBaseViewModelOber

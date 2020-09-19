@@ -8,7 +8,6 @@ import android.text.TextPaint
 import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.ContextCompat
 import com.dongjin.mylibrary.R
 
 
