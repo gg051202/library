@@ -30,6 +30,7 @@ class ImageBrowserActivity : BaseActivity() {
                                     bundleOf(Pair("url", url), Pair("urlList", urlList)))
             baseActivity.overridePendingTransition(R.anim.activity_fade_in_500, 0)
         }
+
     }
 
     private var urlList = ArrayList<String>()
