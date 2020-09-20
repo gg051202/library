@@ -1,5 +1,6 @@
 package gg.base.library.activity;
 
+import android.os.Bundle
 import com.dongjin.mylibrary.R
 import gg.base.library.Constants
 import gg.base.library.base.BaseActivity
@@ -20,7 +21,7 @@ class DevelopActivity : BaseActivity() {
                               onClickProxy = OnClickProxy())
     }
 
-    override fun init() {
+    override fun init(savedInstanceState: Bundle?) {
         setHasSetDevelopMode(true)
         mViewModel.autoRank.value = Constants.autoRank
 

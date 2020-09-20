@@ -79,7 +79,7 @@ abstract class BaseActivity : AppCompatActivity(),
             initMenu(this)
         }
 
-        init()
+        init(savedInstanceState)
         setListener()
 
         //以下是开发者代码
@@ -91,7 +91,7 @@ abstract class BaseActivity : AppCompatActivity(),
 
     abstract fun getActivityInitConfig(): InitConfigData
 
-    abstract fun init()
+    abstract fun init(savedInstanceState: Bundle?)
 
     open fun setListener() {
 

@@ -2,6 +2,7 @@ package gg.base.library.activity;
 
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +48,7 @@ class ImageBrowserActivity : BaseActivity() {
     }
 
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    override fun init() {
+    override fun init(savedInstanceState: Bundle?) {
         val url = intent.getStringExtra("url")
         urlList = intent.getStringArrayListExtra("urlList")
         if (urlList.isEmpty()) {

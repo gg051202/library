@@ -110,7 +110,7 @@
                     background_cornerType="@{showCancleButton?CornerType.BOTTOM_RIGHT:CornerType.BOTTOM}"
                     background_pressedColor="@{true}"
                     background_radius_dp="@{18}"
-                    background_solidColor0x="@{0xffF54F4C}"
+                    background_solidColor0x="@{0xff418CF6}"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
