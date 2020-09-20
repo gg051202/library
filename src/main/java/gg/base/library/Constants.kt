@@ -2,6 +2,7 @@ package gg.base.library
 
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
+import com.dongjin.mylibrary.BuildConfig
 import com.dongjin.mylibrary.R
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
@@ -32,6 +33,10 @@ class Constants {
             return FLAVOR == "_develop"
         }
 
+        fun isDebug(): Boolean {
+            return BuildConfig.DEBUG
+        }
+
         fun isProduct(): Boolean {
             return !DEBUG && FLAVOR == "_product"
         }
@@ -50,10 +55,10 @@ class Constants {
 
         fun getRequestOptions(radiusPx: Int, cornerType: RoundedCornersTransformation.CornerType?): RequestOptions {
             return RequestOptions().transform(CenterCrop(),
-                                              RoundedCornersTransformation(radiusPx,
-                                                                           0,
-                                                                           cornerType
-                                                                               ?: RoundedCornersTransformation.CornerType.ALL))
+                    RoundedCornersTransformation(radiusPx,
+                            0,
+                            cornerType
+                                    ?: RoundedCornersTransformation.CornerType.ALL))
                     .error(IMAGE_LOAD_ERR)
                     .placeholder(IMAGE_LOAD_HOLDER)
                     .timeout(60_1000)
