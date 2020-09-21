@@ -44,9 +44,9 @@ import java.util.*
  * email jkjkjk.com
  */
 abstract class BaseActivity : AppCompatActivity(),
-                              IRunOperation by RunOperationImpl(),
-                              IDiffentOperation,
-                              CustomAdapt {
+        IRunOperation by RunOperationImpl(),
+        IDiffentOperation,
+        CustomAdapt {
 
     private lateinit var mBinding: ViewDataBinding
 
@@ -152,7 +152,7 @@ abstract class BaseActivity : AppCompatActivity(),
                     dialogLoadingView = LayoutInflater.from(mActivity)
                             .inflate(R.layout.frame_custom_layout_base_loading_view, null, false)
                     val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
-                                                                FrameLayout.LayoutParams.WRAP_CONTENT)
+                            FrameLayout.LayoutParams.WRAP_CONTENT)
                     layoutParams.gravity = Gravity.CENTER
                     addContentView(dialogLoadingView, layoutParams)
                 }
@@ -182,7 +182,7 @@ abstract class BaseActivity : AppCompatActivity(),
                         it.setAnimation("frame_anim_loading_line.json")
                         it.repeatCount = LottieDrawable.INFINITE
                         val layoutParams = FrameLayout.LayoutParams(AutoSizeTool.dp2px(100),
-                                                                    AutoSizeTool.dp2px(200))
+                                AutoSizeTool.dp2px(200))
                         layoutParams.gravity = Gravity.CENTER
                         addContentView(it, layoutParams)
                     }
@@ -220,7 +220,7 @@ abstract class BaseActivity : AppCompatActivity(),
         if (defaultErrView == null) {
             defaultErrView = View.inflate(mActivity, R.layout.frame_activity_default_err_view, null)
             val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                                                        FrameLayout.LayoutParams.MATCH_PARENT)
+                    FrameLayout.LayoutParams.MATCH_PARENT)
             addContentView(defaultErrView, layoutParams)
         }
         defaultErrView?.let {
@@ -297,9 +297,9 @@ abstract class BaseActivity : AppCompatActivity(),
     private val requestPermission = 1221
     private var list = mutableListOf<PermissionData>()
     private lateinit var succ: () -> Unit
-    private var fail: (() -> Unit)? = null
+    private var fail: (() -> Boolean)? = null
 
-    open fun checkPermission(succ: () -> Unit, fail: (() -> Unit)? = null, vararg permissions: String) {
+    open fun checkPermission(succ: () -> Unit, fail: (() -> Boolean)? = null, vararg permissions: String) {
         if (!NormalUtil.isOver6_0()) { //如果是6.0以下系统，不需要验证权限
             succ()
             return
@@ -352,7 +352,7 @@ abstract class BaseActivity : AppCompatActivity(),
                     Manifest.permission.CAMERA -> failPermissionName = "拍摄照片"
                     Manifest.permission.RECORD_AUDIO -> failPermissionName = "录音"
                     Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION -> failPermissionName = "定位"
-                    else                                                                                  -> {
+                    else -> {
                     }
                 }
             }
@@ -361,24 +361,24 @@ abstract class BaseActivity : AppCompatActivity(),
             this.succ()
         } else {
             fail?.let { it() }
-            if (fail == null) {
+            if (fail == null || !fail!!.invoke()) {
                 val ssb = SpannableStringBuilder()
                 val s = SpannableString("权限管理")
                 s.setSpan(ForegroundColorSpan(Constants.DEFAULT_PRIMARY),
-                          0,
-                          4,
-                          Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        0,
+                        4,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 ssb.append("暂未允许$failPermissionName，您可以在${s}中开启")
 
                 MyDialog(baseActivity = mActivity,
-                         title = "提示",
-                         desc = ssb,
-                         cancleText = "算了吧",
-                         submitText = "去系统设置",
-                         submitFun = {
-                             GotoPermissionPageUtils(mActivity).jump()
-                         },
-                         showCancleButton = true).show()
+                        title = "提示",
+                        desc = ssb,
+                        cancleText = "算了吧",
+                        submitText = "去系统设置",
+                        submitFun = {
+                            GotoPermissionPageUtils(mActivity).jump()
+                        },
+                        showCancleButton = true).show()
             }
         }
     }
