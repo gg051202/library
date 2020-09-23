@@ -28,10 +28,7 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.dongjin.mylibrary.R
 import gg.base.library.Constants
-import gg.base.library.util.AutoSizeTool
-import gg.base.library.util.FirstItemHorzontalMarginDecoration
-import gg.base.library.util.FirstItemVerticalMarginDecoration
-import gg.base.library.util.setVisable
+import gg.base.library.util.*
 import gg.base.library.widget.BaseRecyclerView
 import gg.base.library.widget.FakeBoldTextView
 import gg.base.library.widget.GGFlowLayout
@@ -43,6 +40,20 @@ import me.jessyan.autosize.utils.ScreenUtils
  * Created by sss on 2020/8/20 00:13.
  * email jkjkjk.com
  */
+
+
+@BindingAdapter("base_recycler_view_on_success")
+fun setBaseRecyclerView1(baseRecyclerView: BaseRecyclerView, newList: List<*>?) {
+    LL.i("setBaseRecyclerView1")
+    baseRecyclerView.onLoadDataComplete(newList)
+}
+
+
+@BindingAdapter("base_recycler_view_on_err")
+fun setBaseRecyclerView2(baseRecyclerView: BaseRecyclerView, errMsg: String?) {
+    errMsg?.let { baseRecyclerView.onLoadDataCompleteErr(it) }
+}
+
 
 @BindingAdapter(value = ["marginTopPx", "marginRightPx", "marginBottomPx", "marginLeftPx"],
                 requireAll = false)
@@ -368,17 +379,6 @@ fun setRecyclerViewAdapter(recyclerView: RecyclerView,
     }
 
 
-}
-
-@BindingAdapter("base_recycler_view_on_success")
-fun setBaseRecyclerView1(baseRecyclerView: BaseRecyclerView, newList: List<*>?) {
-    baseRecyclerView.onLoadDataComplete(newList)
-}
-
-
-@BindingAdapter("base_recycler_view_on_err")
-fun setBaseRecyclerView2(baseRecyclerView: BaseRecyclerView, errMsg: String?) {
-    errMsg?.let { baseRecyclerView.onLoadDataCompleteErr(it) }
 }
 
 
