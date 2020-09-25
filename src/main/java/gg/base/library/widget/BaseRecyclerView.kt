@@ -58,7 +58,7 @@ class BaseRecyclerView : SmartRefreshLayout {
     }
 
     fun start(adapter: BaseQuickAdapter<*, *>, pageSize: Int = 20, layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
-        context), nodataString: String = "暂无数据", noMoreString: String = "没有更多了", needShowNoMoreFooter: Boolean = true, func: (pageIndex: Int, pageSize: Int) -> Unit) {
+        context), nodataString: String = "暂无数据", noDataPlaceView: View? = null, noMoreString: String = "没有更多了", needShowNoMoreFooter: Boolean = true, func: (pageIndex: Int, pageSize: Int) -> Unit) {
         mNoDataString = nodataString
         mNoMoreString = noMoreString
         mNeedShowNoMoreFooter = needShowNoMoreFooter
@@ -68,6 +68,7 @@ class BaseRecyclerView : SmartRefreshLayout {
         mRecyclerView.adapter = adapter
         mRecyclerView.layoutManager = layoutManager
         mAdapter.animationEnable = true
+        mNoDataPlaceView = noDataPlaceView
 
         setEnableLoadMoreWhenContentNotFull(false)
 
