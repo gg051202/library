@@ -57,13 +57,8 @@ class BaseRecyclerView : SmartRefreshLayout {
         addView(mRecyclerView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
     }
 
-    fun start(adapter: BaseQuickAdapter<*, *>,
-              pageSize: Int = 20,
-              layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),
-              nodataString: String = "暂无数据",
-              noMoreString: String = "没有更多了",
-              needShowNoMoreFooter: Boolean = true,
-              func: (pageIndex: Int, pageSize: Int) -> Unit) {
+    fun start(adapter: BaseQuickAdapter<*, *>, pageSize: Int = 20, layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
+        context), nodataString: String = "暂无数据", noDataPlaceView: View? = null, noMoreString: String = "没有更多了", needShowNoMoreFooter: Boolean = true, func: (pageIndex: Int, pageSize: Int) -> Unit) {
         mNoDataString = nodataString
         mNoMoreString = noMoreString
         mNeedShowNoMoreFooter = needShowNoMoreFooter
@@ -73,6 +68,7 @@ class BaseRecyclerView : SmartRefreshLayout {
         mRecyclerView.adapter = adapter
         mRecyclerView.layoutManager = layoutManager
         mAdapter.openLoadAnimation()
+        mNoDataPlaceView = noDataPlaceView
 
         setEnableLoadMoreWhenContentNotFull(false)
 
@@ -83,8 +79,7 @@ class BaseRecyclerView : SmartRefreshLayout {
                 mPageIndex = 1
 
 
-                val isAdded = mAdapter.footerLayout != null && mAdapter.footerLayout!!.indexOfChild(
-                        getNoMoreFooterView()) >= 0
+                val isAdded = mAdapter.footerLayout != null && mAdapter.footerLayout!!.indexOfChild(getNoMoreFooterView()) >= 0
                 if (mNeedShowNoMoreFooter && isAdded) {
                     mAdapter.removeFooterView(getNoMoreFooterView())
                 }
@@ -145,11 +140,14 @@ class BaseRecyclerView : SmartRefreshLayout {
             setEnableLoadMore(false)
             setEnableAutoLoadMore(false)
 
-            val notAdded = mAdapter.footerLayout == null || mAdapter.footerLayout!!.indexOfChild(
-                    getNoMoreFooterView()) < 0
+
+            val notAdded = mAdapter.footerLayout == null || mAdapter.footerLayout!!.indexOfChild(getNoMoreFooterView()) < 0
             if (mNeedShowNoMoreFooter && mAdapter.data.isNotEmpty() && notAdded) {
-                mAdapter.addFooterView(getNoMoreFooterView())
+                postDelayed({
+                                mAdapter.addFooterView(getNoMoreFooterView())
+                            }, 300)
             }
+
         }
         mPageIndex++
     }
@@ -186,8 +184,7 @@ class BaseRecyclerView : SmartRefreshLayout {
 
     private fun View.placeViewDefaultOperation(tvString: String) {
         findViewById<TextView>(R.id.tv)?.text = tvString
-        layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT)
+        layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         mAdapter.setEmptyView(this)
         findViewById<View>(R.id.refresh)?.apply {
             if (!hasOnClickListeners()) {
@@ -198,8 +195,7 @@ class BaseRecyclerView : SmartRefreshLayout {
 
     private fun getLoadingLayout(): FrameLayout {
         val loadingViewLayout = FrameLayout(mContext)
-        loadingViewLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT)
+        loadingViewLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         val layoutParams = FrameLayout.LayoutParams(AutoSizeTool.dp2px(130), AutoSizeTool.dp2px(130))
         layoutParams.gravity = Gravity.CENTER
 
@@ -214,11 +210,8 @@ class BaseRecyclerView : SmartRefreshLayout {
 
     private fun getNoMoreFooterView(): View {
         if (mNoMoreFooterView == null) {
-            mNoMoreFooterView = inflate(mContext,
-                    R.layout.frame_custome_layout_default_no_more_footer_view,
-                    null)
-            val layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT)
+            mNoMoreFooterView = inflate(mContext, R.layout.frame_custome_layout_default_no_more_footer_view, null)
+            val layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             mNoMoreFooterView?.layoutParams = layoutParams
         }
         if (mNoMoreFooterView is TextView) {
@@ -229,9 +222,7 @@ class BaseRecyclerView : SmartRefreshLayout {
 
     private fun getNoDataPlaceView(): View {
         if (mNoDataPlaceView == null) {
-            mNoDataPlaceView = inflate(mContext,
-                    R.layout.frame_custome_layout_default_no_data_place_view,
-                    null)
+            mNoDataPlaceView = inflate(mContext, R.layout.frame_custome_layout_default_no_data_place_view, null)
         }
         return mNoDataPlaceView as View
     }
