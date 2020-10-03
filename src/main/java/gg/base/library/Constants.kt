@@ -30,7 +30,8 @@ class Constants {
         var APPLICATION_ID: String = ""
 
         fun isDevelop(): Boolean {
-            return FLAVOR == "_develop"
+//            return FLAVOR == "_develop"
+            return isDebug()
         }
 
         fun isDebug(): Boolean {
