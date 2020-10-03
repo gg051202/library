@@ -93,7 +93,7 @@ class BaseRecyclerView : SmartRefreshLayout {
             }
         })
 
-        mAdapter.setEmptyView(getLoadingLayout())
+        mAdapter.emptyView = getLoadingLayout()
         func(1, mPageSize)
     }
 
