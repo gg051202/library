@@ -76,8 +76,10 @@ class MyLogInterceptor : Interceptor {
 
         val responseBody = response.body!!
         val contentLength = responseBody.contentLength()
-        val bodySize = if (contentLength != -1L) "$contentLength-byte" else "unknown-length"
-        LL.i("【地址】${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms)($bodySize body)")
+        val bodySize = if (contentLength != -1L) "${contentLength / 1024}kb" else "no"
+        LL.i("  ")
+        LL.i("  ")
+        LL.i("【地址】${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms-$bodySize body)")
 
 
         val headers = request.headers
@@ -101,13 +103,13 @@ class MyLogInterceptor : Interceptor {
 
         //打印请求体
         if (requestBody == null) {
-            LL.i("--> END ${request.method} 不需要打印：requestBody == null")
+            LL.i("【参数】${request.method} requestBody == null")
         } else if (bodyHasUnknownEncoding(request.headers)) {
-            LL.i("--> END ${request.method} (encoded body omitted) 不需要打印：bodyHasUnknownEncoding")
+            LL.i("【参数】${request.method} (encoded body omitted) 不需要打印：bodyHasUnknownEncoding")
         } else if (requestBody.isDuplex()) {
-            LL.i("--> END ${request.method} (duplex request body omitted) 不需要打印：requestBody.isDuplex")
+            LL.i("【参数】${request.method} (duplex request body omitted) 不需要打印：requestBody.isDuplex")
         } else if (requestBody.isOneShot()) {
-            LL.i("--> END ${request.method} (one-shot body omitted) 不需要打印：requestBody.isOneShot()")
+            LL.i("【参数】${request.method} (one-shot body omitted) 不需要打印：requestBody.isOneShot()")
         } else {
             val buffer = Buffer()
             requestBody.writeTo(buffer)
@@ -181,17 +183,17 @@ class MyLogInterceptor : Interceptor {
                 "Cache-Control", "Content-Type" -> 1
                 "X-Powered-By", "Date", "Content-Length" -> 1
                 "Server", "X-AspNet-Version" -> 1
-                else                                     -> sb.append("${if (it.first == "comment") "" else it.first + ": "}${it.second}   ")
+                else -> sb.append("${if (it.first == "comment") "" else it.first + ": "}${it.second}   ")
             }
         }
 
-        LL.i(sb.toString())
+//        LL.i(sb.toString())
     }
 
     private fun bodyHasUnknownEncoding(headers: Headers): Boolean {
         val contentEncoding = headers["Content-Encoding"] ?: return false
         return !contentEncoding.equals("identity", ignoreCase = true) && !contentEncoding.equals("gzip",
-                                                                                                 ignoreCase = true)
+                ignoreCase = true)
     }
 }
 

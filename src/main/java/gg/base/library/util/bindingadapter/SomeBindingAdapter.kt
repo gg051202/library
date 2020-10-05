@@ -44,7 +44,6 @@ import me.jessyan.autosize.utils.ScreenUtils
 
 @BindingAdapter("base_recycler_view_on_success")
 fun setBaseRecyclerView1(baseRecyclerView: BaseRecyclerView, newList: List<*>?) {
-    LL.i("setBaseRecyclerView1")
     baseRecyclerView.onLoadDataComplete(newList)
 }
 
