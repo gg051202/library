@@ -154,7 +154,7 @@ class MyLogInterceptor : Interceptor {
             val charset: Charset = contentType?.charset(utf_8) ?: utf_8
 
             if (!buffer.isProbablyUtf8()) {
-                LL.i("<-- END HTTP (binary ${buffer.size}-byte body omitted)不需要打印!buffer.isProbablyUtf8()")
+//                LL.i("<-- END HTTP (binary ${buffer.size}-byte body omitted)不需要打印!buffer.isProbablyUtf8()")
                 return response
             }
 
