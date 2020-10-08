@@ -29,6 +29,7 @@ import java.io.IOException
 import java.lang.Exception
 import java.lang.StringBuilder
 import java.nio.charset.Charset
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -76,10 +77,8 @@ class MyLogInterceptor : Interceptor {
 
         val responseBody = response.body!!
         val contentLength = responseBody.contentLength()
-        val bodySize = if (contentLength != -1L) "${contentLength / 1024}kb" else "no"
-        LL.i("  ")
-        LL.i("  ")
-        LL.i("【地址】${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms-$bodySize body)")
+        val bodySize = if (contentLength != -1L) "$contentLength-byte" else "unknown-length"
+        LL.i("【地址】${request.method.toUpperCase(Locale.ROOT)} ${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms)($bodySize body)")
 
 
         val headers = request.headers
@@ -156,7 +155,7 @@ class MyLogInterceptor : Interceptor {
             val charset: Charset = contentType?.charset(utf_8) ?: utf_8
 
             if (!buffer.isProbablyUtf8()) {
-//                LL.i("<-- END HTTP (binary ${buffer.size}-byte body omitted)不需要打印!buffer.isProbablyUtf8()")
+                LL.i("<-- END HTTP (binary ${buffer.size}-byte body omitted)不需要打印!buffer.isProbablyUtf8()")
                 return response
             }
 
