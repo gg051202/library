@@ -29,6 +29,7 @@ import java.io.IOException
 import java.lang.Exception
 import java.lang.StringBuilder
 import java.nio.charset.Charset
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -77,7 +78,7 @@ class MyLogInterceptor : Interceptor {
         val responseBody = response.body!!
         val contentLength = responseBody.contentLength()
         val bodySize = if (contentLength != -1L) "$contentLength-byte" else "unknown-length"
-        LL.i("【地址】${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms)($bodySize body)")
+        LL.i("【地址】${request.method.toUpperCase(Locale.ROOT)} ${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms)($bodySize body)")
 
 
         val headers = request.headers
