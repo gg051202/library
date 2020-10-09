@@ -167,18 +167,7 @@ class MyLogInterceptor : Interceptor {
     }
 
     private fun logHeader(headers: Headers) {
-        val sb = StringBuilder("【头部】")
-
-        headers.forEach {
-            when (it.first) {
-                "Cache-Control", "Content-Type" -> 1
-                "X-Powered-By", "Date", "Content-Length" -> 1
-                "Server", "X-AspNet-Version" -> 1
-                else -> sb.append("${if (it.first == "comment") "" else it.first + ": "}${it.second}   ")
-            }
-        }
-
-//        LL.i(sb.toString())
+        LL.i(headers.toString())
     }
 
     private fun bodyHasUnknownEncoding(headers: Headers): Boolean {

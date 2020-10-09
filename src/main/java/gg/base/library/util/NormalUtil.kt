@@ -2,7 +2,6 @@ package gg.base.library.util
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
@@ -17,6 +16,7 @@ import gg.base.library.Constants
 import gg.base.library.base.BaseActivity
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.text.DecimalFormat
 import java.util.*
 
 
@@ -195,7 +195,15 @@ open class NormalUtil {
             return ""
         }
 
+        private val df = DecimalFormat("#.##")
+
+        // 格式化数字显示方式,double类型会显示小数点后很多位
+        fun getTwoPointnumberAuto(e: Float): String {
+            return df.format(e.toDouble())
+        }
     }
+
+
 }
 
 fun hidePhone(phone: String?): String {
