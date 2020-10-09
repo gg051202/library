@@ -31,6 +31,7 @@ import java.lang.StringBuilder
 import java.nio.charset.Charset
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.system.exitProcess
 
 /**
  * An OkHttp interceptor which logs request and response information. Can be applied as an
@@ -117,17 +118,8 @@ class MyLogInterceptor : Interceptor {
             val charset: Charset = contentType?.charset(utf_8) ?: utf_8
             //打印请求体
             if (buffer.isProbablyUtf8()) {
-                val s = buffer.readString(charset)
-                try {
-                    s.split("&").forEach {
-                        if (it.contains("info=")) {
-                            LL.i(EncodeUtils.urlDecode("【参数】$it"))
-                        }
-                    }
-                } catch (e: Exception) {
-
-                }
-                //                LL.i("--> END ${request.method} (${requestBody.contentLength()}-byte body)")
+                LL.i(EncodeUtils.urlDecode("【参数】${buffer.readString(charset)}"))
+//                LL.i("--> END ${request.method} (${requestBody.contentLength()}-byte body)")
             } else {
                 LL.i("--> END ${request.method} (binary ${requestBody.contentLength()}-byte body omitted) 不需要打印：！buffer.isProbablyUtf8")
             }
