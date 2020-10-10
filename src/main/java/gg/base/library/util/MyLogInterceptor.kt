@@ -99,7 +99,7 @@ class MyLogInterceptor : Interceptor {
         //            }
         //        }
 
-        logHeader(headers)
+//        logHeader(headers)
 
         //打印请求体
         if (requestBody == null) {

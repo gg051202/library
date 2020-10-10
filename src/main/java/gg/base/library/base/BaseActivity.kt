@@ -198,21 +198,15 @@ abstract class BaseActivity : AppCompatActivity(),
     }
 
     override fun hideLoadingView(loadingViewStatus: LoadingViewStatus) {
-        when (loadingViewStatus.type) {
-            LoadingViewStatus.Type.ROUND_CIRCLE -> {
-                mLoadingViewAnimator?.let {
-                    if (it.isRunning) {
-                        it.cancel()
-                    }
-                    dialogLoadingView?.setVisibility(View.GONE)
-                }
+        mLoadingViewAnimator?.let {
+            if (it.isRunning) {
+                it.cancel()
             }
-            LoadingViewStatus.Type.LINE -> {
-                lineLoadingView?.let {
-                    it.cancelAnimation()
-                    it.setGone(false)
-                }
-            }
+            dialogLoadingView?.setVisibility(View.GONE)
+        }
+        lineLoadingView?.let {
+            it.cancelAnimation()
+            it.setGone(false)
         }
     }
 
