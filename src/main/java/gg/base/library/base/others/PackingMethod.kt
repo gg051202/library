@@ -154,7 +154,7 @@ fun addActivityInfo(binding: ViewBinding, activity: BaseActivity) {
         }
         val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
                                                     AutoSizeTool.dp2px(30))
-        layoutParams.topMargin = AutoSizeTool.dp2px(3)
+        layoutParams.topMargin = AutoSizeTool.dp2px(100)
         layoutParams.leftMargin = AutoSizeTool.dp2px(10)
         (binding.root.parent as ContentFrameLayout).addView(descTextView, layoutParams)
     }
