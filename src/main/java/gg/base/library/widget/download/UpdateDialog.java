@@ -24,7 +24,6 @@ import com.dongjin.mylibrary.R;
 import java.io.File;
 
 import gg.base.library.util.NormalUtil;
-import gg.base.library.util.SPUtils2;
 import gg.base.library.widget.MyDialog;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
@@ -244,7 +243,7 @@ public class UpdateDialog implements View.OnClickListener {
      * 保存点击"明天再说"时的时间
      */
     private void saveLatestTime() {
-        SPUtils2.Companion.put("checkUpdate_tomorrow_dialog", System.currentTimeMillis());
+        SPUtils.getInstance().put("checkUpdate_tomorrow_dialog", System.currentTimeMillis());
     }
 
     /**
@@ -388,14 +387,6 @@ public class UpdateDialog implements View.OnClickListener {
 
     public void setDownloadUtil(DownloadUtil downloadUtil) {
         mDownloadUtil = downloadUtil;
-    }
-
-    public boolean isAutoCheck() {
-        return mIsAutoCheck;
-    }
-
-    public void setAutoCheck(boolean autoCheck) {
-        mIsAutoCheck = autoCheck;
     }
 
     public boolean isNeedUpdate() {
