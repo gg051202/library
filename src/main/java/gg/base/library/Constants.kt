@@ -48,7 +48,7 @@ class Constants {
         private val IMAGE_LOAD_ERR: Int = R.drawable.frame_bg_place_holder
 
 
-        fun getRequestOptions(radiusPx: Int, cornerType: RoundedCornersTransformation.CornerType?): RequestOptions {
+        fun getRequestOptions(radiusPx: Int = 0, cornerType: RoundedCornersTransformation.CornerType = RoundedCornersTransformation.CornerType.ALL): RequestOptions {
             return RequestOptions().transform(CenterCrop(),
                                               RoundedCornersTransformation(radiusPx,
                                                                            0,

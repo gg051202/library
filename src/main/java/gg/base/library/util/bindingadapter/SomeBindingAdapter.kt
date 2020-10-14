@@ -56,7 +56,7 @@ fun setBaseRecyclerView2(baseRecyclerView: BaseRecyclerView, errMsg: String?) {
 
 
 @BindingAdapter(value = ["marginTopPx", "marginRightPx", "marginBottomPx", "marginLeftPx"],
-                requireAll = false)
+        requireAll = false)
 fun setMarginPx(view: View, marginTopPx: Int?, marginRightPx: Int?, marginBottomPx: Int?, marginLeftPx: Int?) {
     val layoutParams = view.layoutParams
     if (layoutParams is MarginLayoutParams) {
@@ -69,7 +69,7 @@ fun setMarginPx(view: View, marginTopPx: Int?, marginRightPx: Int?, marginBottom
 }
 
 @BindingAdapter(value = ["marginTopDp", "marginRightDp", "marginBottomDp", "marginLeftDp"],
-                requireAll = false)
+        requireAll = false)
 fun setMarginDp(view: View, marginTopDp: Int?, marginRightDp: Int?, marginBottomDp: Int?, marginLeftDp: Int?) {
     val layoutParams = view.layoutParams
     if (layoutParams is MarginLayoutParams) {
@@ -106,7 +106,8 @@ fun setHeightDp(view: View, layout_height_dp: Int?, layout_width_dp: Int?) {
  */
 @BindingAdapter(value = ["url", "url2", "urlRadiusDp", "urlCornerType"], requireAll = false)
 fun loadImage(imageView: ImageView, url: String?, url2: Any?, radiusDp: Int?, cornerType: CornerType?) {
-    val options: RequestOptions = Constants.getRequestOptions(AutoSizeTool.dp2px(radiusDp ?: 0), cornerType)
+    val options: RequestOptions = Constants.getRequestOptions(AutoSizeTool.dp2px(radiusDp
+            ?: 0), cornerType ?: CornerType.ALL)
     val target = if (!TextUtils.isEmpty(url)) url else url2
 
     val build = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
@@ -176,7 +177,7 @@ fun setVisable2(v: View, visable: Boolean) {
  * @param firstDontNeedAnim 第一次显示不需要加载动画,为了解决，某些页面的view，本来就是gone，不需要展示动画
  */
 @BindingAdapter(value = ["gone", "gone_anim_type", "gone_anim_time", "gone_first_dont_need_anim"],
-                requireAll = false)
+        requireAll = false)
 fun setGone2(view: View, isGone: Boolean, goneAnimType: Int, goneAnimTime: Int, firstDontNeedAnim: Boolean) {
     var goneAnimTime = goneAnimTime
     if (goneAnimTime == 0) {
@@ -294,7 +295,7 @@ private fun haveContentsChanged(str1: CharSequence?, str2: CharSequence?): Boole
  * @param radius @{3}
  */
 @BindingAdapter(value = ["background_solidColor0x", "background_radius_dp", "background_pressedColor", "background_cornerType"],
-                requireAll = false)
+        requireAll = false)
 fun setViewBackground(v: View,
                       color: Int,
                       radiusDp: Float,
@@ -307,7 +308,7 @@ fun setViewBackground(v: View,
     drawablePressedFlase.setCornerRadius(cornerType, radiusDp)
 
     stalistDrawable.addState(intArrayOf(-android.R.attr.state_pressed, android.R.attr.state_enabled),
-                             drawablePressedFlase)
+            drawablePressedFlase)
     if (backgroundPressedColor) {
         val drawablePressedTrue = GradientDrawable()
         //            color& 0xa0ffffff 可以把颜色变透明
@@ -315,10 +316,10 @@ fun setViewBackground(v: View,
         drawablePressedTrue.setCornerRadius(cornerType, radiusDp)
 
         stalistDrawable.addState(intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled),
-                                 drawablePressedTrue)
+                drawablePressedTrue)
     } else {
         stalistDrawable.addState(intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled),
-                                 drawablePressedFlase)
+                drawablePressedFlase)
     }
 
     //            //没有任何状态时显示的图片
@@ -356,7 +357,7 @@ fun setViewBackground(v: RedPointTextView, pointViewNumber: Int) {
 }
 
 @BindingAdapter(value = ["adapter", "adapterLayoutManager", "adapterGridCount", "adapterFirstItemVerticalSpacingDp", "adapterFirstItemHorizontalSpacingDp"],
-                requireAll = false)
+        requireAll = false)
 fun setRecyclerViewAdapter(recyclerView: RecyclerView,
                            adapter: BaseQuickAdapter<*, *>?,
                            layoutManager: Int? = null,
@@ -400,9 +401,9 @@ fun belowStatusBarMargin(view: View, needBelowStatusBar: Boolean?) {
 fun belowStatusBarPadding(view: View, needBelowStatusBar: Boolean?) {
     needBelowStatusBar?.let {
         view.setPadding(view.paddingLeft,
-                        view.paddingTop + ScreenUtils.getStatusBarHeight(),
-                        view.paddingRight,
-                        view.paddingBottom)
+                view.paddingTop + ScreenUtils.getStatusBarHeight(),
+                view.paddingRight,
+                view.paddingBottom)
     }
 }
 
