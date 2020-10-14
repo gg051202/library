@@ -38,7 +38,7 @@ class SPUtils2 {
                 is Long -> {
                     editor.putLong(key, ob)
                 }
-                else       -> {
+                else -> {
                     editor.putString(key, ob.toString())
                 }
             }
@@ -69,7 +69,7 @@ class SPUtils2 {
                 is Long -> {
                     return sp.getLong(key, (defaultObject as Long)) as T
                 }
-                else       -> return 1 as T
+                else -> return 1 as T
             }
         }
 
