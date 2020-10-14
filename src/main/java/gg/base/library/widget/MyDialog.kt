@@ -1,18 +1,18 @@
 package gg.base.library.widget
 
+import android.app.Activity
 import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.dongjin.mylibrary.R
 import com.dongjin.mylibrary.databinding.FrameCustomLayoutMyDialogBinding
-import gg.base.library.base.BaseActivity
 
 /**
  * Created by sss on 2020/8/23 16:55.
  * email jkjkjk.com
  */
-class MyDialog(val baseActivity: BaseActivity,
+class MyDialog(val activity: Activity,
                val showCancleButton: Boolean = true,
                val title: String? = null,
                val desc: CharSequence? = null,
@@ -23,8 +23,8 @@ class MyDialog(val baseActivity: BaseActivity,
 
 
     private val mBinding: FrameCustomLayoutMyDialogBinding = DataBindingUtil.inflate(LayoutInflater.from(
-        baseActivity), R.layout.frame_custom_layout_my_dialog, null, false)
-    private val alertDialog: AlertDialog = AlertDialog.Builder(baseActivity, R.style.DefaultDialogStyle)
+            activity), R.layout.frame_custom_layout_my_dialog, null, false)
+    private val alertDialog: AlertDialog = AlertDialog.Builder(activity, R.style.DefaultDialogStyle)
             .setView(mBinding.root)
             .setCancelable(false)
             .create()

@@ -364,7 +364,7 @@ abstract class BaseActivity : AppCompatActivity(),
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 ssb.append("暂未允许$failPermissionName，您可以在${s}中开启")
 
-                MyDialog(baseActivity = mActivity,
+                MyDialog(activity = mActivity,
                         title = "提示",
                         desc = ssb,
                         cancleText = "算了吧",
