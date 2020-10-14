@@ -37,6 +37,10 @@ class Constants {
             return BuildConfig.DEBUG
         }
 
+        fun isTest(): Boolean {
+            return FLAVOR == "_test"
+        }
+
         fun isProduct(): Boolean {
             return !DEBUG && FLAVOR == "_product"
         }

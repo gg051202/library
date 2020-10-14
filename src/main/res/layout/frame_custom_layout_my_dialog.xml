@@ -47,7 +47,7 @@
                 android:id="@+id/layout"
                 background_cornerType="@{CornerType.TOP}"
                 background_pressedColor="@{true}"
-                background_radius_dp="@{18}"
+                background_radius_dp="@{8}"
                 background_solidColor0x="@{0xffffffff}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="19dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="38dp">
+                android:paddingBottom="20dp">
 
                 <gg.base.library.widget.FakeBoldTextView
                     android:id="@+id/titleTextView"
@@ -76,7 +76,7 @@
                     gone="@{!TextUtils.isEmpty(desc)}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="23dp"
+                    android:layout_marginTop="13dp"
                     android:gravity="center"
                     android:lineSpacingExtra="5dp"
                     android:text="@{desc}"
@@ -94,7 +94,7 @@
                     android:id="@+id/cancelTextView"
                     background_cornerType="@{CornerType.BOTTOM_LEFT}"
                     background_pressedColor="@{true}"
-                    background_radius_dp="@{18}"
+                    background_radius_dp="@{8}"
                     background_solidColor0x="@{0xffF6F6F6}"
                     gone="@{showCancleButton}"
                     android:layout_width="0dp"
@@ -109,7 +109,7 @@
                     android:id="@+id/submitTextView"
                     background_cornerType="@{showCancleButton?CornerType.BOTTOM_RIGHT:CornerType.BOTTOM}"
                     background_pressedColor="@{true}"
-                    background_radius_dp="@{18}"
+                    background_radius_dp="@{8}"
                     background_solidColor0x="@{0xff418CF6}"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

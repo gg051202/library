@@ -25,6 +25,9 @@ import java.io.File;
 
 import gg.base.library.util.NormalUtil;
 import gg.base.library.util.SPUtils2;
+import gg.base.library.widget.MyDialog;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 /**
  * ！！！需要设置manifest权限  install_package
@@ -86,13 +89,12 @@ public class UpdateDialog implements View.OnClickListener {
             update();
         } else {
             if (!mIsAutoCheck) {//如果不是自动更新，才需要弹出提示窗
-                new AlertDialog.Builder(mActivity, R.style.DefaultDialogStyle)
-                        .setTitle("提示")
-                        .setMessage("当前版本已是最新版本")
-                        .setPositiveButton("确定", (dialog, which) -> {
-                        })
-                        .create()
-                        .show();
+                new MyDialog(mActivity, false, "提示", "当前版本已是最新版本", new Function0<Unit>() {
+                    @Override
+                    public Unit invoke() {
+                        return null;
+                    }
+                },null,"确定","").show();
             }
         }
     }
