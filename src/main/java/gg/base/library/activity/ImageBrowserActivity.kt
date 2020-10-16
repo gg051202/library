@@ -17,6 +17,7 @@ import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.dongjin.mylibrary.R
 import gg.base.library.base.BaseActivity
+import gg.base.library.base.MyBaseViewHolder
 import gg.base.library.base.others.InitConfigData
 import gg.base.library.util.AutoSizeTool
 import gg.base.library.vm.ImageBrowserActivityViewModel
@@ -76,7 +77,7 @@ class ImageBrowserActivity : BaseActivity() {
                     finish()
                     overridePendingTransition()
                 }
-                return BaseViewHolder(imageView)
+                return MyBaseViewHolder(imageView)
 
             }
 
