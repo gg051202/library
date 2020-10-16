@@ -27,6 +27,7 @@ import com.airbnb.lottie.LottieDrawable
 import com.dongjin.mylibrary.BR
 import com.dongjin.mylibrary.R
 import com.gyf.immersionbar.ImmersionBar
+import com.umeng.analytics.MobclickAgent
 import gg.base.library.Constants
 import gg.base.library.base.others.*
 import gg.base.library.util.*
@@ -44,9 +45,9 @@ import java.util.*
  * email jkjkjk.com
  */
 abstract class BaseActivity : AppCompatActivity(),
-        IRunOperation by RunOperationImpl(),
-        IDiffentOperation,
-        CustomAdapt {
+                              IRunOperation by RunOperationImpl(),
+                              IDiffentOperation,
+                              CustomAdapt {
 
     private lateinit var mBinding: ViewDataBinding
 
@@ -149,10 +150,8 @@ abstract class BaseActivity : AppCompatActivity(),
         when (loadingViewStatus.type) {
             LoadingViewStatus.Type.ROUND_CIRCLE -> {
                 if (dialogLoadingView == null) {
-                    dialogLoadingView = LayoutInflater.from(mActivity)
-                            .inflate(R.layout.frame_custom_layout_base_loading_view, null, false)
-                    val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
-                            FrameLayout.LayoutParams.WRAP_CONTENT)
+                    dialogLoadingView = LayoutInflater.from(mActivity).inflate(R.layout.frame_custom_layout_base_loading_view, null, false)
+                    val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
                     layoutParams.gravity = Gravity.CENTER
                     addContentView(dialogLoadingView, layoutParams)
                 }
@@ -181,8 +180,7 @@ abstract class BaseActivity : AppCompatActivity(),
                     lineLoadingView?.let {
                         it.setAnimation("frame_anim_loading_line.json")
                         it.repeatCount = LottieDrawable.INFINITE
-                        val layoutParams = FrameLayout.LayoutParams(AutoSizeTool.dp2px(100),
-                                AutoSizeTool.dp2px(200))
+                        val layoutParams = FrameLayout.LayoutParams(AutoSizeTool.dp2px(100), AutoSizeTool.dp2px(200))
                         layoutParams.gravity = Gravity.CENTER
                         addContentView(it, layoutParams)
                     }
@@ -219,8 +217,7 @@ abstract class BaseActivity : AppCompatActivity(),
     override fun showErrView(msg: String, retryCallback: (() -> Unit)?) {
         if (defaultErrView == null) {
             defaultErrView = View.inflate(mActivity, R.layout.frame_activity_default_err_view, null)
-            val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT)
+            val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
             addContentView(defaultErrView, layoutParams)
         }
         defaultErrView?.let {
@@ -245,6 +242,12 @@ abstract class BaseActivity : AppCompatActivity(),
     override fun onResume() {
         super.onResume()
         NormalUtil.autoRecordActivity(this)
+        MobclickAgent.onResume(this);
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this);
     }
 
     override fun onDestroy() {
@@ -327,9 +330,7 @@ abstract class BaseActivity : AppCompatActivity(),
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<out String>,
-                                            grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode != requestPermission) {
             return
@@ -352,7 +353,7 @@ abstract class BaseActivity : AppCompatActivity(),
                     Manifest.permission.CAMERA -> failPermissionName = "拍摄照片"
                     Manifest.permission.RECORD_AUDIO -> failPermissionName = "录音"
                     Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION -> failPermissionName = "定位"
-                    else -> {
+                    else                                                                                  -> {
                     }
                 }
             }
@@ -364,21 +365,12 @@ abstract class BaseActivity : AppCompatActivity(),
             if (fail == null || !fail!!.invoke()) {
                 val ssb = SpannableStringBuilder()
                 val s = SpannableString("权限管理")
-                s.setSpan(ForegroundColorSpan(Constants.DEFAULT_PRIMARY),
-                        0,
-                        4,
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                s.setSpan(ForegroundColorSpan(Constants.DEFAULT_PRIMARY), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 ssb.append("暂未允许$failPermissionName，您可以在${s}中开启")
 
-                MyDialog(baseActivity = mActivity,
-                        title = "提示",
-                        desc = ssb,
-                        cancleText = "算了吧",
-                        submitText = "去系统设置",
-                        submitFun = {
-                            GotoPermissionPageUtils(mActivity).jump()
-                        },
-                        showCancleButton = true).show()
+                MyDialog(baseActivity = mActivity, title = "提示", desc = ssb, cancleText = "算了吧", submitText = "去系统设置", submitFun = {
+                    GotoPermissionPageUtils(mActivity).jump()
+                }, showCancleButton = true).show()
             }
         }
     }

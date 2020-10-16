@@ -29,11 +29,11 @@ class Constants {
         var APPLICATION_ID: String = ""
 
         fun isDevelop(): Boolean {
-            return FLAVOR == "_develop"
+            return FLAVOR.contains("_develop")
         }
 
         fun isProduct(): Boolean {
-            return !DEBUG && FLAVOR == "_product"
+            return !DEBUG && FLAVOR.contains("_product")
         }
 
 
@@ -50,13 +50,8 @@ class Constants {
 
         fun getRequestOptions(radiusPx: Int = 0, cornerType: RoundedCornersTransformation.CornerType = RoundedCornersTransformation.CornerType.ALL): RequestOptions {
             return RequestOptions().transform(CenterCrop(),
-                                              RoundedCornersTransformation(radiusPx,
-                                                                           0,
-                                                                           cornerType
-                                                                               ?: RoundedCornersTransformation.CornerType.ALL))
-                    .error(IMAGE_LOAD_ERR)
-                    .placeholder(IMAGE_LOAD_HOLDER)
-                    .timeout(60_1000)
+                                              RoundedCornersTransformation(radiusPx, 0, cornerType ?: RoundedCornersTransformation.CornerType.ALL)).error(
+                IMAGE_LOAD_ERR).placeholder(IMAGE_LOAD_HOLDER).timeout(60_1000)
         }
 
     }

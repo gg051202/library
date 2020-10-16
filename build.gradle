@@ -36,17 +36,6 @@ android {
         dataBinding true
     }
 
-    flavorDimensions "version"
-    productFlavors {
-        _develop {
-        }
-
-        _test {
-        }
-
-        _product {
-        }
-    }
 }
 
 dependencies {
@@ -93,7 +82,25 @@ dependencies {
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
 
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.0"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.10"
+
+
+    api 'com.umeng.umsdk:common:9.1.6' // (必选)版本号
+    api 'com.umeng.umsdk:asms:1.1.3' // asms包依赖(必选)
+    api 'com.umeng.umsdk:crash:0.0.5' // native crash包依赖(必选)
+    api 'com.umeng.umsdk:oaid_lenovo:1.0.0' // (可选)
+    api 'com.umeng.umsdk:oaid_mi:1.0.0' // (可选)
+    api 'com.umeng.umsdk:oaid_oppo:1.0.4' // (可选)
+    api 'com.umeng.umsdk:oaid_vivo:1.0.0.1' // (可选)
+
+    api 'com.umeng.umsdk:push:6.1.0'
+    api 'com.umeng.umsdk:alicloud-httpdns:1.2.5'
+    api 'com.umeng.umsdk:alicloud-utils:1.1.5'
+    api 'com.umeng.umsdk:alicloud_beacon:1.0.1'
+    api 'com.umeng.umsdk:agoo-accs:3.3.8.8-open-fix2'
+    api 'com.umeng.umsdk:agoo_networksdk:3.5.5'
+    api 'com.umeng.umsdk:agoo_tlog:3.0.0.17'
+    api 'com.umeng.umsdk:agoo_tnet4android:3.1.14.9'
 
 
 }
