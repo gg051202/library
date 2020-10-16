@@ -24,6 +24,7 @@ class Constants {
         const val DEFAULT_ERR = (0xff3aeeb).toInt()
         const val DEFAULT_BLOCK = (0xffa0a0b).toInt()
 
+        //todo 如果集成库，需要初始化这些变量
         var FLAVOR: String = ""
         var DEBUG: Boolean = false
         var APPLICATION_ID: String = ""
@@ -50,10 +51,10 @@ class Constants {
 
         fun getRequestOptions(radiusPx: Int = 0, cornerType: RoundedCornersTransformation.CornerType = RoundedCornersTransformation.CornerType.ALL): RequestOptions {
             return RequestOptions().transform(CenterCrop(),
-                                              RoundedCornersTransformation(radiusPx,
-                                                                           0,
-                                                                           cornerType
-                                                                               ?: RoundedCornersTransformation.CornerType.ALL))
+                    RoundedCornersTransformation(radiusPx,
+                            0,
+                            cornerType
+                                    ?: RoundedCornersTransformation.CornerType.ALL))
                     .error(IMAGE_LOAD_ERR)
                     .placeholder(IMAGE_LOAD_HOLDER)
                     .timeout(60_1000)
