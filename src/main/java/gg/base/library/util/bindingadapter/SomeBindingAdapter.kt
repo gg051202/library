@@ -29,7 +29,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.dongjin.mylibrary.R
 import gg.base.library.Constants
 import gg.base.library.util.*
-import gg.base.library.widget.BaseRecyclerView
+import gg.base.library.widget.BaseRecyclerView2
 import gg.base.library.widget.FakeBoldTextView
 import gg.base.library.widget.GGFlowLayout
 import gg.base.library.widget.RedPointTextView
@@ -43,14 +43,14 @@ import me.jessyan.autosize.utils.ScreenUtils
 
 
 @BindingAdapter("base_recycler_view_on_success")
-fun setBaseRecyclerView1(baseRecyclerView: BaseRecyclerView, newList: List<*>?) {
+fun setBaseRecyclerView1(baseRecyclerView: BaseRecyclerView2, newList: List<*>?) {
     LL.i("setBaseRecyclerView1")
     baseRecyclerView.onLoadDataComplete(newList)
 }
 
 
 @BindingAdapter("base_recycler_view_on_err")
-fun setBaseRecyclerView2(baseRecyclerView: BaseRecyclerView, errMsg: String?) {
+fun setBaseRecyclerView2(baseRecyclerView: BaseRecyclerView2, errMsg: String?) {
     errMsg?.let { baseRecyclerView.onLoadDataCompleteErr(it) }
 }
 

@@ -24,7 +24,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
  * Created by sss on 2020/8/20 17:39.
  * email jkjkjk.com
  */
-class BaseRecyclerView : SmartRefreshLayout {
+class BaseRecyclerView2 : SmartRefreshLayout {
     enum class RefreshingStatus {
         STATUS_REFRESHING,
         STATUS_LOADINGMORE,
