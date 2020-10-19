@@ -273,6 +273,7 @@ abstract class BaseActivity : AppCompatActivity(),
                 .init()
     }
 
+
     override fun finish() {
         super.finish()
         cancle()
