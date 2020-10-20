@@ -391,8 +391,10 @@ fun setImageViewResource(imageView: ImageView, resource: Int) {
 @BindingAdapter("belowStatusBarMargin")
 fun belowStatusBarMargin(view: View, needBelowStatusBar: Boolean?) {
     needBelowStatusBar?.let {
-        view.updateLayoutParams<MarginLayoutParams> {
-            topMargin = ScreenUtils.getStatusBarHeight()
+        if (it) {
+            view.updateLayoutParams<MarginLayoutParams> {
+                topMargin = ScreenUtils.getStatusBarHeight()
+            }
         }
     }
 }
@@ -400,10 +402,12 @@ fun belowStatusBarMargin(view: View, needBelowStatusBar: Boolean?) {
 @BindingAdapter("belowStatusBarPadding")
 fun belowStatusBarPadding(view: View, needBelowStatusBar: Boolean?) {
     needBelowStatusBar?.let {
-        view.setPadding(view.paddingLeft,
-                view.paddingTop + ScreenUtils.getStatusBarHeight(),
-                view.paddingRight,
-                view.paddingBottom)
+        if (it) {
+            view.setPadding(view.paddingLeft,
+                    view.paddingTop + ScreenUtils.getStatusBarHeight(),
+                    view.paddingRight,
+                    view.paddingBottom)
+        }
     }
 }
 
