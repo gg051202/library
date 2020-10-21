@@ -28,13 +28,14 @@ import com.dongjin.mylibrary.BR
 import com.dongjin.mylibrary.R
 import com.gyf.immersionbar.ImmersionBar
 import com.umeng.analytics.MobclickAgent
+import com.umeng.message.PushAgent
 import gg.base.library.Constants
+import gg.base.library.activity.DevelopActivity
 import gg.base.library.base.others.*
 import gg.base.library.util.*
 import gg.base.library.widget.MyDialog
 import kotlinx.android.synthetic.main.frame_activity_default_err_view.*
 import kotlinx.android.synthetic.main.frame_custom_layout_base_loading_view.*
-import kotlinx.android.synthetic.main.frame_custom_layout_base_loading_view.loadingTextView
 import kotlinx.android.synthetic.main.frame_custom_layout_my_action_bar.*
 import me.jessyan.autosize.internal.CustomAdapt
 import java.util.*
@@ -74,6 +75,7 @@ abstract class BaseActivity : AppCompatActivity(),
         mBinding.setVariable(BR.onClickProxy, mActivityInitConfig.onClickProxy)
 
         AppManager.getAppManager().addActivity(this)
+        PushAgent.getInstance(this).onAppStart()
 
         if (mActivityInitConfig.showActionBar) {
             initActionBar(this)
@@ -87,6 +89,11 @@ abstract class BaseActivity : AppCompatActivity(),
         NormalUtil.autoGo(this)
         addLogButton(mBinding, this)
         addActivityInfo(mBinding, this)
+//        if (DevelopActivity.isShowLogButton()) {
+//            val logButton = findViewById<View>(R.id.logButton)
+//            logButton.visibility = View.VISIBLE
+//            logButton.setOnClickListener { v: View? -> com.leo.marketing.widget.dialog.ShowLogDialog(mActivity).show() }
+//        }
     }
 
 

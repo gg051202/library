@@ -9,10 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-import gg.base.library.base.BaseActivity;
-
 public class AppManager {
-    private static Stack<BaseActivity> activityStack;
+    private static Stack<Activity> activityStack;
     private static AppManager instance;
 
     private AppManager() {
@@ -31,7 +29,7 @@ public class AppManager {
     /**
      * 添加Activity到堆栈
      */
-    public void addActivity(BaseActivity activity) {
+    public void addActivity(Activity activity) {
         if (activityStack == null) {
             activityStack = new Stack<>();
         }
@@ -50,7 +48,7 @@ public class AppManager {
      * 结束当前Activity（堆栈中最后一个压入的）
      */
     public void finishActivity() {
-        BaseActivity activity = activityStack.lastElement();
+        Activity activity = activityStack.lastElement();
         finishActivity(activity);
     }
 
@@ -64,7 +62,7 @@ public class AppManager {
     /**
      * 获取当前Activity 是否位于栈顶
      */
-    public boolean isActivityTop(BaseActivity activity) {
+    public boolean isActivityTop(Activity activity) {
         return activityStack.lastElement().getClass().equals(activity.getClass());
     }
 
@@ -72,7 +70,7 @@ public class AppManager {
     /**
      * 移除当前ACTIVITY堆栈
      */
-    public void removeActivity(BaseActivity activity) {
+    public void removeActivity(Activity activity) {
         if (activityStack.contains(activity)) {
             activityStack.remove(activity);
             activity = null;
@@ -82,11 +80,11 @@ public class AppManager {
     /**
      * 结束指定的Activity
      */
-    public void finishActivity(BaseActivity activity) {
+    public void finishActivity(Activity activity) {
         if (activity != null) {
             activity.finish();
             activity = null;
-            Iterator<BaseActivity> iter = activityStack.iterator();
+            Iterator<Activity> iter = activityStack.iterator();
             while (iter.hasNext()) {
                 Activity str = iter.next();
                 if (str.equals(activity)) {
@@ -100,7 +98,7 @@ public class AppManager {
      * 结束指定类名的Activity
      */
     public void finishActivity(Class<?> cls) {
-        for (BaseActivity activity : activityStack) {
+        for (Activity activity : activityStack) {
             if (activity.getClass().equals(cls)) {
                 finishActivity(activity);
             }
@@ -135,10 +133,9 @@ public class AppManager {
         try {
             for (int i = 0, size = activityStack.size(); i < size; i++) {
                 if (null != activityStack.get(i) && !activityStack.get(i).getClass().equals(cls)) {
-                    activityStack.get(i).finish();
+                    finishActivity(activityStack.get(i));
                 }
             }
-            activityStack.clear();
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -175,8 +172,8 @@ public class AppManager {
      *
      * @param name
      */
-    public BaseActivity getActivityByName(String name) {
-        for (BaseActivity ia : activityStack) {
+    public Activity getActivityByName(String name) {
+        for (Activity ia : activityStack) {
             if (ia.getClass().getName().indexOf(name) >= 0) {
                 return ia;
             }

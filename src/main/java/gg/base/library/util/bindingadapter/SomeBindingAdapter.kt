@@ -6,9 +6,11 @@ import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
+import android.text.Html
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
 import android.text.style.UnderlineSpan
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
@@ -414,4 +416,16 @@ fun belowStatusBarPadding(view: View, needBelowStatusBar: Boolean?) {
 @BindingAdapter("ggfl_list_String")
 fun setBelowStatusBar(view: GGFlowLayout<String>, list: ArrayList<String>) {
     view.setViewList(list)
+}
+
+@BindingAdapter("htmlText")
+fun setHtmlText(view: TextView, value: String) {
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+        view.text = Html.fromHtml(value, Html.FROM_HTML_MODE_COMPACT)
+    } else {
+        @Suppress("DEPRECATION")
+        view.text = Html.fromHtml(value)
+    }
+
+    view.movementMethod = LinkMovementMethod.getInstance()
 }
