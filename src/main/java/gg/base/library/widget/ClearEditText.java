@@ -53,10 +53,10 @@ public class ClearEditText extends AppCompatEditText {
         if (mClearDrawable == null) {
             // throw new
             // NullPointerException("You can add drawableRight attribute in XML");
-            mClearDrawable = getResources().getDrawable(R.mipmap.frame_base_icon_delete);
+            mClearDrawable = getResources().getDrawable(R.mipmap.frame_icon_delete);
         }
 
-        int width = AutoSizeUtils.dp2px(context, 18);
+        int width = AutoSizeUtils.dp2px(context, 20);
         mClearDrawable.setBounds(0, 0, width, width);
         // 默认设置隐藏图标
         setClearIconVisible(false);

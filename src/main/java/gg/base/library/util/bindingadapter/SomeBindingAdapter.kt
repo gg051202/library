@@ -34,7 +34,7 @@ import gg.base.library.util.*
 import gg.base.library.widget.BaseRecyclerView2
 import gg.base.library.widget.FakeBoldTextView
 import gg.base.library.widget.GGFlowLayout
-import gg.base.library.widget.RedPointTextView
+import gg.base.library.widget.download.RedPointTextView
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType
 import me.jessyan.autosize.utils.ScreenUtils
 

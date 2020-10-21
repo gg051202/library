@@ -1,21 +1,21 @@
 /**
  *
  */
-package gg.base.library.widget;
-
+package gg.base.library.widget.download;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 
 import com.dongjin.mylibrary.R;
+
 
 /**
  * @author guilin
@@ -62,7 +62,7 @@ public class RedPointTextView extends View {
 
         // 画数字
         paint.setColor(0xffffffff);
-        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextAlign(Align.CENTER);
         if (!number.equals("0"))
             canvas.drawText(number + "", width / 2, height / 2 + textRect.height() / 2, paint);
     }
@@ -70,18 +70,17 @@ public class RedPointTextView extends View {
     private void init(Canvas canvas) {
         paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setTypeface(Typeface.DEFAULT_BOLD);
         height = canvas.getHeight();
         // 圆的半径
         radius = height / 2;
         // 设置text的字体大小，高度的3/5
-        paint.setTextSize(height * 4 / 5);
+        paint.setTextSize(height * 3 / 5);
         // 计算所画数字的宽高
         textRect = new Rect();
         paint.getTextBounds(number + "", 0, number.length(), textRect);
         textWidth = (number.length() == 1 ? 0 : (textRect.width() - paint.measureText("2")));
 
-        ViewGroup.LayoutParams lp = getLayoutParams();
+        LayoutParams lp = getLayoutParams();
         // 根据字体宽度重新设置view的宽度
         width = (int) (height + textWidth);
         lp.width = (int) width;
@@ -104,6 +103,15 @@ public class RedPointTextView extends View {
 
     public void setColor(int color) {
         this.color = color;
+        invalidate();
+    }
+
+    /**
+     * 仅最为一个小红点
+     */
+    public void setEmptyString() {
+        number = "0";
+        setVisibility(View.VISIBLE);
         invalidate();
     }
 

@@ -44,7 +44,7 @@
             android:layout_marginTop="11dp"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView">
 
-            <com.a26c.android.frame.widget.FakeBoldTextView
+            <gg.base.library.widget.FakeBoldTextView
                 android:id="@+id/cancelTextView"
                 android:layout_width="0dp"
                 android:layout_height="43dp"
@@ -56,7 +56,7 @@
                 android:textSize="13sp"
                 app:fbt_boldSize="0.7" />
 
-            <com.a26c.android.frame.widget.FakeBoldTextView
+            <gg.base.library.widget.FakeBoldTextView
                 android:id="@+id/submitTextView"
                 android:layout_width="0dp"
                 android:layout_height="43dp"
