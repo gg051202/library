@@ -9,7 +9,8 @@ import android.util.AttributeSet;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import com.a26c.android.frame.R;
+import com.dongjin.mylibrary.R;
+
 
 /**
  * Created by guilinlin on 2017/8/16 10:41.
@@ -25,8 +26,7 @@ public class FakeBoldTextView extends AppCompatTextView {
         super(context, attrs);
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.FakeBoldTextView);
-        color = array.getColor(R.styleable.FakeBoldTextView_fbt_color, 0);
-        boldSize = array.getFloat(R.styleable.FakeBoldTextView_fbt_boldSize, 0.3f);
+        boldSize = array.getFloat(R.styleable.FakeBoldTextView_fbt_bold_size, 0.3f);
         array.recycle();
 
         updateString(getText().toString());

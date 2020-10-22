@@ -6,7 +6,8 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.a26c.android.frame.R;
+import com.dongjin.mylibrary.R;
+
 
 /**
  * Created by guilinlin on 2018/7/13 23:56.
