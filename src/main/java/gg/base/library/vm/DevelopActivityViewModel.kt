@@ -7,7 +7,6 @@ class DevelopActivityViewModel : BaseViewModel() {
 
     var testUrl = MutableLiveData<Boolean>()
     var showLogButton = MutableLiveData<Boolean>()
-    var autoRank = MutableLiveData<Boolean>()
 
 //    fun sendHttp() {
 //        send(callFun = { it.getWeather() }, succ = { _ ->

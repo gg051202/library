@@ -75,13 +75,13 @@ public class LL {
         int start = 0;
         int LOG_MAXLENGTH = 2000;
         int end = LOG_MAXLENGTH;
-        for (int i = 0; i < 100; i++) {
+        while (true) {
             if (strLength > end) {
-                print2(type, tagName + (i == 0 ? "" : "████████████████████████"), msg.substring(start, end));
-                start = end;
-                end = end + LOG_MAXLENGTH;
+                print2(type, tagName + "████████████████████████", msg.substring(start, end));
+                start += LOG_MAXLENGTH;
+                end += LOG_MAXLENGTH;
             } else {
-                print2(type, tagName + (i == 0 ? "" : "████████████████████████"), msg.substring(start, strLength));
+                print2(type, tagName + "████████████████████████", msg.substring(start, strLength));
                 break;
             }
         }

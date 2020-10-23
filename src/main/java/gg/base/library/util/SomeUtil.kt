@@ -76,32 +76,29 @@ open class NormalUtil {
         }
 
 
-        fun autoRecordActivity(baseActivity: BaseActivity) {
+        fun autoRecordActivity(baseActivity: Activity) {
             if (!Constants.isDevelop()) {
                 return
             }
-
             //当是开发者模式时，如果停留在一个页面5秒，那么下次在进入APP时，会自动重新打开这个界面
-            baseActivity.post(5000) {
-                val activityName: String = baseActivity::class.java.name
-                SPUtils2.put("develop_last_activity_name", activityName)
-                //                LL.i("记录 Activity：$activityName")
-                val extras = baseActivity.intent.extras
-                if (extras != null) {
-                    val dataList: MutableList<BundleData> = ArrayList()
-                    for (s in extras.keySet()) {
-                        dataList.add(BundleData(s!!, extras[s]!!))
-                    }
-                    SPUtils2.put("develop_last_activity_bundle", Gson().toJson(dataList))
-                } else {
-                    SPUtils2.put("develop_last_activity_bundle", "")
+            val activityName: String = baseActivity::class.java.name
+            SPUtils2.put("develop_last_activity_name", activityName)
+            //                LL.i("记录 Activity：$activityName")
+            val extras = baseActivity.intent.extras
+            if (extras != null) {
+                val dataList: MutableList<BundleData> = ArrayList()
+                for (s in extras.keySet()) {
+                    dataList.add(BundleData(s!!, extras[s]!!))
                 }
-                //                LL.i("参数：" + SPUtils2["develop_last_activity_bundle", ""])
+                SPUtils2.put("develop_last_activity_bundle", Gson().toJson(dataList))
+            } else {
+                SPUtils2.put("develop_last_activity_bundle", "")
             }
+            //                LL.i("参数：" + SPUtils2["develop_last_activity_bundle", ""])
         }
 
 
-        fun autoGo(baseActivity: BaseActivity) {
+        fun autoGo(baseActivity: Activity) {
             if (!Constants.isDevelop()) {
                 return
             }
@@ -144,7 +141,7 @@ open class NormalUtil {
                         val activityClass = Class.forName(activityName)
                         if (!AppManager.getAppManager().checkActivity(activityClass)) {
                             toast("自动跳转至上次停留页面")
-                            baseActivity.goActivity(activityClass, bundle)
+                            baseActivity.startActivity(Intent(baseActivity, activityClass), bundle)
                         }
                     }
                 }
@@ -158,17 +155,17 @@ open class NormalUtil {
 
         fun getSingleId(): String? {
             var serial: String? = null
-            val m_szDevIDShort = "35" + Build.BOARD.length % 10 + Build.BRAND.length % 10 + Build.CPU_ABI.length % 10 + Build.DEVICE.length % 10 + Build.DISPLAY.length % 10 + Build.HOST.length % 10 + Build.ID.length % 10 + Build.MANUFACTURER.length % 10 + Build.MODEL.length % 10 + Build.PRODUCT.length % 10 + Build.TAGS.length % 10 + Build.TYPE.length % 10 + Build.USER.length % 10 //13 位
+            val mSzdevidshort = "35" + Build.BOARD.length % 10 + Build.BRAND.length % 10 + Build.CPU_ABI.length % 10 + Build.DEVICE.length % 10 + Build.DISPLAY.length % 10 + Build.HOST.length % 10 + Build.ID.length % 10 + Build.MANUFACTURER.length % 10 + Build.MODEL.length % 10 + Build.PRODUCT.length % 10 + Build.TAGS.length % 10 + Build.TYPE.length % 10 + Build.USER.length % 10 //13 位
             try {
                 serial = Build::class.java.getField("SERIAL")[null].toString()
                 //API>=9 使用serial号
-                return UUID(m_szDevIDShort.hashCode().toLong(), serial.hashCode().toLong()).toString()
+                return UUID(mSzdevidshort.hashCode().toLong(), serial.hashCode().toLong()).toString()
             } catch (exception: Exception) {
                 //serial需要一个初始化
                 serial = "serial" // 随便一个初始化
             }
             //使用硬件信息拼凑出来的15位号码
-            return UUID(m_szDevIDShort.hashCode().toLong(), serial.hashCode().toLong()).toString()
+            return UUID(mSzdevidshort.hashCode().toLong(), serial.hashCode().toLong()).toString()
         }
 
 
@@ -194,6 +191,7 @@ open class NormalUtil {
             }
             return ""
         }
+
 
     }
 }

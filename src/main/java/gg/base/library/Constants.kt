@@ -12,11 +12,6 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 class Constants {
 
     companion object {
-        var SHOW_LOG = true
-
-        var TEST_URL = false
-
-        var autoRank = false
 
         const val DEFAULT_PRIMARY = (0xffF54F4C).toInt()
         const val DEFAULT_BLACK = (0xff333333).toInt()
@@ -28,6 +23,8 @@ class Constants {
         var FLAVOR: String = ""
         var DEBUG: Boolean = false
         var APPLICATION_ID: String = ""
+        var SHOW_LOG = true
+
 
         fun isDevelop(): Boolean {
             return FLAVOR.contains("_develop")

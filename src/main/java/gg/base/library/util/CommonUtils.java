@@ -493,56 +493,6 @@ public class CommonUtils {
     }
 
 
-    /**
-     * 获取当前屏幕截图，包含状态栏
-     *
-     * @param activity
-     */
-    public static Bitmap snapShotWithStatusBar(Activity activity) {
-        View view = activity.getWindow().getDecorView();
-        view.setDrawingCacheEnabled(true);
-        view.buildDrawingCache();
-        Bitmap bmp = view.getDrawingCache();
-        int width = ActivityUtil.getScreenWidth(activity);
-        int height = ActivityUtil.getScreenHeight(activity);
-        Bitmap bp = null;
-        bp = Bitmap.createBitmap(bmp, 0, 0, width, height);
-        view.destroyDrawingCache();
-        return bp;
-
-    }
-
-    /**
-     * 获取当前屏幕截图，不包含状态栏
-     */
-    public static Bitmap snapShotWithoutStatusBar(Activity activity) {
-        View view = activity.getWindow().getDecorView();
-        view.setDrawingCacheEnabled(true);
-        view.buildDrawingCache();
-        Bitmap bmp = view.getDrawingCache();
-        Rect frame = new Rect();
-        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-        int statusBarHeight = frame.top;
-
-        int width = ActivityUtil.getScreenWidth(activity);
-        int height = ActivityUtil.getScreenHeight(activity);
-        Bitmap bp;
-        bp = Bitmap.createBitmap(bmp, 0, statusBarHeight, width, height - statusBarHeight);
-        view.destroyDrawingCache();
-        return bp;
-
-    }
-
-    /**
-     * 获取当前屏幕截图，不包含状态栏
-     */
-    public static Bitmap screenShootView(View view) {
-        view.setDrawingCacheEnabled(true);
-        view.buildDrawingCache();
-        return view.getDrawingCache();
-
-    }
-
     public static String get2String(int i) {
         if (i >= 0 && i <= 9) {
             return "0" + i;

@@ -4,6 +4,7 @@ import com.dongjin.mylibrary.R
 import gg.base.library.Constants
 import gg.base.library.base.BaseActivity
 import gg.base.library.base.others.InitConfigData
+import gg.base.library.util.NormalUtil
 import gg.base.library.util.SPUtils2
 import gg.base.library.util.toast
 import gg.base.library.vm.DevelopActivityViewModel
@@ -22,7 +23,6 @@ class DevelopActivity : BaseActivity() {
 
     override fun init() {
         setHasSetDevelopMode(true)
-        mViewModel.autoRank.value = Constants.autoRank
 
         mViewModel.testUrl.value = isTestUrl()
         mViewModel.showLogButton.value = isShowLogButton()
@@ -34,9 +34,7 @@ class DevelopActivity : BaseActivity() {
             setShowLogButton(it)
         })
 
-        mViewModel.autoRank.observe(this, {
-            Constants.autoRank = it
-        })
+        NormalUtil
 
     }
 

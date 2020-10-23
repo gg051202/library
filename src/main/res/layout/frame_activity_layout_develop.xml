@@ -74,48 +74,6 @@
 
                 <RadioButton
                     style="@style/develop_button_style1"
-                    android:checked='@{vm.autoRank}'
-                    android:text="自动匹配" />
-
-                <RadioButton
-                    style="@style/develop_button_style1"
-                    android:checked='@={!vm.autoRank}'
-                    android:text="不自动匹配(重启失效)" />
-
-            </RadioGroup>
-
-
-            <!--        <RadioGroup-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:orientation="horizontal"-->
-            <!--            android:padding="20dp">-->
-
-            <!--            <RadioButton-->
-            <!--                android:id="@+id/notPrintLogRadioButton"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:checked='@{!data.showLog}'-->
-            <!--                android:text="不打印日志" />-->
-
-            <!--            <RadioButton-->
-            <!--                android:id="@+id/printLogRadioButton"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:checked='@{data.showLog}'-->
-            <!--                android:text="打印日志" />-->
-
-
-            <!--        </RadioGroup>-->
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <RadioButton
-                    style="@style/develop_button_style1"
                     android:checked="@{!vm.showLogButton}"
                     android:text="关闭日志按钮" />
 
@@ -124,7 +82,6 @@
                     style="@style/develop_button_style1"
                     android:checked="@={vm.showLogButton}"
                     android:text="显示日志按钮" />
-
 
             </RadioGroup>
 

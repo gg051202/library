@@ -40,7 +40,7 @@ import java.util.concurrent.TimeUnit
  * change slightly between releases. If you need a stable logging format, use your own interceptor.
  */
 class MyLogInterceptor : Interceptor {
-    val utf_8 = Charset.forName("UTF-8")
+    private val utf8: Charset = Charset.forName("UTF-8")
 
 
     @Throws(IOException::class)
@@ -102,7 +102,7 @@ class MyLogInterceptor : Interceptor {
 
         //打印请求体
         if (requestBody == null) {
-            LL.i("--> END ${request.method} 不需要打印：requestBody == null")
+//            LL.i("--> END ${request.method} 不需要打印：requestBody == null")
         } else if (bodyHasUnknownEncoding(request.headers)) {
             LL.i("--> END ${request.method} (encoded body omitted) 不需要打印：bodyHasUnknownEncoding")
         } else if (requestBody.isDuplex()) {
@@ -114,7 +114,7 @@ class MyLogInterceptor : Interceptor {
             requestBody.writeTo(buffer)
 
             val contentType = requestBody.contentType()
-            val charset: Charset = contentType?.charset(utf_8) ?: utf_8
+            val charset: Charset = contentType?.charset(utf8) ?: utf8
             //打印请求体
             if (buffer.isProbablyUtf8()) {
                 val s = buffer.readString(charset)
@@ -152,7 +152,7 @@ class MyLogInterceptor : Interceptor {
             }
 
             val contentType = responseBody.contentType()
-            val charset: Charset = contentType?.charset(utf_8) ?: utf_8
+            val charset: Charset = contentType?.charset(utf8) ?: utf8
 
             if (!buffer.isProbablyUtf8()) {
                 LL.i("<-- END HTTP (binary ${buffer.size}-byte body omitted)不需要打印!buffer.isProbablyUtf8()")
@@ -161,7 +161,8 @@ class MyLogInterceptor : Interceptor {
 
             //打印response
             if (contentLength != 0L) {
-                LL.i("【结果】" + buffer.clone().readString(charset))
+                val readString = buffer.clone().readString(charset)
+                LL.i("【结果】${JsonFormatTool.formatJson(CommonUtils.unicodeToUTF_8(readString))} \n\n" )
             }
 
             //            if (gzippedLength != null) {
@@ -179,10 +180,8 @@ class MyLogInterceptor : Interceptor {
 
         headers.forEach {
             when (it.first) {
-                "Cache-Control", "Content-Type" -> 1
-                "X-Powered-By", "Date", "Content-Length" -> 1
-                "Server", "X-AspNet-Version" -> 1
-                else                                     -> sb.append("${if (it.first == "comment") "" else it.first + ": "}${it.second}   ")
+                "Cache-Control", "Content-Type", "X-Powered-By", "Date", "Content-Length", "Server", "X-AspNet-Version" -> 1
+                else -> sb.append("${it.first}:${it.second}\n")
             }
         }
 
@@ -192,7 +191,7 @@ class MyLogInterceptor : Interceptor {
     private fun bodyHasUnknownEncoding(headers: Headers): Boolean {
         val contentEncoding = headers["Content-Encoding"] ?: return false
         return !contentEncoding.equals("identity", ignoreCase = true) && !contentEncoding.equals("gzip",
-                                                                                                 ignoreCase = true)
+                ignoreCase = true)
     }
 }
 
