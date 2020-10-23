@@ -15,7 +15,7 @@ import android.util.SparseArray;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationCompat;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import java.io.BufferedInputStream;
 import java.io.File;

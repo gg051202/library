@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 
 /**

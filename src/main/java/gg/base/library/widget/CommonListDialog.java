@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import java.util.ArrayList;
 import java.util.List;

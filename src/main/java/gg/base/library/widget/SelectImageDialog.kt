@@ -9,16 +9,12 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import com.dongjin.mylibrary.R
-import com.dongjin.mylibrary.databinding.DialogLayoutSelectImageBinding
 import com.yuyh.library.imgsel.ISNav
-import com.yuyh.library.imgsel.common.Constant
 import com.yuyh.library.imgsel.config.ISCameraConfig
 import com.yuyh.library.imgsel.config.ISListConfig
-import gg.base.library.Constants
+import gg.base.library.R
 import gg.base.library.base.BaseActivity
-import gg.base.library.base.BaseFragment
-import java.lang.RuntimeException
+import gg.base.library.databinding.DialogLayoutSelectImageBinding
 
 /**
  * current :可以传Activity或者Fragment

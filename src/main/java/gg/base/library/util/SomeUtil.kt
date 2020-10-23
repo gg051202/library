@@ -104,9 +104,9 @@ open class NormalUtil {
             }
             try {
                 if (baseActivity::class.java.name.contains("HomePageActivity")) {
-                    val activityName = SPUtils2["develop_last_activity_name", ""]
+                    val activityName = SPUtils2.get2("develop_last_activity_name", "")
                     val bundle = Bundle()
-                    val values = SPUtils2["develop_last_activity_bundle", ""]
+                    val values = SPUtils2.get2("develop_last_activity_bundle", "")
                     //                    LL.i("获取路径：$activityName")
                     //                    LL.i("获取参数：$values")
                     if (!TextUtils.isEmpty(values)) {

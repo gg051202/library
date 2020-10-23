@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import java.util.List;
 

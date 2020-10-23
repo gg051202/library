@@ -16,7 +16,7 @@ import androidx.core.content.FileProvider;
 import androidx.core.widget.NestedScrollView;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import java.io.File;
 

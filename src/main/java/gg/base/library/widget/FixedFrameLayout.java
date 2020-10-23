@@ -6,7 +6,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 
 /**

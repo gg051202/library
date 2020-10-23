@@ -2,7 +2,6 @@ package gg.base.library
 
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
-import com.dongjin.mylibrary.R
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 /**
@@ -18,13 +17,12 @@ class Constants {
         const val DEFAULT_GREY = (0xff79797a).toInt()
         const val DEFAULT_ERR = (0xff3aeeb).toInt()
         const val DEFAULT_BLOCK = (0xffa0a0b).toInt()
+        var DEBUG: Boolean = BuildConfig.DEBUG
+        var FLAVOR: String = BuildConfig.FLAVOR
 
         //todo 如果集成库，需要初始化这些变量
-        var FLAVOR: String = ""
-        var DEBUG: Boolean = false
-        var APPLICATION_ID: String = ""
         var SHOW_LOG = true
-
+        var APPLICATION_ID: String = ""
 
         fun isDevelop(): Boolean {
             return FLAVOR.contains("_develop")

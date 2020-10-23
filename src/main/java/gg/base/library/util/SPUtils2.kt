@@ -2,7 +2,11 @@ package gg.base.library.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.SyncStatusObserver
 import com.blankj.utilcode.util.Utils
+import com.yuyh.library.imgsel.common.Constant
+import gg.base.library.BuildConfig
+import gg.base.library.Constants
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
@@ -13,11 +17,19 @@ class SPUtils2 {
          */
         var FILE_NAME = "mysp"
 
+        init {
+            println(Constants.FLAVOR +","+BuildConfig.FLAVOR)
+            when (Constants.FLAVOR) {
+                "_develop" -> FILE_NAME = "mysp_develop"
+                "_test" -> FILE_NAME = "mysp_test"
+                "_product" -> FILE_NAME = "mysp"
+            }
+        }
+
         /**
          * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
          *
          * @param key
-         * @param object
          */
         fun put(key: String, ob: Any) {
             val sp = Utils.getApp().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
@@ -51,7 +63,31 @@ class SPUtils2 {
          * @param key
          * @param defaultObject
          */
-        inline operator fun <reified T> get(key: String, defaultObject: T): T {
+        inline fun <reified T> get2(key: String, defaultObject: T): T {
+            val sp = Utils.getApp().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
+            when (defaultObject) {
+                is String -> {
+                    return sp.getString(key, defaultObject.toString()) as T
+                }
+                is Int -> {
+                    return sp.getInt(key, defaultObject.toInt()) as T
+                }
+                is Boolean -> {
+                    return sp.getBoolean(key, (defaultObject as Boolean)) as T
+                }
+                is Float -> {
+                    return sp.getFloat(key, (defaultObject as Float)) as T
+                }
+                is Long -> {
+                    return sp.getLong(key, (defaultObject as Long)) as T
+                }
+                else -> return 1 as T
+            }
+        }
+
+
+        fun <T> get(key: String, defaultObject: T): T {
+            toast(FILE_NAME)
             val sp = Utils.getApp().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
             when (defaultObject) {
                 is String -> {

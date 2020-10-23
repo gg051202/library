@@ -4,9 +4,9 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import com.dongjin.mylibrary.R
-import com.dongjin.mylibrary.databinding.FrameCustomLayoutMyDialogBinding
+import gg.base.library.R
 import gg.base.library.base.BaseActivity
+import gg.base.library.databinding.FrameCustomLayoutMyDialogBinding
 
 /**
  * Created by sss on 2020/8/23 16:55.

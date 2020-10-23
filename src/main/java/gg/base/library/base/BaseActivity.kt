@@ -24,13 +24,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
-import com.dongjin.mylibrary.BR
-import com.dongjin.mylibrary.R
 import com.gyf.immersionbar.ImmersionBar
 import com.umeng.analytics.MobclickAgent
 import com.umeng.message.PushAgent
 import gg.base.library.Constants
-import gg.base.library.activity.DevelopActivity
+import gg.base.library.R
 import gg.base.library.base.others.*
 import gg.base.library.util.*
 import gg.base.library.widget.MyDialog
@@ -39,6 +37,7 @@ import kotlinx.android.synthetic.main.frame_custom_layout_base_loading_view.*
 import kotlinx.android.synthetic.main.frame_custom_layout_my_action_bar.*
 import me.jessyan.autosize.internal.CustomAdapt
 import java.util.*
+import gg.base.library.BR
 
 
 /**

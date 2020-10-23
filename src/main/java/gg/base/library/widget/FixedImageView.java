@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 
 /**

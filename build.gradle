@@ -13,7 +13,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
+        flavorDimensions "versionCode"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -33,6 +33,18 @@ android {
     }
     buildFeatures {
         dataBinding true
+    }
+
+    productFlavors {
+        _develop {
+        }
+
+        _test {
+        }
+
+        _product {
+        }
+
     }
 
 }
@@ -101,6 +113,4 @@ dependencies {
     api 'com.umeng.umsdk:agoo_networksdk:3.5.5'
     api 'com.umeng.umsdk:agoo_tlog:3.0.0.17'
     api 'com.umeng.umsdk:agoo_tnet4android:3.1.14.9'
-
-
 }

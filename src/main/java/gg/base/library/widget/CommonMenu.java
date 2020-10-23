@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import gg.base.library.util.FrameDensityUtils;
 import gg.base.library.widget.download.RedPointTextView;

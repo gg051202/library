@@ -16,7 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationCompat;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import java.io.BufferedInputStream;
 import java.io.File;

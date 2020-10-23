@@ -1,7 +1,6 @@
 package gg.base.library.activity;
 
-import com.dongjin.mylibrary.R
-import gg.base.library.Constants
+import gg.base.library.R
 import gg.base.library.base.BaseActivity
 import gg.base.library.base.others.InitConfigData
 import gg.base.library.util.NormalUtil
@@ -66,7 +65,7 @@ class DevelopActivity : BaseActivity() {
         }
 
         fun isHasSetDevelopMode(): Boolean {
-            return SPUtils2[DEVELOP_MODE, false]
+            return SPUtils2.get2(DEVELOP_MODE, false)
         }
 
         private const val TEST_URL = "TEST_URL_randomstr"
@@ -76,7 +75,7 @@ class DevelopActivity : BaseActivity() {
         }
 
         fun isTestUrl(): Boolean {
-            return SPUtils2[TEST_URL, false]
+            return SPUtils2.get2(TEST_URL, false)
         }
 
         private const val SHOW_LOG_BUTTON = "SHOW_HTTP_DIALOG_randomstr"
@@ -86,7 +85,7 @@ class DevelopActivity : BaseActivity() {
         }
 
         fun isShowLogButton(): Boolean {
-            return SPUtils2[SHOW_LOG_BUTTON, false]
+            return SPUtils2.get2(SHOW_LOG_BUTTON, false)
         }
     }
 

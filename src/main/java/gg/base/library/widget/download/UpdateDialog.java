@@ -19,7 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.daimajia.numberprogressbar.NumberProgressBar;
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import java.io.File;
 

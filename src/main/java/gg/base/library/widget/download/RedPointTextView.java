@@ -14,7 +14,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 
 /**

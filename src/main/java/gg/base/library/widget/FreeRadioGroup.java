@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 
 /**

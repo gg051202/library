@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 
 public class MaxHeightNestScrollView extends NestedScrollView {

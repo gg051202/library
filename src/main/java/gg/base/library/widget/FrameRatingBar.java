@@ -14,7 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import java.io.InputStream;
 

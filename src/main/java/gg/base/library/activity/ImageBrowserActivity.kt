@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-import com.dongjin.mylibrary.R
+import gg.base.library.R
 import gg.base.library.base.BaseActivity
 import gg.base.library.base.MyBaseViewHolder
 import gg.base.library.base.others.InitConfigData

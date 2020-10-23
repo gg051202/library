@@ -14,7 +14,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import com.blankj.utilcode.util.ToastUtils
-import com.dongjin.mylibrary.R
+import gg.base.library.R
 import gg.base.library.Constants
 import gg.base.library.base.BaseActivity
 import gg.base.library.base.BaseViewModel

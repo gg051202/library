@@ -28,8 +28,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.dongjin.mylibrary.R
 import gg.base.library.Constants
+import gg.base.library.R
 import gg.base.library.util.*
 import gg.base.library.widget.BaseRecyclerView2
 import gg.base.library.widget.FakeBoldTextView

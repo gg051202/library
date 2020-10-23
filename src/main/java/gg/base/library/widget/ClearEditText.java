@@ -13,7 +13,7 @@ import android.view.animation.TranslateAnimation;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import me.jessyan.autosize.utils.AutoSizeUtils;
 

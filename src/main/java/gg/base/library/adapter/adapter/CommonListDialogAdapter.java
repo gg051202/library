@@ -1,7 +1,7 @@
 package gg.base.library.adapter.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 import java.util.List;
 

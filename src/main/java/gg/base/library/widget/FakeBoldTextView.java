@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import com.dongjin.mylibrary.R;
+import gg.base.library.R;
 
 
 /**
