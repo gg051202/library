@@ -300,7 +300,7 @@ abstract class BaseActivity : AppCompatActivity(),
     }
 
     override fun getSizeInDp(): Float {
-        return 360f
+        return Constants.BASE_WIDTH.toFloat()
     }
 
     //*********************申请权限代码 start*********************

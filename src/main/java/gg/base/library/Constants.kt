@@ -37,6 +37,8 @@ class Constants {
             return !DEBUG && FLAVOR.contains("_product")
         }
 
+        var BASE_WIDTH = 360
+
 
         /**
          * 默认的占位图
