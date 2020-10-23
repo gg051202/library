@@ -15,16 +15,25 @@ class SPUtils2 {
         /**
          * 保存在手机里面的文件名
          */
-        var FILE_NAME = "mysp"
-
-        init {
-            println(Constants.FLAVOR +","+BuildConfig.FLAVOR)
-            when (Constants.FLAVOR) {
-                "_develop" -> FILE_NAME = "mysp_develop"
-                "_test" -> FILE_NAME = "mysp_test"
-                "_product" -> FILE_NAME = "mysp"
-            }
-        }
+        var FILE_NAME =
+                when (Constants.FLAVOR) {
+                    "_develop" -> {
+                        println("geting ${Constants.FLAVOR}")
+                        "mysp_develop"
+                    }
+                    "_test" -> {
+                        println("geting ${Constants.FLAVOR} ")
+                        "mysp_test"
+                    }
+                    "_product" -> {
+                        println("geting  ${Constants.FLAVOR}")
+                        "mysp"
+                    }
+                    else -> {
+                        println("geting  ${Constants.FLAVOR}")
+                        "mysp"
+                    }
+                }
 
         /**
          * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
@@ -87,7 +96,7 @@ class SPUtils2 {
 
 
         fun <T> get(key: String, defaultObject: T): T {
-            toast(FILE_NAME)
+            println("get $FILE_NAME")
             val sp = Utils.getApp().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
             when (defaultObject) {
                 is String -> {
@@ -147,23 +156,6 @@ class SPUtils2 {
         fun all(context: Context): Map<String, *> {
             val sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
             return sp.all
-        }
-
-        init {
-            FILE_NAME = "mysp"
-            //
-            //        switch (BuildConfig.FLAVOR) {
-            //            case "_develop":
-            //                FILE_NAME = "mysp_develop";
-            //                break;
-            //            case "_test":
-            //                FILE_NAME = "mysp_test";
-            //                break;
-            //            case "_product":
-            //                break;
-            //            default:
-            //                break;
-            //        }
         }
     }
 
