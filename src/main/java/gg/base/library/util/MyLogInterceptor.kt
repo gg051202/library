@@ -50,8 +50,14 @@ class MyLogInterceptor : Interceptor {
         }
 
         val toString = chain.request().url.toString()
-        if (toString.contains("api/message/listInfo") || toString.contains("api/serviceNotice/list")) {
-            return chain.proceed(chain.request())
+        val list = listOf("cardIM/app/IMAccount",
+                "api/message/listInfo",
+                "ardIM/app/merchantSign",
+                "api/serviceNotice/list")
+        list.forEach {
+            if (toString.contains(it)) {
+                return chain.proceed(chain.request())
+            }
         }
 
         val request = chain.request()
