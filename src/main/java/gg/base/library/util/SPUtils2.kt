@@ -2,10 +2,7 @@ package gg.base.library.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.SyncStatusObserver
 import com.blankj.utilcode.util.Utils
-import com.yuyh.library.imgsel.common.Constant
-import gg.base.library.BuildConfig
 import gg.base.library.Constants
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method

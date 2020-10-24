@@ -1,5 +1,6 @@
 package gg.base.library
 
+import com.blankj.utilcode.util.ScreenUtils
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
@@ -20,7 +21,7 @@ class Constants {
         var DEBUG: Boolean = BuildConfig.DEBUG
         var FLAVOR: String = BuildConfig.FLAVOR
 
-        //todo 如果集成库，需要初始化这些变量
+        //todo 如果集成库，需要初始化这些变量，还需要 Utils.init(this);
         var SHOW_LOG = true
         var APPLICATION_ID: String = ""
 
@@ -32,7 +33,10 @@ class Constants {
             return !DEBUG && FLAVOR.contains("_product")
         }
 
-        var BASE_WIDTH = 360
+        /**
+         * 会根据当前屏幕的比例，设置合适的基准宽度，到达适配适配不同比例的屏幕的效果。
+         */
+        var BASE_WIDTH = (360 * (19 / 9f / ScreenUtils.getScreenHeight() * ScreenUtils.getScreenWidth())).toInt()
 
 
         /**

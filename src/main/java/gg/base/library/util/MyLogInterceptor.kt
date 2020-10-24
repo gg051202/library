@@ -47,7 +47,11 @@ class MyLogInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!Constants.SHOW_LOG) {
             return chain.proceed(chain.request())
+        }
 
+        val toString = chain.request().url.toString()
+        if (toString.contains("api/message/listInfo") || toString.contains("api/serviceNotice/list")) {
+            return chain.proceed(chain.request())
         }
 
         val request = chain.request()
@@ -162,7 +166,7 @@ class MyLogInterceptor : Interceptor {
             //打印response
             if (contentLength != 0L) {
                 val readString = buffer.clone().readString(charset)
-                LL.i("【结果】${JsonFormatTool.formatJson(CommonUtils.unicodeToUTF_8(readString))} \n\n" )
+                LL.i("【结果】${JsonFormatTool.formatJson(CommonUtils.unicodeToUTF_8(readString))} \n\n")
             }
 
             //            if (gzippedLength != null) {
