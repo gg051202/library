@@ -19,15 +19,12 @@ class SPUtils2 {
                         "mysp_develop"
                     }
                     "_test" -> {
-                        println("geting ${Constants.FLAVOR} ")
                         "mysp_test"
                     }
                     "_product" -> {
-                        println("geting  ${Constants.FLAVOR}")
                         "mysp"
                     }
                     else -> {
-                        println("geting  ${Constants.FLAVOR}")
                         "mysp"
                     }
                 }
@@ -93,7 +90,6 @@ class SPUtils2 {
 
 
         fun <T> get(key: String, defaultObject: T): T {
-            println("get $FILE_NAME")
             val sp = Utils.getApp().getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
             when (defaultObject) {
                 is String -> {

@@ -440,7 +440,6 @@ public class CommonUtils {
                 if (addApkToInstallSession(activity, uri, session)) {
                     return false;
                 }
-                System.out.println("install");
 
                 // Create an install status receiver.
                 Intent intent = new Intent(activity, activity.getClass());
@@ -471,7 +470,6 @@ public class CommonUtils {
             try (OutputStream packageInSession = session.openWrite("package", 0, -1);
                  InputStream is = context.getContentResolver().openInputStream(uri)) {
                 if (is == null) {
-                    System.out.println("is isnull");
                     return false;
                 }
 
