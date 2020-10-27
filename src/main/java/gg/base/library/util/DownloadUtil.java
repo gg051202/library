@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -124,14 +126,15 @@ public class DownloadUtil {
 
         void success(File file);
 
-        void err(String msg);
+        void err(@NotNull String msg);
 
     }
 
     private OnDownloadListener onDownloadListener;
 
-    public void setOnDownloadListener(OnDownloadListener l) {
+    public DownloadUtil setOnDownloadListener(OnDownloadListener l) {
         onDownloadListener = l;
+        return this;
     }
 
 

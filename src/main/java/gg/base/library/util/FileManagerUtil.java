@@ -1,7 +1,6 @@
 package gg.base.library.util;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Environment;
 
 import java.io.File;
@@ -13,7 +12,8 @@ import java.io.File;
  */
 public class FileManagerUtil {
 
-    public static final String RECORD_FILE_PATH = "xiangqin_record";
+
+    public static final String RECORD_FILE_PATH = "leo_record";
 
 
     public static File getImageDir() {
@@ -28,25 +28,22 @@ public class FileManagerUtil {
         return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath());
     }
 
-    public static File getExternalCacheDir(Context context) {
-        String filePath;
-        if (Build.VERSION.SDK_INT >= 29) {//10以上不需要申请权限
-            filePath = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-        } else {
-            filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-        }
+    public static String getDownloadAbsoluePath(String fileName) {
+        return String.format("%s/%s", getDownloadDir().getAbsolutePath(), fileName);
+    }
 
-        return createFileDir(new File(filePath, "XiangqinCacheTemp"));
+    public static File getCacheDir() {
+        return createFile(new File(Environment.getExternalStorageDirectory(), "LeoCacheTemp"));
     }
 
     public static File getCacheDir(Context context) {
-        return createFileDir(new File(context.getCacheDir(), "XiangqinCacheTemp"));
+        return createFile(new File(context.getCacheDir(), "LeoCacheTemp"));
     }
 
-    public static File createFileDir(File file) {
+    public static File createFile(File file) {
         if (!file.exists()) {
             boolean mkdirs = file.mkdirs();
-            LL.i("创建缓存目录结果LeoCacheTemp：" + mkdirs);
+            LL.i("获取缓存目录结果LeoCacheTemp：" + mkdirs);
             if (mkdirs) {
                 return file;
             } else {
@@ -90,14 +87,20 @@ public class FileManagerUtil {
     /**
      * 删除用户可能存在的图片缓存
      */
-    public static void deleteImageCacheFiles(Context context) {
-        File dir = getExternalCacheDir(context);
+    public static void deleteImageCacheFiles() {
+        File dir = getCacheDir();
         if (dir == null) {
             return;
         }
         if (dir.exists() && dir.isDirectory()) {
             File[] files = dir.listFiles();
+            if (files == null) {
+                return;
+            }
             for (File file : files) {
+                if (file == null) {
+                    continue;
+                }
                 LL.i("deleteCacheFile", String.format("delete file:%s,result:%s", file.getName(), file.delete()));
             }
         }

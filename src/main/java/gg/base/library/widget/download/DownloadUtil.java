@@ -32,7 +32,7 @@ import rx.schedulers.Schedulers;
  * Created by guilinlin on 2018/8/6 11:32.
  * email 973635949@qq.com
  */
-public class DownloadUtil {
+class DownloadUtil {
 
 
     private static final String TAG = "DownloadUtil";
