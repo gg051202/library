@@ -46,7 +46,7 @@ public class DownloadUtil {
     }
 
     public void startDownload(final String downloadLocalFilePath, final String downloadRemoteUrl) {
-        Log.i(TAG, "start download");
+        Log.i(TAG, "start download " + downloadRemoteUrl);
         mSubscriber = new Subscriber<Integer>() {
             @Override
             public void onStart() {
@@ -124,7 +124,7 @@ public class DownloadUtil {
 
         void onProgress(int progress);
 
-        void success(File file);
+        void success(@NotNull File file);
 
         void err(@NotNull String msg);
 
