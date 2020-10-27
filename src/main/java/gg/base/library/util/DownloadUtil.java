@@ -144,6 +144,11 @@ public class DownloadUtil {
         }
 
         mDownloadFile = new File(downloadLocalFilePath);
+        if (mDownloadFile.exists()) {
+            Log.i(TAG, "文件已存在,直接调用，path：" + mDownloadFile.getAbsolutePath());
+            subscriber.onNext(100);
+            return;
+        }
 
         try {
 
@@ -151,23 +156,17 @@ public class DownloadUtil {
 
             mConnection.connect();
 
+            if (mConnection.getResponseCode() == 301 || mConnection.getResponseCode() == 302) {
+                //得到重定向的地址
+                String location = mConnection.getHeaderField("Location");
+                startDownload(subscriber, downloadLocalFilePath, location);
+                return;
+            }
+
+
             checkStatus();
 
             mTotalSize = mConnection.getContentLength();
-
-            if (mDownloadFile.exists()) {
-//                文件已存在，不重新下载
-                if (mDownloadFile.length() == mTotalSize) {
-                    Log.i(TAG, "文件已存在,直接调用，path：" + mDownloadFile.getAbsolutePath());
-                    subscriber.onNext(100);
-                    return;
-                } else {
-                    boolean delete = mDownloadFile.delete();
-                    Log.i(TAG, "文件已存在，但是大小不同，删除重新下载，result：" + delete);
-                }
-//                boolean delete = mDownloadFile.delete();
-//                Log.i(TAG, "文件已存在，删除重新下载，删除结果：" + delete);
-            }
 
             CommonUtils.clearFile(mDownloadFile);
 
@@ -204,6 +203,7 @@ public class DownloadUtil {
     private void checkStatus() throws IOException, CheckUpdateManager.DownLoadError {
         int statusCode = mConnection.getResponseCode();
         if (statusCode != 200 && statusCode != 206) {
+            LL.i(TAG, "statusCode:" + statusCode);
             throw new CheckUpdateManager.DownLoadError(CheckUpdateManager.DownLoadError.DOWNLOAD_HTTP_STATUS, "" + statusCode);
         }
     }
