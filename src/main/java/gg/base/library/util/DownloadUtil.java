@@ -43,8 +43,7 @@ public class DownloadUtil {
         this.mActivity = activity;
     }
 
-
-    public void startDownload(final String fileName, final String downloadUrl) {
+    public void startDownload(final String downloadLocalFilePath, final String downloadRemoteUrl) {
         Log.i(TAG, "start download");
         mSubscriber = new Subscriber<Integer>() {
             @Override
@@ -80,6 +79,7 @@ public class DownloadUtil {
                 if (progress == 100) {
                     if (onDownloadListener != null) {
                         onDownloadListener.success(mDownloadFile);
+                        mDownloadFile = null;//下载成功后清空文件，因为如果取消下载，会删除已有的文件。
                     }
                 } else {
                     if (progress >= 1) {
@@ -91,12 +91,7 @@ public class DownloadUtil {
             }
         };
         Observable
-                .create(new Observable.OnSubscribe<Integer>() {
-                    @Override
-                    public void call(Subscriber<? super Integer> subscriber) {
-                        startDownload(subscriber, fileName, downloadUrl);
-                    }
-                })
+                .create((Observable.OnSubscribe<Integer>) subscriber -> startDownload(subscriber, downloadLocalFilePath, downloadRemoteUrl))
                 .sample(1, TimeUnit.SECONDS)//过滤 1秒只能更新一次
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidScheduler.mainThread())
@@ -114,7 +109,10 @@ public class DownloadUtil {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+        }
+        if (mDownloadFile != null && mDownloadFile.exists()) {
+            boolean delete = mDownloadFile.delete();
+            LL.i(TAG, "删除文件" + delete);
         }
     }
 
@@ -137,16 +135,16 @@ public class DownloadUtil {
     }
 
 
-    private void startDownload(Subscriber<? super Integer> subscriber, String fileName, String downloadUrl) {
-        if (TextUtils.isEmpty(downloadUrl)) {
+    private void startDownload(Subscriber<? super Integer> subscriber, final String downloadLocalFilePath, final String downloadRemoteUrl) {
+        if (TextUtils.isEmpty(downloadRemoteUrl)) {
             throw new DownLoadError(DownLoadError.DOWNLOAD_URL_ERR);
         }
 
-        mDownloadFile = new File(fileName);
+        mDownloadFile = new File(downloadLocalFilePath);
 
         try {
 
-            mConnection = create(new URL(downloadUrl));
+            mConnection = create(new URL(downloadRemoteUrl));
 
             mConnection.connect();
 
@@ -155,17 +153,17 @@ public class DownloadUtil {
             mTotalSize = mConnection.getContentLength();
 
             if (mDownloadFile.exists()) {
-                //文件已存在，不重新下载
-//                if (mDownloadFile.length() == mTotalSize) {
-//                    Log.i(TAG, "文件已存在,直接调用，path：" + mDownloadFile.getAbsolutePath());
-//                    subscriber.onNext(100);
-//                    return;
-//                } else {
-//                    boolean delete = mDownloadFile.delete();
-//                    Log.i(TAG, "文件已存在，但是大小不同，删除重新下载，result：" + delete);
-//                }
-                boolean delete = mDownloadFile.delete();
-                Log.i(TAG, "文件已存在，删除重新下载，删除结果：" + delete);
+//                文件已存在，不重新下载
+                if (mDownloadFile.length() == mTotalSize) {
+                    Log.i(TAG, "文件已存在,直接调用，path：" + mDownloadFile.getAbsolutePath());
+                    subscriber.onNext(100);
+                    return;
+                } else {
+                    boolean delete = mDownloadFile.delete();
+                    Log.i(TAG, "文件已存在，但是大小不同，删除重新下载，result：" + delete);
+                }
+//                boolean delete = mDownloadFile.delete();
+//                Log.i(TAG, "文件已存在，删除重新下载，删除结果：" + delete);
             }
 
             CommonUtils.clearFile(mDownloadFile);
