@@ -112,7 +112,7 @@ class MyLogInterceptor : Interceptor {
 
         //打印请求体
         if (requestBody == null) {
-//            LL.i("--> END ${request.method} 不需要打印：requestBody == null")
+            LL.i("--> END ${request.method} 不需要打印：requestBody == null")
         } else if (bodyHasUnknownEncoding(request.headers)) {
             LL.i("--> END ${request.method} (encoded body omitted) 不需要打印：bodyHasUnknownEncoding")
         } else if (requestBody.isDuplex()) {
