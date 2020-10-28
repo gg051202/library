@@ -51,9 +51,11 @@ class Constants {
 
 
         fun getRequestOptions(radiusPx: Int = 0, cornerType: RoundedCornersTransformation.CornerType = RoundedCornersTransformation.CornerType.ALL): RequestOptions {
-            return RequestOptions().transform(CenterCrop(),
-                    RoundedCornersTransformation(radiusPx, 0, cornerType)).error(
-                    IMAGE_LOAD_ERR).placeholder(IMAGE_LOAD_HOLDER).timeout(60_1000)
+            return RequestOptions()
+                    .transform(CenterCrop(), RoundedCornersTransformation(radiusPx, 0, cornerType))
+                    .error(IMAGE_LOAD_ERR)
+                    .placeholder(IMAGE_LOAD_HOLDER)
+                    .timeout(60_1000)
         }
 
     }

@@ -35,6 +35,7 @@ import gg.base.library.widget.BaseRecyclerView2
 import gg.base.library.widget.FakeBoldTextView
 import gg.base.library.widget.GGFlowLayout
 import gg.base.library.widget.download.RedPointTextView
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType
 import me.jessyan.autosize.utils.ScreenUtils
 
@@ -106,10 +107,16 @@ fun setHeightDp(view: View, layout_height_dp: Int?, layout_width_dp: Int?) {
  * @param radiusDp   圆角
  * @param cornerType 圆角的类型
  */
-@BindingAdapter(value = ["url", "url2", "urlRadiusDp", "urlCornerType"], requireAll = false)
-fun loadImage(imageView: ImageView, url: String?, url2: Any?, radiusDp: Int?, cornerType: CornerType?) {
+@BindingAdapter(value = ["url", "url2", "urlRadiusDp", "urlCornerType", "urlNotNeedCenterCrop"], requireAll = false)
+fun loadImage(imageView: ImageView, url: String?, url2: Any?, radiusDp: Int?, cornerType: CornerType?, urlNotNeedCenterCrop: Boolean?) {
     val options: RequestOptions = Constants.getRequestOptions(AutoSizeTool.dp2px(radiusDp
             ?: 0), cornerType ?: CornerType.ALL)
+    urlNotNeedCenterCrop?.let {
+        if (it) {
+            options.transform(RoundedCornersTransformation(AutoSizeTool.dp2px(radiusDp ?: 0), 0, cornerType ?: CornerType.ALL))
+        }
+    }
+
     val target = if (!TextUtils.isEmpty(url)) url else url2
 
     val build = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
