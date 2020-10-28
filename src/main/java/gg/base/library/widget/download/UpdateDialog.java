@@ -55,7 +55,7 @@ public class UpdateDialog implements View.OnClickListener {
     private CharSequence mSubmitName = "抢先体验";
     private CharSequence mCancleName = "留在旧版";
     private String mDownloadUrl;
-    private DownloadUtil mDownloadUtil;
+    private UpdateDownloadUtil mDownloadUtil;
 
 
     /**
@@ -156,7 +156,7 @@ public class UpdateDialog implements View.OnClickListener {
                     File.separatorChar + NormalUtil.Companion.MD5(mDownloadUrl) + ".apk";
         }
 
-        mDownloadUtil = new DownloadUtil(mActivity);
+        mDownloadUtil = new UpdateDownloadUtil(mActivity);
         mDownloadUtil.setOnDownloadListener(mDownloadListener);
         mDownloadUtil.startDownload(fileName, mDownloadUrl);
     }
@@ -203,7 +203,7 @@ public class UpdateDialog implements View.OnClickListener {
     /**
      * 下载的监听事件
      */
-    private DownloadUtil.OnDownloadListener mDownloadListener = new DownloadUtil.OnDownloadListener() {
+    private UpdateDownloadUtil.OnDownloadListener mDownloadListener = new UpdateDownloadUtil.OnDownloadListener() {
         @Override
         public void start() {
             mNumberProgressBar.setVisibility(View.VISIBLE);
@@ -226,7 +226,7 @@ public class UpdateDialog implements View.OnClickListener {
         @Override
         public void success(File file) {
             dismissDialog();
-            DownloadUtil.install(mActivity, getAuthority(), file, false);
+            UpdateDownloadUtil.install(mActivity, getAuthority(), file, false);
             setIsRunningBackground(false);
         }
 
@@ -380,11 +380,11 @@ public class UpdateDialog implements View.OnClickListener {
         return mDownloadUrl;
     }
 
-    public DownloadUtil getDownloadUtil() {
+    public UpdateDownloadUtil getDownloadUtil() {
         return mDownloadUtil;
     }
 
-    public void setDownloadUtil(DownloadUtil downloadUtil) {
+    public void setDownloadUtil(UpdateDownloadUtil downloadUtil) {
         mDownloadUtil = downloadUtil;
     }
 
@@ -404,11 +404,11 @@ public class UpdateDialog implements View.OnClickListener {
         return mSpaceTimeHour;
     }
 
-    public DownloadUtil.OnDownloadListener getDownloadListener() {
+    public UpdateDownloadUtil.OnDownloadListener getDownloadListener() {
         return mDownloadListener;
     }
 
-    public void setDownloadListener(DownloadUtil.OnDownloadListener downloadListener) {
+    public void setDownloadListener(UpdateDownloadUtil.OnDownloadListener downloadListener) {
         mDownloadListener = downloadListener;
     }
 

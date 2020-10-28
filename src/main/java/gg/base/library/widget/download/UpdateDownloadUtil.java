@@ -32,7 +32,7 @@ import rx.schedulers.Schedulers;
  * Created by guilinlin on 2018/8/6 11:32.
  * email 973635949@qq.com
  */
-class DownloadUtil {
+class UpdateDownloadUtil {
 
 
     private static final String TAG = "DownloadUtil";
@@ -45,7 +45,7 @@ class DownloadUtil {
     private LoadingRandomAccessFile mRandomAccessFile;
 
 
-    public DownloadUtil(Activity activity) {
+    public UpdateDownloadUtil(Activity activity) {
         this.mActivity = activity;
     }
 

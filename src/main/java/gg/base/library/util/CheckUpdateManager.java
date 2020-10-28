@@ -15,8 +15,6 @@ import android.util.SparseArray;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationCompat;
 
-import gg.base.library.R;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,6 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import gg.base.library.R;
 import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
@@ -361,6 +360,7 @@ public class CheckUpdateManager {
     public static class DownLoadError extends RuntimeException {
 
         public final int code;
+        private String mMessage;
 
         public DownLoadError(int code) {
             this(code, null);
@@ -368,6 +368,7 @@ public class CheckUpdateManager {
 
         public DownLoadError(int code, String message) {
             super(make(code, message));
+            mMessage = message;
             this.code = code;
         }
 
@@ -376,7 +377,7 @@ public class CheckUpdateManager {
         }
 
         public String getMessage() {
-            return messages.get(code);
+            return messages.get(code) + mMessage;
         }
 
         public static String getMessage(int code) {
@@ -384,14 +385,7 @@ public class CheckUpdateManager {
         }
 
         private static String make(int code, String message) {
-            String m = messages.get(code);
-            if (m == null) {
-                return message;
-            }
-            if (message == null) {
-                return m;
-            }
-            return m + "(" + message + ")";
+            return messages.get(code) + "(" + message + ")";
         }
 
 

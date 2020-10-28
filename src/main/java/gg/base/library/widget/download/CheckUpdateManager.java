@@ -216,7 +216,7 @@ public class CheckUpdateManager {
                     public void onNext(Integer progress) {
                         if (progress == 100) {
                             mManager.cancel(NOTIFICATION_ID);
-                            DownloadUtil.install(mContext, getAuthority(), downloadFile, false);
+                            UpdateDownloadUtil.install(mContext, getAuthority(), downloadFile, false);
                         } else {
                             if (progress % 5 == 0 || progress >= 1) {
                                 mBuilder.setProgress(100, progress, false);
@@ -255,7 +255,7 @@ public class CheckUpdateManager {
                 return;
             }
 
-            DownloadUtil.clearFile(downloadFile);
+            UpdateDownloadUtil.clearFile(downloadFile);
 
             Log.i(TAG, "开始下载，将要保存到的文件路径：" + downloadFile.getAbsolutePath());
 

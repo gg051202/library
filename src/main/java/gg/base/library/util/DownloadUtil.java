@@ -204,7 +204,7 @@ public class DownloadUtil {
         int statusCode = mConnection.getResponseCode();
         if (statusCode != 200 && statusCode != 206) {
             LL.i(TAG, "statusCode:" + statusCode);
-            throw new CheckUpdateManager.DownLoadError(CheckUpdateManager.DownLoadError.DOWNLOAD_HTTP_STATUS, "" + statusCode);
+            throw new CheckUpdateManager.DownLoadError(CheckUpdateManager.DownLoadError.DOWNLOAD_HTTP_STATUS, mConnection.getURL().toString() + "," + statusCode);
         }
     }
 
