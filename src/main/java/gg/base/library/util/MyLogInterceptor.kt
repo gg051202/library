@@ -62,22 +62,6 @@ class MyLogInterceptor : Interceptor {
 
         val request = chain.request()
         val requestBody = request.body
-        //        if (level == Level.NONE) {
-        //            return chain.proceed(request)
-        //        }
-        //
-        //        val logBody = level == Level.BODY
-        //        val logHeaders = logBody || level == Level.HEADERS
-        //
-
-        //
-        //        val connection = chain.connection()
-        //        var requestStartMessage = ("--> ${request.method} ${request.url}${if (connection != null) " " + connection.protocol() else ""}")
-        //        if (!logHeaders && requestBody != null) {
-        //            requestStartMessage += " (${requestBody.contentLength()}-byte body)"
-        //        }
-        //        logger.log(requestStartMessage)
-        //
 
         val startNs = System.nanoTime()
         val response: Response
@@ -111,6 +95,7 @@ class MyLogInterceptor : Interceptor {
         logHeader(headers)
 
         //打印请求体
+
         if (requestBody == null) {
             LL.i("--> END ${request.method} 不需要打印：requestBody == null")
         } else if (bodyHasUnknownEncoding(request.headers)) {
@@ -125,14 +110,12 @@ class MyLogInterceptor : Interceptor {
 
             val contentType = requestBody.contentType()
             val charset: Charset = contentType?.charset(utf8) ?: utf8
-            //打印请求体
+            //打印请求体，请注意，不同的项目格式不同，如果想正确打印post请求日志，请在此处修改。
             if (buffer.isProbablyUtf8()) {
                 val s = buffer.readString(charset)
                 try {
                     s.split("&").forEach {
-                        if (it.contains("info=")) {
-                            LL.i(EncodeUtils.urlDecode("【参数】$it"))
-                        }
+                        LL.i(EncodeUtils.urlDecode("【参数】$it"))
                     }
                 } catch (e: Exception) {
 
