@@ -63,16 +63,12 @@ public class DownloadUtil {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
-                String msg = "下载失败";
-                if (e instanceof DownLoadError) {
-                    msg = ((DownLoadError) e).getErrString();
-                }
                 if (mDownloadFile != null && mDownloadFile.exists()) {
                     boolean delete = mDownloadFile.delete();
                     Log.i(TAG, "下载失败，删除文件，result：" + delete);
                 }
                 if (onDownloadListener != null) {
-                    onDownloadListener.err(msg);
+                    onDownloadListener.err(e.toString());
                 }
             }
 
@@ -204,7 +200,7 @@ public class DownloadUtil {
         int statusCode = mConnection.getResponseCode();
         if (statusCode != 200 && statusCode != 206) {
             LL.i(TAG, "statusCode:" + statusCode);
-            throw new CheckUpdateManager.DownLoadError(CheckUpdateManager.DownLoadError.DOWNLOAD_HTTP_STATUS, mConnection.getURL().toString() + "," + statusCode);
+            throw new CheckUpdateManager.DownLoadError(CheckUpdateManager.DownLoadError.DOWNLOAD_HTTP_STATUS, String.format(" statusCode:%s %s", statusCode, mConnection.getURL().toString()));
         }
     }
 
