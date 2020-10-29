@@ -57,7 +57,7 @@ class MyLogInterceptor : Interceptor {
         val tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs)
 
         val responseBody = response.body!!
-        if (!Constants.isProduct() && response.code >= 500) {
+        if (response.code >= 500) {
             throw RuntimeException("${response.code} ${response.request.url}")
         }
         val contentLength = responseBody.contentLength()
