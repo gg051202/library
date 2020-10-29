@@ -1,21 +1,7 @@
-/*
- * Copyright (C) 2015 Square, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package gg.base.library.util
 
 import com.blankj.utilcode.util.EncodeUtils
+import com.blankj.utilcode.util.ToastUtils
 import gg.base.library.Constants
 import okhttp3.Headers
 import okhttp3.Interceptor
@@ -27,6 +13,7 @@ import okio.GzipSource
 import java.io.EOFException
 import java.io.IOException
 import java.lang.Exception
+import java.lang.RuntimeException
 import java.lang.StringBuilder
 import java.nio.charset.Charset
 import java.util.*
@@ -70,10 +57,12 @@ class MyLogInterceptor : Interceptor {
         val tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs)
 
         val responseBody = response.body!!
+        if (!Constants.isProduct() && response.code >= 500) {
+            throw RuntimeException("${response.code} ${response.request.url}")
+        }
         val contentLength = responseBody.contentLength()
         val bodySize = if (contentLength != -1L) "$contentLength-byte" else "unknown-length"
         LL.i("【地址】${request.method.toUpperCase(Locale.ROOT)} ${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms)($bodySize body)")
-
 
         val headers = request.headers
 

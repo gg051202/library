@@ -1,18 +1,18 @@
 package gg.base.library.widget
 
+import android.app.Activity
 import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import gg.base.library.R
-import gg.base.library.base.BaseActivity
 import gg.base.library.databinding.FrameCustomLayoutMyDialogBinding
 
 /**
  * Created by sss on 2020/8/23 16:55.
  * email jkjkjk.com
  */
-class MyDialog(val baseActivity: BaseActivity,
+class MyDialog(val baseActivity: Activity,
                val showCancleButton: Boolean = true,
                val title: String? = null,
                val desc: CharSequence? = null,
