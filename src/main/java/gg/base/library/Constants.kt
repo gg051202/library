@@ -16,7 +16,7 @@ class Constants {
 
     companion object {
 
-        const val DEFAULT_PRIMARY = (0xffF54F4C).toInt()
+        const val DEFAULT_PRIMARY = (0xffac5bb5).toInt()
         const val DEFAULT_BLACK = (0xff333333).toInt()
         const val DEFAULT_GREY = (0xff79797a).toInt()
         const val DEFAULT_ERR = (0xff3aeeb).toInt()

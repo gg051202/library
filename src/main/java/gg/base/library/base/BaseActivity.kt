@@ -375,7 +375,7 @@ abstract class BaseActivity : AppCompatActivity(),
                 s.setSpan(ForegroundColorSpan(Constants.DEFAULT_PRIMARY), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 ssb.append("暂未允许$failPermissionName，您可以在${s}中开启")
 
-                MyDialog(baseActivity = mActivity, title = "提示", desc = ssb, cancleText = "算了吧", submitText = "去系统设置", submitFun = {
+                MyDialog(activity = mActivity, title = "提示", desc = ssb, cancleText = "算了吧", submitText = "去系统设置", submitFun = {
                     GotoPermissionPageUtils(mActivity).jump()
                 }, showCancleButton = true).show()
             }

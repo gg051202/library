@@ -6,7 +6,7 @@
 
         <variable
             name="title"
-            type="String" />
+            type="CharSequence" />
 
         <variable
             name="desc"
@@ -14,11 +14,11 @@
 
         <variable
             name="submitText"
-            type="String" />
+            type="CharSequence" />
 
         <variable
             name="cancleText"
-            type="String" />
+            type="CharSequence" />
 
         <variable
             name="showCancleButton"
@@ -27,6 +27,7 @@
         <import type="jp.wasabeef.glide.transformations.RoundedCornersTransformation.CornerType" />
 
         <import type="android.text.TextUtils" />
+        <import type="gg.base.library.Constants" />
     </data>
 
     <LinearLayout
@@ -47,7 +48,7 @@
                 android:id="@+id/layout"
                 background_cornerType="@{CornerType.TOP}"
                 background_pressedColor="@{true}"
-                background_radius_dp="@{18}"
+                background_radius_dp="@{8}"
                 background_solidColor0x="@{0xffffffff}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,7 +95,7 @@
                     android:id="@+id/cancelTextView"
                     background_cornerType="@{CornerType.BOTTOM_LEFT}"
                     background_pressedColor="@{true}"
-                    background_radius_dp="@{18}"
+                    background_radius_dp="@{8}"
                     background_solidColor0x="@{0xffF6F6F6}"
                     gone="@{showCancleButton}"
                     android:layout_width="0dp"
@@ -109,8 +110,8 @@
                     android:id="@+id/submitTextView"
                     background_cornerType="@{showCancleButton?CornerType.BOTTOM_RIGHT:CornerType.BOTTOM}"
                     background_pressedColor="@{true}"
-                    background_radius_dp="@{18}"
-                    background_solidColor0x="@{0xffF54F4C}"
+                    background_radius_dp="@{8}"
+                    background_solidColor0x="@{Constants.DEFAULT_PRIMARY}"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

@@ -1,5 +1,6 @@
 package gg.base.library.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.TextUtils;
@@ -7,13 +8,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import gg.base.library.R;
-
 import java.util.List;
 
+import gg.base.library.R;
+import gg.base.library.widget.MyDialog;
+import kotlin.Unit;
 import rx.Observable;
-import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -23,36 +23,46 @@ import rx.schedulers.Schedulers;
 public class DialogFactory {
 
 
-    public static AlertDialog show(Context context, CharSequence title, CharSequence message,
+    public static AlertDialog show(Activity activity, CharSequence title, CharSequence message,
                                    CharSequence negative, DialogInterface.OnClickListener negativeListener,
                                    CharSequence positive, DialogInterface.OnClickListener positiveListener) {
 
-        AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.FrameDefaultDialogStyle).setTitle(title)
-                .setMessage(message)
-                .setNegativeButton(negative, negativeListener)
-                .setPositiveButton(positive, positiveListener).create();
-        alertDialog.show();
-        return alertDialog;
+        MyDialog myDialog = new MyDialog(activity, true, title, message, () -> {
+            if (positiveListener != null) {
+                positiveListener.onClick(null, 0);
+            }
+            return Unit.INSTANCE;
+        }, () -> {
+            if (negativeListener != null) {
+                negativeListener.onClick(null, 0);
+            }
+            return Unit.INSTANCE;
+        }, positive, negative).show();
+
+//        AlertDialog alertDialog = new AlertDialog.Builder(activity, R.style.FrameDefaultDialogStyle).setTitle(title)
+//                .setMessage(message)
+//                .setNegativeButton(negative, negativeListener)
+//                .setPositiveButton(positive, positiveListener).create();
+//        alertDialog.show();
+        return myDialog.getAlertDialog();
     }
 
-    public static AlertDialog show(Context context, CharSequence title, CharSequence message,
+    public static AlertDialog show(Activity activity, CharSequence title, CharSequence message,
                                    CharSequence positive, DialogInterface.OnClickListener positiveListener) {
 
-        AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.FrameDefaultDialogStyle).setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(positive, positiveListener).create();
-
-        alertDialog.show();
-        return alertDialog;
-    }
-
-    public static AlertDialog show(Context context, CharSequence title,
-                                   CharSequence positive, DialogInterface.OnClickListener positiveListener) {
-
-        AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.FrameDefaultDialogStyle).setTitle(title)
-                .setPositiveButton(positive, positiveListener).create();
-        alertDialog.show();
-        return alertDialog;
+        MyDialog myDialog = new MyDialog(activity, false, title, message, () -> {
+            if (positiveListener != null) {
+                positiveListener.onClick(null, 0);
+            }
+            return Unit.INSTANCE;
+        }, () -> Unit.INSTANCE, positive, "").show();
+        return myDialog.getAlertDialog();
+//        AlertDialog alertDialog = new AlertDialog.Builder(activity, R.style.FrameDefaultDialogStyle).setTitle(title)
+//                .setMessage(message)
+//                .setPositiveButton(positive, positiveListener).create();
+//
+//        alertDialog.show();
+//        return alertDialog;
     }
 
     /**
@@ -69,32 +79,21 @@ public class DialogFactory {
         }
 
         AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.FrameDefaultDialogStyle)
-                .setSingleChoiceItems(scList, select, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, int which) {
-                        listener.onSelect(list.get(which), null);
-                        Observable.just(1)
-                                .subscribeOn(Schedulers.io())
-                                .map(new Func1<Integer, Object>() {
-                                    @Override
-                                    public Object call(Integer integer) {
-                                        try {
-                                            Thread.sleep(500);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        return null;
-                                    }
-                                })
-                                .observeOn(AndroidScheduler.mainThread())
-                                .subscribe(new Action1<Object>() {
-                                    @Override
-                                    public void call(Object o) {
-                                        dialog.dismiss();
-                                    }
-                                });
+                .setSingleChoiceItems(scList, select, (dialog, which) -> {
+                    listener.onSelect(list.get(which), null);
+                    Observable.just(1)
+                            .subscribeOn(Schedulers.io())
+                            .map(integer -> {
+                                try {
+                                    Thread.sleep(500);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                return null;
+                            })
+                            .observeOn(AndroidScheduler.mainThread())
+                            .subscribe(o -> dialog.dismiss());
 
-                    }
                 }).create();
         alertDialog.show();
         return alertDialog;
@@ -116,18 +115,8 @@ public class DialogFactory {
         }
 
         AlertDialog alertDialog = new AlertDialog.Builder(context, R.style.FrameDefaultDialogStyle)
-                .setMultiChoiceItems(valueList, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        list.get(which).setSelected(isChecked);
-                    }
-                })
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        listener.onSelect(null, list);
-                    }
-                })
+                .setMultiChoiceItems(valueList, checkedItems, (dialog, which, isChecked) -> list.get(which).setSelected(isChecked))
+                .setPositiveButton("确定", (dialog, which) -> listener.onSelect(null, list))
                 .setNegativeButton("取消", null)
                 .create();
         alertDialog.show();
@@ -150,7 +139,7 @@ public class DialogFactory {
     public static AlertDialog showProgress(Context context, String msg, boolean iscancel) {
         AlertDialog dialog = getProgressDialog(context, iscancel);
         dialog.show();
-        TextView textView = (TextView) dialog.findViewById(R.id.text);
+        TextView textView = dialog.findViewById(R.id.text);
         if (textView != null) {
             textView.setText(msg);
         }
@@ -159,7 +148,7 @@ public class DialogFactory {
 
     public static AlertDialog getProgress(Context context, String msg, boolean iscancel) {
         AlertDialog dialog = getProgressDialog(context, iscancel);
-        TextView textView = (TextView) dialog.findViewById(R.id.text);
+        TextView textView = dialog.findViewById(R.id.text);
         if (textView != null) {
             textView.setText(msg);
         }

@@ -19,10 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.daimajia.numberprogressbar.NumberProgressBar;
-import gg.base.library.R;
 
 import java.io.File;
 
+import gg.base.library.R;
+import gg.base.library.util.DialogFactory;
 import gg.base.library.util.NormalUtil;
 import gg.base.library.util.SPUtils2;
 
@@ -86,13 +87,9 @@ public class UpdateDialog implements View.OnClickListener {
             update();
         } else {
             if (!mIsAutoCheck) {//如果不是自动更新，才需要弹出提示窗
-                new AlertDialog.Builder(mActivity, R.style.DefaultDialogStyle)
-                        .setTitle("提示")
-                        .setMessage("当前版本已是最新版本")
-                        .setPositiveButton("确定", (dialog, which) -> {
-                        })
-                        .create()
-                        .show();
+                DialogFactory.show(mActivity, "提示", "当前版本已是最新版本", "确定", (dialog, which) -> {
+
+                });
             }
         }
     }

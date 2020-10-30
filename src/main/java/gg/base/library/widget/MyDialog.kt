@@ -12,21 +12,20 @@ import gg.base.library.databinding.FrameCustomLayoutMyDialogBinding
  * Created by sss on 2020/8/23 16:55.
  * email jkjkjk.com
  */
-class MyDialog(val baseActivity: Activity,
+class MyDialog(val activity: Activity,
                val showCancleButton: Boolean = true,
-               val title: String? = null,
+               val title: CharSequence? = null,
                val desc: CharSequence? = null,
                val submitFun: (() -> Unit)? = null,
                val cancleFun: (() -> Unit)? = null,
-               val submitText: String? = "确定",
-               val cancleText: String? = "取消") {
+               val submitText: CharSequence? = "确定",
+               val cancleText: CharSequence? = "取消") {
 
 
     private val mBinding: FrameCustomLayoutMyDialogBinding = DataBindingUtil.inflate(LayoutInflater.from(
-        baseActivity), R.layout.frame_custom_layout_my_dialog, null, false)
-    private val alertDialog: AlertDialog = AlertDialog.Builder(baseActivity, R.style.DefaultDialogStyle)
+            activity), R.layout.frame_custom_layout_my_dialog, null, false)
+    val alertDialog: AlertDialog = AlertDialog.Builder(activity, R.style.DefaultDialogStyle)
             .setView(mBinding.root)
-            .setCancelable(false)
             .create()
 
     init {
