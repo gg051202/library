@@ -28,6 +28,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import gg.base.library.Constants
 import gg.base.library.R
 import gg.base.library.util.*
@@ -435,4 +436,14 @@ fun setHtmlText(view: TextView, value: String) {
     }
 
     view.movementMethod = LinkMovementMethod.getInstance()
+}
+
+@BindingAdapter(value = ["srl_headerColorblock","srl_enableLoadMore"],requireAll = false)
+fun setBelowStatusBar(refreshLayout: SmartRefreshLayout, headerColorblock: Boolean?,enableLoadMore:Boolean?) {
+    headerColorblock?.let {
+        refreshLayout.setRefreshHeader(Constants.getRefreshHeader(refreshLayout.context, Constants.DEFAULT_BLOCK))
+    }
+    enableLoadMore?.let {
+        refreshLayout.setEnableLoadMore(it)
+    }
 }
