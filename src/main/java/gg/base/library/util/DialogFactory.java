@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -27,7 +28,7 @@ public class DialogFactory {
                                    CharSequence negative, DialogInterface.OnClickListener negativeListener,
                                    CharSequence positive, DialogInterface.OnClickListener positiveListener) {
 
-        MyDialog myDialog = new MyDialog(activity, true, title, message, () -> {
+        MyDialog myDialog = new MyDialog(activity, true, Gravity.CENTER, title, message, () -> {
             if (positiveListener != null) {
                 positiveListener.onClick(null, 0);
             }
@@ -50,7 +51,7 @@ public class DialogFactory {
     public static AlertDialog show(Activity activity, CharSequence title, CharSequence message,
                                    CharSequence positive, DialogInterface.OnClickListener positiveListener) {
 
-        MyDialog myDialog = new MyDialog(activity, false, title, message, () -> {
+        MyDialog myDialog = new MyDialog(activity, false, Gravity.CENTER, title, message, () -> {
             if (positiveListener != null) {
                 positiveListener.onClick(null, 0);
             }

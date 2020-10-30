@@ -1,6 +1,7 @@
 package gg.base.library.widget
 
 import android.app.Activity
+import android.text.method.LinkMovementMethod
 import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
@@ -14,10 +15,11 @@ import gg.base.library.databinding.FrameCustomLayoutMyDialogBinding
  */
 class MyDialog(val activity: Activity,
                val showCancleButton: Boolean = true,
+               private val descGravity: Int = Gravity.CENTER,
                val title: CharSequence? = null,
                val desc: CharSequence? = null,
                val submitFun: (() -> Unit)? = null,
-               val cancleFun: (() -> Unit)? = null,
+               private val cancleFun: (() -> Unit)? = null,
                val submitText: CharSequence? = "确定",
                val cancleText: CharSequence? = "取消") {
 
@@ -35,7 +37,8 @@ class MyDialog(val activity: Activity,
         mBinding.submitText = submitText
         mBinding.cancleText = cancleText
         mBinding.showCancleButton = showCancleButton
-
+        mBinding.descTextView.gravity = descGravity
+        mBinding.descTextView.movementMethod = LinkMovementMethod.getInstance();
         mBinding.submitTextView.setOnClickListener {
             if (alertDialog.isShowing) {
                 alertDialog.dismiss()
