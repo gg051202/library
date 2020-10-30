@@ -83,10 +83,10 @@ open class NormalUtil {
             //当是开发者模式时，如果停留在一个页面5秒，那么下次在进入APP时，会自动重新打开这个界面
             val activityName: String = baseActivity::class.java.name
             if (activityName.contains("HomePageActivity")) {
+                SPUtils2.put("develop_last_activity_name", "")
                 return
             }
             SPUtils2.put("develop_last_activity_name", activityName)
-            //                LL.i("记录 Activity：$activityName")
             val extras = baseActivity.intent.extras
             if (extras != null) {
                 val dataList: MutableList<BundleData> = ArrayList()
