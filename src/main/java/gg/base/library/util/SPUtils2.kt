@@ -15,7 +15,6 @@ class SPUtils2 {
         var FILE_NAME =
                 when (Constants.FLAVOR) {
                     "_develop" -> {
-                        println("geting ${Constants.FLAVOR}")
                         "mysp_develop"
                     }
                     "_test" -> {
