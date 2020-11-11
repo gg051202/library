@@ -13,6 +13,7 @@ import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.UnderlineSpan
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.ImageView
 import android.widget.TextView
@@ -82,8 +83,32 @@ fun setHeightPx(view: View, layout_height_px: Int?, layout_width_px: Int?) {
 @BindingAdapter(value = ["layout_height_dp", "layout_width_dp"], requireAll = false)
 fun setHeightDp(view: View, layout_height_dp: Int?, layout_width_dp: Int?) {
     val layoutParams = view.layoutParams
-    layout_height_dp?.let { layoutParams.height = dp2px(it) }
-    layout_width_dp?.let { layoutParams.width = dp2px(it) }
+    layout_height_dp?.let {
+        when (it) {
+            ViewGroup.LayoutParams.WRAP_CONTENT -> {
+                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            }
+            ViewGroup.LayoutParams.MATCH_PARENT -> {
+                layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+            }
+            else -> {
+                layoutParams.height = dp2px(it)
+            }
+        }
+    }
+    layout_width_dp?.let {
+        when (it) {
+            ViewGroup.LayoutParams.WRAP_CONTENT -> {
+                layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+            }
+            ViewGroup.LayoutParams.MATCH_PARENT -> {
+                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            }
+            else -> {
+                layoutParams.width = dp2px(it)
+            }
+        }
+    }
     view.layoutParams = layoutParams
 }
 
@@ -370,7 +395,7 @@ fun setText(textView: TextView, text: CharSequence?, textHolder: String?, textSi
     textSizeSp?.let {
         textView.textSize = textSizeSp.toFloat()
     }
-    val realText= if (!TextUtils.isEmpty(text)) text else textHolder
+    val realText = if (!TextUtils.isEmpty(text)) text else textHolder
     val oldText = textView.text
     if (!SomeUtil.haveContentsChanged(realText, oldText)) {
         return  // 数据没有变化不进行刷新视图
