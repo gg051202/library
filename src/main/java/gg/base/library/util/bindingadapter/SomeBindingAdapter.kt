@@ -362,43 +362,44 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
 }
 
 //TextView someThing
-@BindingAdapter(value = ["android:text","textSizeSp","textColor0xff"], requireAll = false)
-fun setText(textView: TextView, text: CharSequence?, textSizeSp: Int?, textColor: Int?) {
+@BindingAdapter(value = ["android:text", "textHolder", "textSizeSp", "textColor0xff"], requireAll = false)
+fun setText(textView: TextView, text: CharSequence?, textHolder: String?, textSizeSp: Int?, textColor: Int?) {
     textColor?.let {
         textView.setTextColor(it)
     }
     textSizeSp?.let {
         textView.textSize = textSizeSp.toFloat()
     }
+    val realText= if (!TextUtils.isEmpty(text)) text else textHolder
     val oldText = textView.text
-    if (!SomeUtil.haveContentsChanged(text, oldText)) {
+    if (!SomeUtil.haveContentsChanged(realText, oldText)) {
         return  // 数据没有变化不进行刷新视图
     }
-    textView.text = text
+    textView.text = realText
 }
 
 @BindingAdapter("htmlText")
-fun setHtmlText(view: TextView, value: String) {
+fun setHtmlText(textView: TextView, value: String) {
     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-        view.text = Html.fromHtml(value, Html.FROM_HTML_MODE_COMPACT)
+        textView.text = Html.fromHtml(value, Html.FROM_HTML_MODE_COMPACT)
     } else {
         @Suppress("DEPRECATION")
-        view.text = Html.fromHtml(value)
+        textView.text = Html.fromHtml(value)
     }
-    view.movementMethod = LinkMovementMethod.getInstance()
+    textView.movementMethod = LinkMovementMethod.getInstance()
 }
 
 
 @BindingAdapter(value = ["text_underLine"], requireAll = false)
-fun setTextUnderLine(view: TextView, text: CharSequence?) {
+fun setTextUnderLine(textView: TextView, text: CharSequence?) {
     text?.let {
-        val oldText = view.text
+        val oldText = textView.text
         if (!SomeUtil.haveContentsChanged(text, oldText) || TextUtils.isEmpty(text)) {
             return  // 数据没有变化不进行刷新视图
         }
         val ss = SpannableString(text)
         ss.setSpan(UnderlineSpan(), 0, ss.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        view.text = ss
+        textView.text = ss
     }
 }
 
@@ -409,7 +410,7 @@ fun setBackground(view: View, resource: Int) {
 }
 
 @BindingAdapter("android:enabled")
-fun setBackground(view: View, enable: Boolean) {
+fun setEnabled(view: View, enable: Boolean) {
     view.isEnabled = enable
 }
 
@@ -425,6 +426,6 @@ fun setVisable(v: View, visable: Boolean) {
 }
 
 @BindingAdapter(value = ["alpha"])
-fun setViewBackground(v: View, alpha: Float) {
+fun setViewAlpha(v: View, alpha: Float) {
     v.alpha = alpha
 }
