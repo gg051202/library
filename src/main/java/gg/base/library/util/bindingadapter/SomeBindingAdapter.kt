@@ -3,6 +3,7 @@ package gg.base.library.util.bindingadapter
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.database.sqlite.SQLiteOutOfMemoryException
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
@@ -32,7 +33,9 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import gg.base.library.Constants
 import gg.base.library.R
 import gg.base.library.util.*
+import gg.base.library.util.AutoSizeTool.dp2px
 import gg.base.library.widget.BaseRecyclerView2
+import gg.base.library.widget.CommonMenu
 import gg.base.library.widget.FakeBoldTextView
 import gg.base.library.widget.GGFlowLayout
 import gg.base.library.widget.download.RedPointTextView
@@ -139,24 +142,11 @@ fun setboldText(textView: FakeBoldTextView, text: String?, color: Int?, fbt_bold
     text?.let { textView.setBoldText(text) }
 }
 
-
-//@BindingAdapter(value = ["android:text"], requireAll = false)
-//fun setText(view: TextView, text: CharSequence?) {
-//    text?.let {
-//        val oldText = view.text
-//        if (!haveContentsChanged(text, oldText)) {
-//            return  // 数据没有变化不进行刷新视图
-//        }
-//        view.text = text
-//    }
-//}
-
-//
 @BindingAdapter(value = ["text_underLine"], requireAll = false)
 fun setTextUnderLine(view: TextView, text: CharSequence?) {
     text?.let {
         val oldText = view.text
-        if (!haveContentsChanged(text, oldText) || TextUtils.isEmpty(text)) {
+        if (!SomeUtil.haveContentsChanged(text, oldText) || TextUtils.isEmpty(text)) {
             return  // 数据没有变化不进行刷新视图
         }
         val ss = SpannableString(text)
@@ -278,27 +268,6 @@ fun setGone2(view: View, isGone: Boolean, goneAnimType: Int, goneAnimTime: Int, 
         }
     }
 }
-
-
-// 本工具类截取自官方源码
-private fun haveContentsChanged(str1: CharSequence?, str2: CharSequence?): Boolean {
-    if (str1 == null != (str2 == null)) {
-        return true
-    } else if (str1 == null) {
-        return false
-    }
-    val length = str1.length
-    if (length != str2!!.length) {
-        return true
-    }
-    for (i in 0 until length) {
-        if (str1[i] != str2[i]) {
-            return true
-        }
-    }
-    return false
-}
-
 
 /**
  * @param color  @{0xffF2F3F8}
@@ -438,12 +407,100 @@ fun setHtmlText(view: TextView, value: String) {
     view.movementMethod = LinkMovementMethod.getInstance()
 }
 
-@BindingAdapter(value = ["srl_headerColorblock","srl_enableLoadMore"],requireAll = false)
-fun setBelowStatusBar(refreshLayout: SmartRefreshLayout, headerColorblock: Boolean?,enableLoadMore:Boolean?) {
+@BindingAdapter(value = ["srl_headerColorblock", "srl_enableLoadMore"], requireAll = false)
+fun setBelowStatusBar(refreshLayout: SmartRefreshLayout, headerColorblock: Boolean?, enableLoadMore: Boolean?) {
     headerColorblock?.let {
         refreshLayout.setRefreshHeader(Constants.getRefreshHeader(refreshLayout.context, Constants.DEFAULT_BLOCK))
     }
     enableLoadMore?.let {
         refreshLayout.setEnableLoadMore(it)
     }
+}
+
+@BindingAdapter("android:layout_marginBottom")
+fun setMarginBottom(view: View, bottomMarginPx: Int) {
+    val layoutParams = view.layoutParams as MarginLayoutParams
+    layoutParams.bottomMargin = bottomMarginPx
+    view.layoutParams = layoutParams
+}
+
+@BindingAdapter("layout_marginTopPx")
+fun setMarginTop(view: View, topMarginPx: Int) {
+    val layoutParams = view.layoutParams as MarginLayoutParams
+    layoutParams.topMargin = topMarginPx
+    view.layoutParams = layoutParams
+}
+
+@BindingAdapter("layout_marginTopDp")
+fun setMarginTopDp(view: View, topMarginDp: Int) {
+    val layoutParams = view.layoutParams as MarginLayoutParams
+    layoutParams.topMargin = dp2px(topMarginDp)
+    view.layoutParams = layoutParams
+}
+
+@BindingAdapter("layout_marginBottomDp")
+fun setMarginBottomDp(view: View, topMarginDp: Int) {
+    val layoutParams = view.layoutParams as MarginLayoutParams
+    layoutParams.bottomMargin = dp2px(topMarginDp)
+    view.layoutParams = layoutParams
+}
+
+@BindingAdapter("height_px")
+fun setHeightPx(view: View, heightPx: Int) {
+    val layoutParams = view.layoutParams
+    layoutParams.height = heightPx
+    view.layoutParams = layoutParams
+}
+
+@BindingAdapter("height_dp")
+fun setHeightDp(view: View, heightDp: Int) {
+    val layoutParams = view.layoutParams
+    layoutParams.height = dp2px(heightDp)
+    view.layoutParams = layoutParams
+}
+
+@BindingAdapter("width_px")
+fun setWidthPx(view: View, widthPx: Int) {
+    val layoutParams = view.layoutParams
+    layoutParams.width = widthPx
+    view.layoutParams = layoutParams
+}
+
+
+@BindingAdapter(value = ["cm_RightText", "cm_RightTextColor"], requireAll = false)
+fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
+    commonMenu.setRightText(rightText)
+    if (color != 0) {
+        commonMenu.setRightTextColor(color)
+    }
+}
+
+@BindingAdapter("android:background")
+fun setBackground(view: View, resource: Int) {
+    view.setBackgroundResource(resource)
+}
+
+@BindingAdapter("android:enabled")
+fun setBackground(view: View, enable: Boolean) {
+    view.isEnabled = enable
+}
+
+
+@BindingAdapter("selected")
+fun setViewSelected(view: View, selected: Boolean) {
+    view.isSelected = selected
+}
+
+@BindingAdapter(value = ["android:text"], requireAll = false)
+fun setText(view: TextView, text: CharSequence?) {
+    val oldText = view.text
+    if (!SomeUtil.haveContentsChanged(text, oldText)) {
+        return  // 数据没有变化不进行刷新视图
+    }
+    view.text = text
+}
+
+@BindingAdapter(value = ["alpha"])
+fun setViewBackground(v: View, alpha: Float) {
+    v.alpha = alpha
 }

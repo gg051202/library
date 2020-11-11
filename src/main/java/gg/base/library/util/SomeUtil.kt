@@ -24,7 +24,7 @@ import java.util.*
  * Created by sss on 2020/8/21 13:46.
  * email jkjkjk.com
  */
-open class NormalUtil {
+open class SomeUtil {
     companion object {
 
         private val hexDigits = charArrayOf('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F')
@@ -195,8 +195,28 @@ open class NormalUtil {
             return ""
         }
 
+        // 本工具类截取自官方源码
+        fun haveContentsChanged(str1: CharSequence?, str2: CharSequence?): Boolean {
+            if (str1 == null != (str2 == null)) {
+                return true
+            } else if (str1 == null) {
+                return false
+            }
+            val length = str1.length
+            if (length != str2!!.length) {
+                return true
+            }
+            for (i in 0 until length) {
+                if (str1[i] != str2[i]) {
+                    return true
+                }
+            }
+            return false
+        }
 
     }
+
+
 }
 
 fun hidePhone(phone: String?): String {
