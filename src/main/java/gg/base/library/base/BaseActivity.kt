@@ -85,7 +85,7 @@ abstract class BaseActivity : AppCompatActivity(),
         setListener()
 
         //以下是开发者代码
-        NormalUtil.autoGo(this)
+        SomeUtil.autoGo(this)
         addLogButton(mBinding, this)
         addActivityInfo(mBinding, this)
 //        if (DevelopActivity.isShowLogButton()) {
@@ -247,7 +247,7 @@ abstract class BaseActivity : AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-        NormalUtil.autoRecordActivity(this)
+        SomeUtil.autoRecordActivity(this)
         MobclickAgent.onResume(this);
     }
 
@@ -310,7 +310,7 @@ abstract class BaseActivity : AppCompatActivity(),
     private var fail: (() -> Boolean)? = null
 
     open fun checkPermission(succ: () -> Unit, fail: (() -> Boolean)? = null, vararg permissions: String) {
-        if (!NormalUtil.isOver6_0()) { //如果是6.0以下系统，不需要验证权限
+        if (!SomeUtil.isOver6_0()) { //如果是6.0以下系统，不需要验证权限
             succ()
             return
         }

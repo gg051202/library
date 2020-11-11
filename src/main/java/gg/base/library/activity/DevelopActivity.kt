@@ -3,7 +3,6 @@ package gg.base.library.activity;
 import gg.base.library.R
 import gg.base.library.base.BaseActivity
 import gg.base.library.base.others.InitConfigData
-import gg.base.library.util.NormalUtil
 import gg.base.library.util.SPUtils2
 import gg.base.library.util.toast
 import gg.base.library.vm.DevelopActivityViewModel
@@ -32,8 +31,6 @@ class DevelopActivity : BaseActivity() {
         mViewModel.showLogButton.observe(this, {
             setShowLogButton(it)
         })
-
-        NormalUtil
 
     }
 

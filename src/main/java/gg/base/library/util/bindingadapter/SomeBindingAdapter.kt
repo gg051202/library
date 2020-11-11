@@ -137,8 +137,8 @@ fun loadImage(imageView: ImageView, url: String?, url2: Any?, radiusDp: Int?, co
  */
 @BindingAdapter(value = ["android:text", "android:textColor", "fbt_bold_size"], requireAll = false)
 fun setboldText(textView: FakeBoldTextView, text: String?, color: Int?, fbt_bold_size: Float?) {
-    color?.let { textView.setColor(color) }
-    fbt_bold_size?.let { textView.setBoldSize(fbt_bold_size) }
+    color?.let { textView.color = color }
+    fbt_bold_size?.let { textView.boldSize = fbt_bold_size }
     text?.let { textView.setBoldText(text) }
 }
 

@@ -24,8 +24,8 @@ import java.io.File;
 
 import gg.base.library.R;
 import gg.base.library.util.DialogFactory;
-import gg.base.library.util.NormalUtil;
 import gg.base.library.util.SPUtils2;
+import gg.base.library.util.SomeUtil;
 
 /**
  * ！！！需要设置manifest权限  install_package
@@ -147,10 +147,10 @@ public class UpdateDialog implements View.OnClickListener {
         String fileName;
         if (Build.VERSION.SDK_INT >= 29) {//10以上不需要申请权限
             fileName = mActivity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() +
-                    File.separatorChar + NormalUtil.Companion.MD5(mDownloadUrl) + ".apk";
+                    File.separatorChar + SomeUtil.Companion.MD5(mDownloadUrl) + ".apk";
         } else {
             fileName = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() +
-                    File.separatorChar + NormalUtil.Companion.MD5(mDownloadUrl) + ".apk";
+                    File.separatorChar + SomeUtil.Companion.MD5(mDownloadUrl) + ".apk";
         }
 
         mDownloadUtil = new UpdateDownloadUtil(mActivity);

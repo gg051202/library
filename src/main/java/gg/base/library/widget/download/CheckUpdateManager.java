@@ -16,7 +16,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationCompat;
 
 import com.blankj.utilcode.util.SPUtils;
-import gg.base.library.R;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -28,7 +27,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import gg.base.library.util.NormalUtil;
+import gg.base.library.R;
+import gg.base.library.util.SomeUtil;
 import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
@@ -236,7 +236,7 @@ public class CheckUpdateManager {
         }
 
         downloadFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-                NormalUtil.Companion.MD5(downloadUrl) + ".apk");
+                SomeUtil.Companion.MD5(downloadUrl) + ".apk");
 
 
         try {
