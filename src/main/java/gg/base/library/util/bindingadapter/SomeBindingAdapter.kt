@@ -404,14 +404,19 @@ fun setText(textView: TextView, textHolder: String?, textSizeSp: Int?, textColor
 }
 
 @BindingAdapter("htmlText")
-fun setHtmlText(textView: TextView, value: String) {
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-        textView.text = Html.fromHtml(value, Html.FROM_HTML_MODE_COMPACT)
-    } else {
-        @Suppress("DEPRECATION")
-        textView.text = Html.fromHtml(value)
+fun setHtmlText(textView: TextView, value: String?) {
+    value?.let {
+        if (TextUtils.isEmpty(it)) {
+            return
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            textView.text = Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            @Suppress("DEPRECATION")
+            textView.text = Html.fromHtml(it)
+        }
+        textView.movementMethod = LinkMovementMethod.getInstance()
     }
-    textView.movementMethod = LinkMovementMethod.getInstance()
 }
 
 
