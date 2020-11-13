@@ -6,7 +6,6 @@ import android.util.Log;
 import com.blankj.utilcode.util.Utils;
 
 import gg.base.library.Constants;
-import gg.base.library.activity.DevelopActivity;
 
 public class LL {
 
@@ -68,7 +67,7 @@ public class LL {
         if (msg.equals("")) {
             msg = "你要打印的内容是空字符串";
         }
-        if (DevelopActivity.Companion.isShowLogButton()) {
+        if (Constants.Companion.isShowLogButton()) {
             LocalLogUtil.writeLogtoFile(Utils.getApp(), tagName, msg);
         }
         int strLength = msg.length();

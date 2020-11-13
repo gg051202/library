@@ -19,7 +19,6 @@ import gg.base.library.Constants
 import gg.base.library.base.BaseActivity
 import gg.base.library.base.BaseViewModel
 import gg.base.library.util.AutoSizeTool
-import gg.base.library.util.LL
 import gg.base.library.util.bindingadapter.setCornerRadius
 import gg.base.library.widget.ShowLogDialog
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
@@ -119,7 +118,7 @@ public fun View.addRipple() = with(TypedValue()) {
 }
 
 fun addLogButton(binding: ViewBinding, activity: BaseActivity) {
-    if (gg.base.library.activity.DevelopActivity.isShowLogButton() && binding.root.parent is ContentFrameLayout) {
+    if (Constants.isShowLogButton() && binding.root.parent is ContentFrameLayout) {
         val logButton = TextView(activity)
 
         val drawablePressedFlase = GradientDrawable()

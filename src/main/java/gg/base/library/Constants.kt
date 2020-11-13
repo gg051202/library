@@ -6,6 +6,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestOptions
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
+import gg.base.library.util.SPUtils2.Companion.get
+import gg.base.library.util.SPUtils2.Companion.put
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 /**
@@ -102,6 +104,16 @@ class Constants {
             classicsFooter.setDrawableSize(13f)
             classicsFooter.setDrawableMarginRight(10f)
             return classicsFooter
+        }
+
+        private const val SHOW_LOG_BUTTON = "SHOW_HTTP_DIALOG_randomstr"
+
+        fun setShowLogButton(value: Boolean) {
+            put(SHOW_LOG_BUTTON, value)
+        }
+
+        fun isShowLogButton(): Boolean {
+            return get(SHOW_LOG_BUTTON, false)
         }
 
     }

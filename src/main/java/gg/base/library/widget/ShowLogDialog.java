@@ -2,6 +2,7 @@ package gg.base.library.widget;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -16,20 +17,19 @@ import androidx.core.content.FileProvider;
 import androidx.core.widget.NestedScrollView;
 
 import com.blankj.utilcode.util.ToastUtils;
-import gg.base.library.R;
 
 import java.io.File;
 
-import gg.base.library.base.BaseActivity;
+import gg.base.library.R;
 import gg.base.library.util.LocalLogUtil;
 
 public class ShowLogDialog implements View.OnClickListener {
 
     private AlertDialog mAlertDialog;
-    private BaseActivity mActivity;
+    private Activity mActivity;
     private String mLogString;
 
-    public ShowLogDialog(BaseActivity activity) {
+    public ShowLogDialog(Activity activity) {
         this.mActivity = activity;
 
     }
@@ -43,10 +43,7 @@ public class ShowLogDialog implements View.OnClickListener {
 
             mLogString = LocalLogUtil.getLogString(mActivity.getApplicationContext());
             descTextView.setText(mLogString);
-            mActivity.post(500, "1", () -> {
-                scrollView.smoothScrollTo(0, 10000000);
-                return null;
-            });
+            descTextView.postDelayed(() -> scrollView.smoothScrollTo(0, 10000000), 500);
 
             view.findViewById(R.id.cancelTextView).setOnClickListener(this);
             view.findViewById(R.id.submitTextView).setOnClickListener(this);
