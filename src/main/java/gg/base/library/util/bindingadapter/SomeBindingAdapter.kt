@@ -403,9 +403,9 @@ fun setText(textView: TextView, textHolder: String?, textSizeSp: Int?, textColor
     textView.text = realText
 }
 
-@BindingAdapter("htmlText")
-fun setHtmlText(textView: TextView, value: String?) {
-    value?.let {
+@BindingAdapter(value = ["htmlText", "htmlTextNeedClick"], requireAll = false)
+fun setHtmlText(textView: TextView, value: String?, needClick: Boolean? = false) {
+    value?.let { it ->
         if (TextUtils.isEmpty(it)) {
             return
         }
@@ -415,7 +415,11 @@ fun setHtmlText(textView: TextView, value: String?) {
             @Suppress("DEPRECATION")
             textView.text = Html.fromHtml(it)
         }
-        textView.movementMethod = LinkMovementMethod.getInstance()
+        needClick?.let { it1 ->
+            if (it1) {
+                textView.movementMethod = LinkMovementMethod.getInstance()
+            }
+        }
     }
 }
 
