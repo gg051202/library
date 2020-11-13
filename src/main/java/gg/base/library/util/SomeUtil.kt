@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -276,4 +278,8 @@ fun showKeyboard(activity: BaseActivity, focus: View) {
 
 fun toGson(o: Any): String {
     return Gson().toJson(o)
+}
+
+fun RecyclerView.setLinearLayoutManager() {
+    layoutManager = LinearLayoutManager(context)
 }
