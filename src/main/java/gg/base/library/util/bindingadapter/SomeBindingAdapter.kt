@@ -119,8 +119,8 @@ fun setHeightDp(view: View, layout_height_dp: Int?, layout_width_dp: Int?) {
  * @param radiusDp   圆角
  * @param cornerType 圆角的类型
  */
-@BindingAdapter(value = ["url", "url2", "urlRadiusDp", "urlCornerType", "urlNotNeedCenterCrop"], requireAll = false)
-fun loadImage(imageView: ImageView, url: String?, url2: Any?, radiusDp: Int?, cornerType: CornerType?, urlNotNeedCenterCrop: Boolean?) {
+@BindingAdapter(value = ["url", "url2", "urlRadiusDp", "urlCornerType", "urlNotNeedCenterCrop", "urlSkipMemoryCache"], requireAll = false)
+fun loadImage(imageView: ImageView, url: String?, url2: Any?, radiusDp: Int?, cornerType: CornerType?, urlNotNeedCenterCrop: Boolean?, urlSkipMemoryCache: Boolean?) {
     val options: RequestOptions = Constants.getRequestOptions(dp2px(radiusDp
             ?: 0), cornerType ?: CornerType.ALL)
     urlNotNeedCenterCrop?.let {
@@ -133,8 +133,11 @@ fun loadImage(imageView: ImageView, url: String?, url2: Any?, radiusDp: Int?, co
 
     val build = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
 
+    imageView.setImageResource(0)
+    println(123)
     Glide.with(imageView.context)
             .load(target)
+            .skipMemoryCache(urlSkipMemoryCache ?: false)
             .transition(DrawableTransitionOptions.with(build))
             .apply(options)
             .into(imageView)
@@ -416,7 +419,7 @@ fun setHtmlText(textView: TextView, value: String?, htmlTextHolder: String?, nee
             textView.text = Html.fromHtml(it)
         }
         htmlTextHolder?.let {
-            if (TextUtils.isEmpty(textView.text.toString().replace("\n","").replace("\t",""))) {
+            if (TextUtils.isEmpty(textView.text.toString().replace("\n", "").replace("\t", ""))) {
                 textView.text = htmlTextHolder
             }
         }
