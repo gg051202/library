@@ -134,23 +134,12 @@ fun loadImage(imageView: ImageView, url: String?, url2: Any?, radiusDp: Int?, co
     val build = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
 
     imageView.setImageResource(0)
-    println(123)
     Glide.with(imageView.context)
             .load(target)
             .skipMemoryCache(urlSkipMemoryCache ?: false)
             .transition(DrawableTransitionOptions.with(build))
             .apply(options)
             .into(imageView)
-}
-
-/**
- *  textColor 必须传 0xff000000 格式
- */
-@BindingAdapter(value = ["android:text", "android:textColor", "fbt_bold_size"], requireAll = false)
-fun setboldText(textView: FakeBoldTextView, text: String?, color: Int?, fbt_bold_size: Float?) {
-    color?.let { textView.color = color }
-    fbt_bold_size?.let { textView.boldSize = fbt_bold_size }
-    text?.let { textView.setBoldText(text) }
 }
 
 /**
@@ -390,21 +379,32 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
 }
 
 //TextView someThing
-@BindingAdapter(value = ["textHolder", "textSizeSp", "textColor0xff"], requireAll = false)
-fun setText(textView: TextView, textHolder: String?, textSizeSp: Int?, textColor: Int?) {
+@BindingAdapter(value = ["android:text","textHolder", "textSizeSp", "textColor0xff"], requireAll = false)
+fun setText(textView: TextView, text: String?,  textHolder: String?, textSizeSp: Int?, textColor: Int?) {
     textColor?.let {
         textView.setTextColor(it)
     }
     textSizeSp?.let {
         textView.textSize = textSizeSp.toFloat()
     }
-    val realText = if (!TextUtils.isEmpty(textView.text)) textView.text else textHolder
+    val realText = if (!TextUtils.isEmpty(text)) text else textHolder
     val oldText = textView.text
     if (!SomeUtil.haveContentsChanged(realText, oldText)) {
         return  // 数据没有变化不进行刷新视图
     }
     textView.text = realText
 }
+
+/**
+ *  textColor 必须传 0xff000000 格式
+ */
+@BindingAdapter(value = ["android:text", "android:textColor", "fbt_bold_size"], requireAll = false)
+fun setboldText(textView: FakeBoldTextView, text: String?, color: Int?, fbt_bold_size: Float?) {
+    color?.let { textView.color = color }
+    fbt_bold_size?.let { textView.boldSize = fbt_bold_size }
+    text?.let { textView.setBoldText(text) }
+}
+
 
 @BindingAdapter(value = ["htmlText", "htmlTextHolder", "htmlTextNeedClick"], requireAll = false)
 fun setHtmlText(textView: TextView, value: String?, htmlTextHolder: String?, needClick: Boolean? = false) {
