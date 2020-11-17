@@ -403,8 +403,8 @@ fun setText(textView: TextView, textHolder: String?, textSizeSp: Int?, textColor
     textView.text = realText
 }
 
-@BindingAdapter(value = ["htmlText", "htmlTextNeedClick"], requireAll = false)
-fun setHtmlText(textView: TextView, value: String?, needClick: Boolean? = false) {
+@BindingAdapter(value = ["htmlText", "htmlTextHolder", "htmlTextNeedClick"], requireAll = false)
+fun setHtmlText(textView: TextView, value: String?, htmlTextHolder: String?, needClick: Boolean? = false) {
     value?.let { it ->
         if (TextUtils.isEmpty(it)) {
             return
@@ -414,6 +414,11 @@ fun setHtmlText(textView: TextView, value: String?, needClick: Boolean? = false)
         } else {
             @Suppress("DEPRECATION")
             textView.text = Html.fromHtml(it)
+        }
+        htmlTextHolder?.let {
+            if (TextUtils.isEmpty(textView.text.toString().replace("\n","").replace("\t",""))) {
+                textView.text = htmlTextHolder
+            }
         }
         needClick?.let { it1 ->
             if (it1) {
