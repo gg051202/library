@@ -11,12 +11,19 @@ import java.util.List;
 /**
  * Created by guilinlin on 16/7/20 13:21.
  * email 973635949@qq.com
- * @desc  基于viewPagerAdapter的fragment容器
+ *
+ * @desc 基于viewPagerAdapter的fragment容器
  */
 public class CommonFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> fragments;
-    private List<String>   titles;
+    private List<String> titles;
+
+    public CommonFragmentPagerAdapter(FragmentManager fm, int behavior) {
+        super(fm, behavior);
+        fragments = new ArrayList<>();
+        titles = new ArrayList<>();
+    }
 
     public CommonFragmentPagerAdapter(FragmentManager fm) {
         super(fm);

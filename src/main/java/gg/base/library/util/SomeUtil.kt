@@ -112,8 +112,6 @@ open class SomeUtil {
                     val activityName = SPUtils2.get2("develop_last_activity_name", "")
                     val bundle = Bundle()
                     val values = SPUtils2.get2("develop_last_activity_bundle", "")
-                    //                    LL.i("获取路径：$activityName")
-                    //                    LL.i("获取参数：$values")
                     if (!TextUtils.isEmpty(values)) {
                         val list = Gson().fromJson<List<*>>(values, object : TypeToken<List<BundleData?>?>() {}.type)
                         for (data in list) {
