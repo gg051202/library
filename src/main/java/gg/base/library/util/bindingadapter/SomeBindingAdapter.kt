@@ -379,7 +379,7 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
 }
 
 //TextView someThing
-@BindingAdapter(value = ["android:text","textHolder", "textSizeSp", "textColor0xff"], requireAll = false)
+@BindingAdapter(value = ["text","textHolder", "textSizeSp", "textColor0xff"], requireAll = false)
 fun setText(textView: TextView, text: String?,  textHolder: String?, textSizeSp: Int?, textColor: Int?) {
     textColor?.let {
         textView.setTextColor(it)
