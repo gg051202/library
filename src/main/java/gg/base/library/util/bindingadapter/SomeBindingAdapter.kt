@@ -118,11 +118,31 @@ fun setHeightDp(view: View, layout_height_dp: Int?, layout_width_dp: Int?) {
  * @param url2       如果首选的加载资源为空，加载这个
  * @param radiusDp   圆角
  * @param cornerType 圆角的类型
+ * @param urlSkipMemoryCache 有这么一种情况，如果本来图片很小，通过用户交互缩放后，避免直接从内存中直接获取小的图片，因此可以设置urlSkipMemoryCache跳过内存缓存。
  */
-@BindingAdapter(value = ["url", "url2", "urlRadiusDp", "urlCornerType", "urlNotNeedCenterCrop", "urlSkipMemoryCache"], requireAll = false)
-fun loadImage(imageView: ImageView, url: String?, url2: Any?, radiusDp: Int?, cornerType: CornerType?, urlNotNeedCenterCrop: Boolean?, urlSkipMemoryCache: Boolean?) {
+@BindingAdapter(value = [
+    "url",
+    "url2",
+    "urlRadiusDp",
+    "urlCornerType",
+    "urlNotNeedCenterCrop",
+    "urlSkipMemoryCache",
+    "urlPlaceHolder",
+], requireAll = false)
+fun loadImage(imageView: ImageView,
+              url: String?,
+              url2: Any?,
+              radiusDp: Int?,
+              cornerType: CornerType?,
+              urlNotNeedCenterCrop: Boolean?,
+              urlSkipMemoryCache: Boolean?,
+              urlPlaceHolder: Int?) {
     val options: RequestOptions = Constants.getRequestOptions(dp2px(radiusDp
             ?: 0), cornerType ?: CornerType.ALL)
+    urlPlaceHolder?.let {
+        options.error(it)
+        options.placeholder(it)
+    }
     urlNotNeedCenterCrop?.let {
         if (it) {
             options.transform(RoundedCornersTransformation(dp2px(radiusDp ?: 0), 0, cornerType ?: CornerType.ALL))
@@ -379,8 +399,8 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
 }
 
 //TextView someThing
-@BindingAdapter(value = ["text","textHolder", "textSizeSp", "textColor0xff"], requireAll = false)
-fun setText(textView: TextView, text: String?,  textHolder: String?, textSizeSp: Int?, textColor: Int?) {
+@BindingAdapter(value = ["text", "textHolder", "textSizeSp", "textColor0xff"], requireAll = false)
+fun setText(textView: TextView, text: String?, textHolder: String?, textSizeSp: Int?, textColor: Int?) {
     textColor?.let {
         textView.setTextColor(it)
     }
