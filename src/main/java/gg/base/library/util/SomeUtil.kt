@@ -274,10 +274,14 @@ fun showKeyboard(activity: BaseActivity, focus: View) {
 
 }
 
-fun toGson(o: Any): String {
-    return Gson().toJson(o)
-}
-
 fun RecyclerView.setLinearLayoutManager() {
     layoutManager = LinearLayoutManager(context)
+}
+
+fun String?.or(str: String?): String {
+    return if (TextUtils.isEmpty(this)) {
+        str ?: ""
+    } else {
+        this ?: ""
+    }
 }
