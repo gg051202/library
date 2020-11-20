@@ -15,8 +15,6 @@ import android.util.SparseArray;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.NotificationCompat;
 
-import com.blankj.utilcode.util.SPUtils;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,6 +26,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import gg.base.library.R;
+import gg.base.library.util.SPUtils2;
 import gg.base.library.util.SomeUtil;
 import rx.Observable;
 import rx.Subscriber;
@@ -508,7 +507,7 @@ public class CheckUpdateManager {
      * 保存点击"明天再说"时的时间
      */
     private void saveLatestTime() {
-        SPUtils.getInstance().put("checkUpdate_tomorrow", System.currentTimeMillis());
+        SPUtils2.Companion.put("checkUpdate_tomorrow", System.currentTimeMillis());
     }
 
     /**
@@ -517,7 +516,7 @@ public class CheckUpdateManager {
      * @return true表示超过
      */
     private boolean checkLastTimeIsOver() {
-        long latest = SPUtils.getInstance().getLong("checkUpdate_tomorrow", 0L);
+        long latest = SPUtils2.Companion.get("checkUpdate_tomorrow", 0L);
         return ((System.currentTimeMillis() - latest) > (spaceTimeHour == 0 ? 24 : spaceTimeHour * 3600000L));//24*60*60*1000
     }
 

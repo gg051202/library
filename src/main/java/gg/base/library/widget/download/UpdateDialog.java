@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 
@@ -248,16 +247,16 @@ public class UpdateDialog implements View.OnClickListener {
      * @return true表示超过
      */
     private boolean checkLastTimeIsOver() {
-        long latest = SPUtils.getInstance().getLong("checkUpdate_tomorrow_dialog", 0L);
+        long latest = SPUtils2.Companion.get("checkUpdate_tomorrow_dialog", 0L);
         return ((System.currentTimeMillis() - latest) > (mSpaceTimeHour == 0 ? 24 : mSpaceTimeHour * 3600000L));//24*60*60*1000
     }
 
     public void setIsRunningBackground(boolean isRunningBackground) {
-        SPUtils.getInstance().put("setIsRunningBackground_update", isRunningBackground);
+        SPUtils2.Companion.put("setIsRunningBackground_update", isRunningBackground);
     }
 
     public boolean isRunningBackground() {
-        return SPUtils.getInstance().getBoolean("setIsRunningBackground_update", false);
+        return SPUtils2.Companion.get("setIsRunningBackground_update", false);
     }
 
 
