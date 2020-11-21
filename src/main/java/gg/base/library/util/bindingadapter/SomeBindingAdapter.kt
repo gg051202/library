@@ -401,13 +401,14 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
 //TextView someThing
 @BindingAdapter(value = ["text", "textHolder", "textSizeSp", "textColor0xff"], requireAll = false)
 fun setText(textView: TextView, text: String?, textHolder: String?, textSizeSp: Int?, textColor: Int?) {
+
     textColor?.let {
         textView.setTextColor(it)
     }
     textSizeSp?.let {
         textView.textSize = textSizeSp.toFloat()
     }
-    val realText = if (!TextUtils.isEmpty(text)) text else textHolder
+    val realText = text.or(textHolder).or(textView.text.toString())
     val oldText = textView.text
     if (!SomeUtil.haveContentsChanged(realText, oldText)) {
         return  // 数据没有变化不进行刷新视图

@@ -72,8 +72,8 @@
     </style>
 
     <style name="arrow">
-        <item name="android:layout_width">7dp</item>
-        <item name="android:layout_height">14dp</item>
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">12dp</item>
         <item name="android:src">@mipmap/frame_base_icon_arrow</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
         <item name="layout_constraintBottom_toBottomOf">parent</item>
