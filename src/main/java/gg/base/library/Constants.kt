@@ -42,8 +42,7 @@ class Constants {
         /**
          * 会根据当前屏幕的比例，设置合适的基准宽度，到达适配适配不同比例的屏幕的效果。
          */
-        var BASE_WIDTH = (360 * (19 / 9f / ScreenUtils.getScreenHeight() * ScreenUtils.getScreenWidth())).toInt()
-
+        var BASE_WIDTH = 360
 
         /**
          * 默认的占位图
