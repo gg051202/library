@@ -33,7 +33,7 @@ class SelectImageDialog(val baseActivity: BaseActivity,
 
     private val mBinding: DialogLayoutSelectImageBinding = DataBindingUtil.inflate(LayoutInflater.from(
         baseActivity), R.layout.dialog_layout_select_image, null, false)
-    private val alertDialog: AlertDialog = AlertDialog.Builder(baseActivity, R.style.DefaultDialogStyle)
+    private val alertDialog: AlertDialog = AlertDialog.Builder(baseActivity, R.style.FrameDialogStyle)
             .setView(mBinding.root)
             .create()
 

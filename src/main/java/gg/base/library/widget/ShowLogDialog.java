@@ -49,7 +49,7 @@ public class ShowLogDialog implements View.OnClickListener {
             view.findViewById(R.id.submitTextView).setOnClickListener(this);
             view.findViewById(R.id.clearImageView).setOnClickListener(this);
 
-            mAlertDialog = new AlertDialog.Builder(mActivity, R.style.DefaultDialogStyle)
+            mAlertDialog = new AlertDialog.Builder(mActivity, R.style.FrameDialogStyle)
                     .setView(view)
                     .show();
             Window window = mAlertDialog.getWindow();

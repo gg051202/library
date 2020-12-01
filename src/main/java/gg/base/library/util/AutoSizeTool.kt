@@ -4,6 +4,7 @@ import android.util.SparseArray
 import android.util.TypedValue
 import androidx.core.util.set
 import com.blankj.utilcode.util.Utils
+import gg.base.library.Constants
 
 /**
  * Created by guilin on 2019-04-22 17:56.
@@ -16,8 +17,8 @@ object AutoSizeTool {
     fun dp2px(dp: Int): Int {
         if (sparseArray[dp] == null) {
             sparseArray[dp] = (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                         dp.toFloat(),
-                                                         Utils.getApp().resources.displayMetrics) + 0.5f).toInt()
+                    dp.toFloat(),
+                    Utils.getApp().resources.displayMetrics) + 0.5f).toInt()
         }
         return sparseArray[dp]
     }
@@ -36,5 +37,9 @@ object AutoSizeTool {
 
     fun mm2px(mm: Float): Int {
         return (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, mm, Utils.getApp().resources.displayMetrics) + 0.5f).toInt()
+    }
+
+    fun getWidth(): Int {
+        return dp2px(Constants.BASE_WIDTH)
     }
 }

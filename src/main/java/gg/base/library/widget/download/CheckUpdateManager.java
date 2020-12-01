@@ -127,7 +127,7 @@ public class CheckUpdateManager {
                 Log.i(TAG, "需要更新但是用户设置了提醒间隔");
                 return;
             }
-            new AlertDialog.Builder(mContext, R.style.DefaultDialogStyle)
+            new AlertDialog.Builder(mContext, R.style.FrameDialogStyle)
                     .setTitle(title)
                     .setMessage(desc)
                     .setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
@@ -148,7 +148,7 @@ public class CheckUpdateManager {
 
         } else {
             if (!isAutoCheck) {//如果不是自动更新，才需要弹出提示窗
-                new AlertDialog.Builder(mContext, R.style.DefaultDialogStyle).
+                new AlertDialog.Builder(mContext, R.style.FrameDialogStyle).
                         setTitle("提示")
                         .setMessage("当前版本已是最新版本")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
