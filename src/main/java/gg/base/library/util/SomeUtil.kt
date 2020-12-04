@@ -88,6 +88,9 @@ open class SomeUtil {
                 SPUtils2.put("develop_last_activity_name", "")
                 return
             }
+            if (activityName.contains("SelectCompany")) {
+                return
+            }
             SPUtils2.put("develop_last_activity_name", activityName)
             val extras = baseActivity.intent.extras
             if (extras != null) {
