@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
@@ -32,7 +33,7 @@ public class FakeBoldTextView extends AppCompatTextView {
         updateString(getText().toString());
     }
 
-    public FakeBoldTextView(Context context ) {
+    public FakeBoldTextView(Context context) {
         super(context);
 
         color = 0;
@@ -67,6 +68,9 @@ public class FakeBoldTextView extends AppCompatTextView {
     }
 
     public void setBoldText(CharSequence charSequence) {
+        if (TextUtils.isEmpty(charSequence)) {
+            return;
+        }
         updateString(charSequence.toString());
     }
 
