@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class GetConnactsUtil {
 
-    public static void getContacts(Activity activity) {
+    public static List<ContactData> getContacts(Activity activity) {
 
         List<ContactData> resultList = new ArrayList<>();
         Uri uri = ContactsContract.Contacts.CONTENT_URI;
@@ -45,6 +45,8 @@ public class GetConnactsUtil {
         if (cursor != null) {
             cursor.close();
         }
+
+        return resultList;
 
     }
 
