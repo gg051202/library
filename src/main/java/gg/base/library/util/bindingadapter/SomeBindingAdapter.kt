@@ -3,7 +3,9 @@ package gg.base.library.util.bindingadapter
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
 import android.text.Html
@@ -399,8 +401,22 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
 }
 
 //TextView someThing
-@BindingAdapter(value = ["text", "textHolder", "textSizeSp", "textColor0xff"], requireAll = false)
-fun setText(textView: TextView, text: String?, textHolder: String?, textSizeSp: Int?, textColor: Int?) {
+@SuppressLint("UseCompatLoadingForDrawables")
+@BindingAdapter(value = [
+    "text",
+    "textHolder",
+    "textSizeSp",
+    "textColor0xff",
+    "textLeftDrawable",
+    "textLeftDrawableHeightDp"
+], requireAll = false)
+fun setText(textView: TextView,
+            text: String?,
+            textHolder: String?,
+            textSizeSp: Int?,
+            textColor: Int?,
+            textLeftDrawable: Int?,
+            textLeftDrawableHeight: Int?) {
 
     textColor?.let {
         textView.setTextColor(it)
@@ -414,6 +430,14 @@ fun setText(textView: TextView, text: String?, textHolder: String?, textSizeSp: 
         return  // 数据没有变化不进行刷新视图
     }
     textView.text = realText
+
+    textLeftDrawable?.let {
+        val drawable: Drawable = textView.context.resources.getDrawable(textLeftDrawable)
+        val h = textLeftDrawableHeight ?: 10
+        drawable.setBounds(0, 0, dp2px(h), dp2px(h))
+        textView.setCompoundDrawables(drawable, null, null, null)
+    }
+
 }
 
 /**

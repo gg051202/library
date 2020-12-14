@@ -246,6 +246,9 @@ fun View.setVisable(visable: Boolean) {
 fun toast(msg: String) {
     ToastUtils.showShort(msg)
 }
+fun toastLong(msg: String) {
+    ToastUtils.showLong(msg)
+}
 
 
 private fun showKeyboard(activity: Activity, isShow: Boolean) {
