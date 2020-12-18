@@ -451,17 +451,24 @@ fun setboldText(textView: FakeBoldTextView, text: String?, color: Int?, fbt_bold
 }
 
 
-@BindingAdapter(value = ["htmlText", "htmlTextHolder", "htmlTextNeedClick"], requireAll = false)
-fun setHtmlText(textView: TextView, value: String?, htmlTextHolder: String?, needClick: Boolean? = false) {
+@BindingAdapter(value = ["htmlText", "htmlTextRes", "htmlTextHolder", "htmlTextNeedClick"], requireAll = false)
+fun setHtmlText(textView: TextView, value: String?, valueRes: Int?, htmlTextHolder: String?, needClick: Boolean? = false) {
     value?.let { it ->
         if (TextUtils.isEmpty(it)) {
             return
         }
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             textView.text = Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
+            valueRes?.let {
+                textView.text = Html.fromHtml(textView.context.getString(it), Html.FROM_HTML_MODE_COMPACT)
+            }
         } else {
             @Suppress("DEPRECATION")
             textView.text = Html.fromHtml(it)
+            valueRes?.let {
+                @Suppress("DEPRECATION")
+                textView.text = Html.fromHtml(textView.context.getString(it))
+            }
         }
         htmlTextHolder?.let {
             if (TextUtils.isEmpty(textView.text.toString().replace("\n", "").replace("\t", ""))) {
