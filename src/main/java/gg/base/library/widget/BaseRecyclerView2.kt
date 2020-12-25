@@ -107,7 +107,6 @@ class BaseRecyclerView2 : SmartRefreshLayout {
     /**
      * 请确保list中的数据类型一致
      */
-    @Suppress("UNCHECKED_CAST")
     fun onLoadDataComplete(data: List<*>? = null) {
         if (!this::mAdapter.isInitialized) {
             return

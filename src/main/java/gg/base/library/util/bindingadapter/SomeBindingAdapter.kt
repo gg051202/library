@@ -403,7 +403,7 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
 //TextView someThing
 @SuppressLint("UseCompatLoadingForDrawables")
 @BindingAdapter(value = [
-    "text",
+    "text",//这个好像没用，但是先不删，可能是为了解决设置字符串会出现异常的问题，记不清了，先不改，就这么放着吧
     "textHolder",
     "textSizeSp",
     "textColor0xff",
