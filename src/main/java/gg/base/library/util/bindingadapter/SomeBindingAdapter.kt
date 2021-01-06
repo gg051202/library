@@ -264,10 +264,18 @@ fun setGone(view: View, isGone: Boolean, goneAnimType: Int, goneAnimTime: Int, f
  * @param color  @{0xffF2F3F8}
  * @param radius @{3}
  */
-@BindingAdapter(value = ["background_solidColor0x", "background_radius_dp", "background_pressedColor", "background_cornerType"],
+@BindingAdapter(value = [
+    "background_solidColor0x",
+    "background_radius_dp",
+    "background_pressedColor",
+    "background_cornerType"],
         requireAll = false)
-fun setViewBackground(v: View, color: Int, radiusDp: Float, backgroundPressedColor: Boolean,
-                      cornerType: CornerType? = CornerType.ALL) {
+fun setViewBackground(v: View,
+                      color: Int,
+                      radiusDp: Float,
+                      backgroundPressedColor: Boolean,
+                      cornerType: CornerType? = CornerType.ALL
+) {
     //初始化一个空对象
     val stalistDrawable = StateListDrawable()
     val drawablePressedFlase = GradientDrawable()
@@ -403,7 +411,7 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
 //TextView someThing
 @SuppressLint("UseCompatLoadingForDrawables")
 @BindingAdapter(value = [
-    "text",//这个好像没用，但是先不删，可能是为了解决设置字符串会出现异常的问题，记不清了，先不改，就这么放着吧
+    "text", //这个好像没用，但是先不删，可能是为了解决设置字符串会出现异常的问题，记不清了，先不改，就这么放着吧
     "textHolder",
     "textSizeSp",
     "textColor0xff",
