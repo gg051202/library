@@ -268,12 +268,16 @@ fun setGone(view: View, isGone: Boolean, goneAnimType: Int, goneAnimTime: Int, f
     "background_solidColor0x",
     "background_radius_dp",
     "background_pressedColor",
+    "background_stokeColor0x",
+    "background_stokeWidth",
     "background_cornerType"],
         requireAll = false)
 fun setViewBackground(v: View,
                       color: Int,
                       radiusDp: Float,
                       backgroundPressedColor: Boolean,
+                      background_stokeColor0x: Int?,
+                      background_stokeWidth: Int?,
                       cornerType: CornerType? = CornerType.ALL
 ) {
     //初始化一个空对象
@@ -281,6 +285,7 @@ fun setViewBackground(v: View,
     val drawablePressedFlase = GradientDrawable()
     drawablePressedFlase.setColor(color)
     drawablePressedFlase.setCornerRadius(cornerType, radiusDp)
+    drawablePressedFlase.setStroke(background_stokeWidth ?: 1, background_stokeColor0x ?: 0x00000000)
 
     stalistDrawable.addState(intArrayOf(-android.R.attr.state_pressed, android.R.attr.state_enabled),
             drawablePressedFlase)
@@ -289,6 +294,7 @@ fun setViewBackground(v: View,
         //            color& 0xa0ffffff 可以把颜色变透明
         drawablePressedTrue.setColor(ColorUtils.blendARGB(color, Color.BLACK, 0.1f))
         drawablePressedTrue.setCornerRadius(cornerType, radiusDp)
+        drawablePressedTrue.setStroke(background_stokeWidth ?: 1, background_stokeColor0x ?: 0x00000000)
 
         stalistDrawable.addState(intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled),
                 drawablePressedTrue)
