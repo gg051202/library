@@ -9,6 +9,7 @@ import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
@@ -247,6 +248,7 @@ fun View.setVisable(visable: Boolean) {
 fun toast(msg: String) {
     ToastUtils.showShort(msg)
 }
+
 fun toastLong(msg: String) {
     ToastUtils.showLong(msg)
 }
@@ -284,8 +286,13 @@ fun showKeyboard(activity: BaseActivity, focus: View) {
 fun RecyclerView.setLinearLayoutManager() {
     layoutManager = LinearLayoutManager(context)
 }
+
 fun RecyclerView.setLinearLayoutManagerHorizontal() {
-    layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL ,false)
+    layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+}
+
+fun RecyclerView.setGridLayoutManager(spanCount: Int) {
+    layoutManager = GridLayoutManager(context, spanCount)
 }
 
 fun String?.or(str: String?): String {
