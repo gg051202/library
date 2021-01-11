@@ -285,7 +285,7 @@ fun setViewBackground(v: View,
     val drawablePressedFlase = GradientDrawable()
     drawablePressedFlase.setColor(color)
     drawablePressedFlase.setCornerRadius(cornerType, radiusDp)
-    drawablePressedFlase.setStroke(background_stokeWidth ?: 1, background_stokeColor0x ?: 0x00000000)
+    drawablePressedFlase.setStroke(background_stokeWidth ?: 0, background_stokeColor0x ?: 0x00000000)
 
     stalistDrawable.addState(intArrayOf(-android.R.attr.state_pressed, android.R.attr.state_enabled),
             drawablePressedFlase)
