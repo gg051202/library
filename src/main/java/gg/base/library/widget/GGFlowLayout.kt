@@ -5,10 +5,8 @@ import android.content.Context
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
-import android.widget.TextView
 import com.google.android.material.internal.FlowLayout
 import gg.base.library.util.AutoSizeTool
-import gg.base.library.util.LL
 import gg.base.library.util.toast
 
 /**
