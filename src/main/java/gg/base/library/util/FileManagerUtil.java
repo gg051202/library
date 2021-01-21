@@ -32,6 +32,9 @@ public class FileManagerUtil {
         return String.format("%s/%s", getDownloadDir().getAbsolutePath(), fileName);
     }
 
+    /**
+     * 注意：这个目录，每次进入APP是会清空的！！！只是一个缓存目录，方便操作。
+     */
     public static File getCacheDir() {
         return createFile(new File(Environment.getExternalStorageDirectory(), "LeoCacheTemp"));
     }
