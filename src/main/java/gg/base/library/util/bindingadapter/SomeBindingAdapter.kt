@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
@@ -422,7 +423,8 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
     "textSizeSp",
     "textColor0xff",
     "textLeftDrawable",
-    "textLeftDrawableHeightDp"
+    "textLeftDrawableHeightDp",
+    "textIsBold",
 ], requireAll = false)
 fun setText(textView: TextView,
             text: String?,
@@ -430,13 +432,17 @@ fun setText(textView: TextView,
             textSizeSp: Int?,
             textColor: Int?,
             textLeftDrawable: Int?,
-            textLeftDrawableHeight: Int?) {
+            textLeftDrawableHeight: Int?,
+            textIsBold: Boolean?) {
 
     textColor?.let {
         textView.setTextColor(it)
     }
     textSizeSp?.let {
         textView.textSize = textSizeSp.toFloat()
+    }
+    textIsBold?.let {
+        textView.setTypeface(null, if (it) Typeface.BOLD else Typeface.NORMAL)
     }
     val realText = text.or(textHolder).or(textView.text.toString())
     val oldText = textView.text
