@@ -554,3 +554,8 @@ fun setVisable(v: View, visable: Boolean) {
 fun setViewAlpha(v: View, alpha: Float) {
     v.alpha = alpha
 }
+
+@BindingAdapter(value = ["rotate"])
+fun setViewRotate(v: View, rotate: Float) {
+    v.rotation =rotate
+}
