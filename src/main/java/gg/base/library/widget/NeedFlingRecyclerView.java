@@ -35,15 +35,14 @@ public class NeedFlingRecyclerView extends RecyclerView {
         super.onScrollChanged(l, t, oldl, oldt);
     }
 
-
     @Override
-    protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
-        if (clampedY && scrollY == 0) {
+    public void onScrollStateChanged(int state) {
+        if (state == SCROLL_STATE_IDLE && computeVerticalScrollOffset() == 0) {
             if (mOnScrollToTopListener != null) {
                 mOnScrollToTopListener.onScrollTop(this);
             }
         }
-        super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
+        super.onScrollStateChanged(state);
     }
 
     @Override
