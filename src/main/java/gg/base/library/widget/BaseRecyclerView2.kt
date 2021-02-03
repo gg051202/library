@@ -44,14 +44,14 @@ class BaseRecyclerView2 : SmartRefreshLayout {
     var mErrPlaceView: View? = null
     var mNoDataString = ""
     var mNoMoreString = ""
-    var mRecyclerView: RecyclerView
+    var mRecyclerView: NeedFlingRecyclerView
 
     constructor(context: Context) : this(context, attributeSet = null)
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
         mContext = context
-        mRecyclerView = RecyclerView(mContext)
+        mRecyclerView = NeedFlingRecyclerView(mContext)
         mRecyclerView.overScrollMode = OVER_SCROLL_NEVER
         addView(mRecyclerView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
     }
