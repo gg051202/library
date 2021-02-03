@@ -3,6 +3,7 @@ package gg.base.library.util.bindingadapter
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
@@ -421,6 +422,7 @@ fun setRightText(commonMenu: CommonMenu, rightText: CharSequence?, color: Int) {
     "text", //这个好像没用，但是先不删，可能是为了解决设置字符串会出现异常的问题，记不清了，先不改，就这么放着吧
     "textHolder",
     "textSizeSp",
+    "textSizeSpAnimate",
     "textColor0xff",
     "textLeftDrawable",
     "textLeftDrawableHeightDp",
@@ -430,6 +432,7 @@ fun setText(textView: TextView,
             text: String?,
             textHolder: String?,
             textSizeSp: Int?,
+            textSizeSpAnimate: Int?,
             textColor: Int?,
             textLeftDrawable: Int?,
             textLeftDrawableHeight: Int?,
@@ -443,6 +446,14 @@ fun setText(textView: TextView,
     }
     textIsBold?.let {
         textView.setTypeface(null, if (it) Typeface.BOLD else Typeface.NORMAL)
+    }
+    textSizeSpAnimate?.let {
+        val ofFloat = ObjectAnimator.ofFloat(FrameDensityUtils.px2sp(textView.context, textView.textSize), it.toFloat())
+        ofFloat.addUpdateListener { animator ->
+            textView.textSize = animator.animatedValue as Float
+        }
+        ofFloat.duration = 100
+        ofFloat.start()
     }
     val realText = text.or(textHolder).or(textView.text.toString())
     val oldText = textView.text
