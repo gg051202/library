@@ -31,7 +31,6 @@ public class NeedFlingRecyclerView extends RecyclerView {
 
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-//        System.out.println("时间：" + System.currentTimeMillis() % 100000 + ", " + getScrollY());
         super.onScrollChanged(l, t, oldl, oldt);
     }
 
