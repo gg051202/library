@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class NeedFlingRecyclerView extends RecyclerView {
 
 
-    private boolean needFling = false;
+    private boolean needFling = true;
 
     public NeedFlingRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
