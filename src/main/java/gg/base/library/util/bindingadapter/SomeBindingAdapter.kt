@@ -3,10 +3,10 @@ package gg.base.library.util.bindingadapter
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
@@ -31,8 +31,11 @@ import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
+import com.bumptech.glide.request.transition.Transition
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.davemorrissey.labs.subscaleview.ImageSource
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import gg.base.library.Constants
 import gg.base.library.R
@@ -557,5 +560,14 @@ fun setViewAlpha(v: View, alpha: Float) {
 
 @BindingAdapter(value = ["rotate"])
 fun setViewRotate(v: View, rotate: Float) {
-    v.rotation =rotate
+    v.rotation = rotate
+}
+
+@BindingAdapter(value = ["backgroundUrl"])
+fun setViewbackgroundUrl(v: View, url: String) {
+    Glide.with(v).load(url).into(object : SimpleTarget<Drawable?>() {
+        override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable?>?) {
+            v.background = resource
+        }
+    })
 }
