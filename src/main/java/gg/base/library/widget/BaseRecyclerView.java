@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import gg.base.library.R;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshFooter;
@@ -24,6 +23,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.List;
 
+import gg.base.library.R;
 import gg.base.library.base.MyBaseViewHolder;
 
 /**
@@ -61,8 +61,8 @@ public class BaseRecyclerView<T> extends FrameLayout {
     private final Context mContext;
 
     private BaseQuickAdapter<T, MyBaseViewHolder> mAdapter;
-    private RecyclerView                          mRecyclerView;
-    private FrameLayout        mContentFrameLayout;
+    private NeedFlingRecyclerView mRecyclerView;
+    private FrameLayout mContentFrameLayout;
     private SmartRefreshLayout mRefreshLayout;
     private MutiItemDecoration mMutiItemDecoration;
     private NetworkHandle mNetworkHandle;
@@ -93,9 +93,9 @@ public class BaseRecyclerView<T> extends FrameLayout {
      * 当前的状态
      */
     private int mStatus;
-    private       View                mProgressView;
+    private View mProgressView;
     private final LinearLayoutManager mLayoutManager;
-    private       View                mNoMoreFooterView;
+    private View mNoMoreFooterView;
 
     public BaseRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -387,11 +387,11 @@ public class BaseRecyclerView<T> extends FrameLayout {
         return mAdapter;
     }
 
-    public RecyclerView getRecyclerView() {
+    public NeedFlingRecyclerView getRecyclerView() {
         return mRecyclerView;
     }
 
-    public void setRecyclerView(RecyclerView recyclerView) {
+    public void setRecyclerView(NeedFlingRecyclerView recyclerView) {
         mRecyclerView = recyclerView;
     }
 
