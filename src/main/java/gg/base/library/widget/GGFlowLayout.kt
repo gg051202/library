@@ -20,8 +20,6 @@ class GGFlowLayout<T> constructor(context: Context, at: AttributeSet) : FlowLayo
 
 
     init {
-        itemSpacing = AutoSizeTool.dp2px(10)
-        lineSpacing = AutoSizeTool.dp2px(10)
     }
 
 

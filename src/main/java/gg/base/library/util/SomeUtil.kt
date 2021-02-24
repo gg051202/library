@@ -90,7 +90,7 @@ open class SomeUtil {
                 SPUtils2.put("develop_last_activity_name", "")
                 return
             }
-            if (activityName.contains("SelectCompany")) {
+            if (activityName.contains("SelectCompany")||activityName.contains("JustFragment")) {
                 return
             }
             SPUtils2.put("develop_last_activity_name", activityName)
@@ -288,7 +288,7 @@ fun RecyclerView.setLinearLayoutManager() {
 }
 
 fun RecyclerView.setLinearLayoutManagerHorizontal() {
-    layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
+    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 }
 
 fun RecyclerView.setGridLayoutManager(spanCount: Int) {
