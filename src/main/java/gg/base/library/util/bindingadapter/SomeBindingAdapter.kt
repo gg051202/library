@@ -278,7 +278,7 @@ fun setGone(view: View, isGone: Boolean, goneAnimType: Int, goneAnimTime: Int, f
     "background_cornerType"],
         requireAll = false)
 fun setViewBackground(v: View,
-                      color: Int,
+                      background_solidColor0x: Int,
                       radiusDp: Float,
                       backgroundPressedColor: Boolean,
                       background_stokeColor0x: Int?,
@@ -288,7 +288,7 @@ fun setViewBackground(v: View,
     //初始化一个空对象
     val stalistDrawable = StateListDrawable()
     val drawablePressedFlase = GradientDrawable()
-    drawablePressedFlase.setColor(color)
+    drawablePressedFlase.setColor(background_solidColor0x)
     drawablePressedFlase.setCornerRadius(cornerType, radiusDp)
     drawablePressedFlase.setStroke(background_stokeWidth ?: 0, background_stokeColor0x ?: 0x00000000)
 
@@ -297,7 +297,7 @@ fun setViewBackground(v: View,
     if (backgroundPressedColor) {
         val drawablePressedTrue = GradientDrawable()
         //            color& 0xa0ffffff 可以把颜色变透明
-        drawablePressedTrue.setColor(ColorUtils.blendARGB(color, Color.BLACK, 0.1f))
+        drawablePressedTrue.setColor(ColorUtils.blendARGB(background_solidColor0x, Color.BLACK, 0.1f))
         drawablePressedTrue.setCornerRadius(cornerType, radiusDp)
         drawablePressedTrue.setStroke(background_stokeWidth ?: 1, background_stokeColor0x ?: 0x00000000)
 
