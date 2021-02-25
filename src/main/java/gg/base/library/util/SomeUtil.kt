@@ -90,7 +90,7 @@ open class SomeUtil {
                 SPUtils2.put("develop_last_activity_name", "")
                 return
             }
-            if (activityName.contains("SelectCompany")||activityName.contains("JustFragment")) {
+            if (activityName.contains("SelectCompany") || activityName.contains("JustFragment")) {
                 return
             }
             SPUtils2.put("develop_last_activity_name", activityName)
@@ -100,11 +100,13 @@ open class SomeUtil {
                 for (s in extras.keySet()) {
                     dataList.add(BundleData(s!!, extras[s]!!))
                 }
-                SPUtils2.put("develop_last_activity_bundle", Gson().toJson(dataList))
+                val ob = Gson().toJson(dataList)
+                SPUtils2.put("develop_last_activity_bundle", ob)
+                LL.i("记录参数：$ob")
+
             } else {
                 SPUtils2.put("develop_last_activity_bundle", "")
             }
-            //                LL.i("参数：" + SPUtils2["develop_last_activity_bundle", ""])
         }
 
 
@@ -118,29 +120,21 @@ open class SomeUtil {
                     val bundle = Bundle()
                     val values = SPUtils2.get2("develop_last_activity_bundle", "")
                     if (!TextUtils.isEmpty(values)) {
-                        val list = Gson().fromJson<List<*>>(values, object : TypeToken<List<BundleData?>?>() {}.type)
+                        val list = Gson().fromJson<List<BundleData>>(values, object : TypeToken<List<BundleData>>() {}.type)
+                        LL.i("参数：", Gson().toJson(list))
                         for (data in list) {
-                            if (data is BundleData) {
-                                LL.i(data.key + "," + data.value)
-                                when (data.value) {
-                                    is String -> {
-                                        bundle.putString(data.key, data.value as String)
-                                    }
-                                    is Int -> {
-                                        bundle.putInt(data.key, (data.value as Int))
-                                    }
-                                    is Float -> {
-                                        bundle.putFloat(data.key, (data.value as Float))
-                                    }
-                                    is Double -> {
-                                        bundle.putDouble(data.key, (data.value as Double))
-                                    }
-                                    is Boolean -> {
-                                        bundle.putBoolean(data.key, (data.value as Boolean))
-                                    }
-                                    is Long -> {
-                                        bundle.putLong(data.key, (data.value as Long))
-                                    }
+                            when (data.value) {
+                                is String -> {
+                                    bundle.putString(data.key, data.value as String)
+                                    LL.i("参数：", "String:" + data.key + "," + data.value)
+                                }
+                                is Boolean -> {
+                                    bundle.putBoolean(data.key, (data.value as Boolean))
+                                    LL.i("参数：", "Boolean:" + data.key + "," + data.value)
+                                }
+                                else -> {
+                                    bundle.putInt(data.key, data.value.toString().toFloat().toInt())
+                                    LL.i("参数：", "Int float double。。。:" + data.key + "," + data.value)
                                 }
                             }
                         }
@@ -149,7 +143,10 @@ open class SomeUtil {
                         val activityClass = Class.forName(activityName)
                         if (!AppManager.getAppManager().checkActivity(activityClass)) {
                             toast("自动跳转至上次停留页面")
-                            baseActivity.startActivity(Intent(baseActivity, activityClass), bundle)
+                            LL.i("参数：", " ${Gson().toJson(bundle)}")
+                            val intent = Intent(baseActivity, activityClass)
+                            intent.putExtras(bundle)
+                            baseActivity.startActivity(intent)
                         }
                     }
                 }
