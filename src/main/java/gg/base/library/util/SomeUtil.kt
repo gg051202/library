@@ -133,8 +133,11 @@ open class SomeUtil {
                                     LL.i("参数：", "Boolean:" + data.key + "," + data.value)
                                 }
                                 else -> {
-                                    bundle.putInt(data.key, data.value.toString().toFloat().toInt())
-                                    LL.i("参数：", "Int float double。。。:" + data.key + "," + data.value)
+                                    try {
+                                        bundle.putInt(data.key, data.value.toString().toFloat().toInt())
+                                        LL.i("参数：", "Int float double。。。:" + data.key + "," + data.value)
+                                    } catch (exce: Exception) {
+                                    }
                                 }
                             }
                         }
