@@ -104,6 +104,14 @@ class BaseRecyclerView2 : SmartRefreshLayout {
         autoRefresh(1, 300, 1f, false)
     }
 
+
+    fun callRefreshListenerSlient() {
+        mAdapter.data.clear()
+        mAdapter.notifyDataSetChanged()
+        mAdapter.setEmptyView(getLoadingLayout())
+        autoRefresh(1, 0, 0f, false)
+    }
+
     /**
      * 请确保list中的数据类型一致
      */
