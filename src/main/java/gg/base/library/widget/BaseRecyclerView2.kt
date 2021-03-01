@@ -106,9 +106,6 @@ class BaseRecyclerView2 : SmartRefreshLayout {
 
 
     fun callRefreshListenerSlient() {
-        mAdapter.data.clear()
-        mAdapter.notifyDataSetChanged()
-        mAdapter.setEmptyView(getLoadingLayout())
         autoRefresh(1, 0, 0f, false)
     }
 
