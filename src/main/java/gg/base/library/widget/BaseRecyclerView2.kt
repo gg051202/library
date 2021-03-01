@@ -45,6 +45,7 @@ class BaseRecyclerView2 : SmartRefreshLayout {
     var mNoDataString = ""
     var mNoMoreString = ""
     var mRecyclerView: NeedFlingRecyclerView
+    lateinit var mFunc: (pageIndex: Int, pageSize: Int) -> Unit
 
     constructor(context: Context) : this(context, attributeSet = null)
 
@@ -57,7 +58,8 @@ class BaseRecyclerView2 : SmartRefreshLayout {
     }
 
     fun start(adapter: BaseQuickAdapter<*, *>, pageSize: Int = 20, layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(
-        context), nodataString: String = "暂无数据", noDataPlaceView: View? = null, noMoreString: String = "没有更多了", needShowNoMoreFooter: Boolean = true, func: (pageIndex: Int, pageSize: Int) -> Unit) {
+            context), nodataString: String = "暂无数据", noDataPlaceView: View? = null, noMoreString: String = "没有更多了", needShowNoMoreFooter: Boolean = true, func: (pageIndex: Int, pageSize: Int) -> Unit) {
+        mFunc = func
         mNoDataString = nodataString
         mNoMoreString = noMoreString
         mNeedShowNoMoreFooter = needShowNoMoreFooter
@@ -76,7 +78,6 @@ class BaseRecyclerView2 : SmartRefreshLayout {
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 mRefreshingStatus = RefreshingStatus.STATUS_REFRESHING
                 mPageIndex = 1
-
 
                 val isAdded = mAdapter.footerLayout != null && mAdapter.footerLayout!!.indexOfChild(getNoMoreFooterView()) >= 0
                 if (mNeedShowNoMoreFooter && isAdded) {
@@ -106,7 +107,10 @@ class BaseRecyclerView2 : SmartRefreshLayout {
 
 
     fun callRefreshListenerSlient() {
-        autoRefresh(1, 0, 0f, false)
+        mRefreshingStatus = RefreshingStatus.STATUS_REFRESHING
+        mPageIndex = 1
+
+        mFunc.invoke(1, mPageSize)
     }
 
     /**
@@ -147,8 +151,8 @@ class BaseRecyclerView2 : SmartRefreshLayout {
             val notAdded = mAdapter.footerLayout == null || mAdapter.footerLayout!!.indexOfChild(getNoMoreFooterView()) < 0
             if (mNeedShowNoMoreFooter && mAdapter.data.isNotEmpty() && notAdded) {
                 postDelayed({
-                                mAdapter.addFooterView(getNoMoreFooterView())
-                            }, 300)
+                    mAdapter.addFooterView(getNoMoreFooterView())
+                }, 300)
             }
 
 

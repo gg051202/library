@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -165,6 +164,13 @@ public class BaseRecyclerView<T> extends FrameLayout {
         mAdapter.notifyDataSetChanged();
         mAdapter.setEmptyView(new View(mContext));
         mRefreshLayout.autoRefresh();
+    }
+
+
+    public void callRefreshListenerSlient() {
+        mPageIndex = 1;
+        mStatus = STATUS_FIRST_LOAD_DATA;
+        mNetworkHandle.loadData(true,"1");
     }
 
 
