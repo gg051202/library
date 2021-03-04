@@ -5,7 +5,8 @@
         <attr name="fbt_bold_size" format="float" />
     </declare-styleable>
     <declare-styleable name="RedPointTextView">
-        <attr name="rpt_color" format="color" />
+        <attr name="rpt_bg_color" format="color" />
+        <attr name="rpt_text_color" format="color" />
         <attr name="rpt_number" format="integer" />
     </declare-styleable>
 

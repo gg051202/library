@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -23,7 +24,7 @@ import gg.base.library.R;
  */
 public class RedPointTextView extends View {
 
-    private int color;
+    private int mBackgroundColor;
     private String number;
 
     private Paint paint;
@@ -33,11 +34,13 @@ public class RedPointTextView extends View {
     private float textWidth;
     private Rect textRect;// 计算text的宽高
     private int mMaxNumber = 99;
+    private int mTextColor;
 
     public RedPointTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RedPointTextView);
-        color = array.getColor(R.styleable.RedPointTextView_rpt_color, 0xffF74C31);
+        mBackgroundColor = array.getColor(R.styleable.RedPointTextView_rpt_bg_color, 0xffF74C31);
+        mTextColor = array.getColor(R.styleable.RedPointTextView_rpt_text_color, 0xffffffff);
         number = array.getString(R.styleable.RedPointTextView_rpt_number);
         array.recycle();
 
@@ -51,7 +54,7 @@ public class RedPointTextView extends View {
         init(canvas);
 
         // 画圆，如果数字长度大于两位，画的是个椭圆
-        paint.setColor(color);
+        paint.setColor(mBackgroundColor);
         if (number.length() == 1) {
             canvas.drawCircle(width / 2, height / 2, radius, paint);
         } else {
@@ -61,8 +64,9 @@ public class RedPointTextView extends View {
         }
 
         // 画数字
-        paint.setColor(0xffffffff);
+        paint.setColor(mTextColor);
         paint.setTextAlign(Align.CENTER);
+
         if (!number.equals("0"))
             canvas.drawText(number + "", width / 2, height / 2 + textRect.height() / 2, paint);
     }
@@ -70,11 +74,14 @@ public class RedPointTextView extends View {
     private void init(Canvas canvas) {
         paint = new Paint();
         paint.setAntiAlias(true);
+        paint.setDither(true);
+        Typeface font = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD);
+        paint.setTypeface(font);
         height = canvas.getHeight();
         // 圆的半径
         radius = height / 2;
-        // 设置text的字体大小，高度的3/5
-        paint.setTextSize(height * 3 / 5);
+        // 设置text的字体大小，高度的7/10
+        paint.setTextSize(height * 7 / 10);
         // 计算所画数字的宽高
         textRect = new Rect();
         paint.getTextBounds(number + "", 0, number.length(), textRect);
@@ -102,7 +109,7 @@ public class RedPointTextView extends View {
     }
 
     public void setColor(int color) {
-        this.color = color;
+        this.mBackgroundColor = color;
         invalidate();
     }
 
