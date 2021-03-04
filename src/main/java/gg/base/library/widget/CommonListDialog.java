@@ -15,11 +15,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import gg.base.library.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import gg.base.library.R;
 import gg.base.library.adapter.adapter.CommonListDialogAdapter;
 
 /**
@@ -41,6 +40,7 @@ public class CommonListDialog implements View.OnClickListener {
     private String mcancleName = "取消";
     private String mSubmitName = "确定";
     private boolean showButtonLayout = true;
+    private boolean mShowCheckBox = true;
 
     private OnDialogCancleListener mDialogCancleListener;
     private OnDialogSubmitListener mDialogSubmitListener;
@@ -86,7 +86,7 @@ public class CommonListDialog implements View.OnClickListener {
             }
             mCancelTextView.setText(mcancleName);
             mSubmitTextView.setText(mSubmitName);
-            mTypeAdapter = new CommonListDialogAdapter(mList);
+            mTypeAdapter = new CommonListDialogAdapter(mList, mShowCheckBox);
             for (Data data : mList) {
                 if (data.getKey().equals(mCurrentKey)) {
                     data.setSelected(true);
@@ -224,6 +224,11 @@ public class CommonListDialog implements View.OnClickListener {
 
     public CommonListDialog setShowButtonLayout(boolean showButtonLayout) {
         this.showButtonLayout = showButtonLayout;
+        return this;
+    }
+
+    public CommonListDialog setShowCheckBox(boolean showCheckBox) {
+        mShowCheckBox = showCheckBox;
         return this;
     }
 
